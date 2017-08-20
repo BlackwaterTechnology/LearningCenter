@@ -1,0 +1,22 @@
+{
+    "CN": "kube-master",
+    "hosts": [
+        "172.19.7.124",
+        "127.0.0.1",
+        "kube-master",
+        "kube-master.weilian.cm",
+        "kube-master.suneee.com"
+    ],
+    "key": {
+        "algo": "ecdsa",
+        "size": 256
+    },
+    "names": [
+        {
+            "C": "CN",
+            "L": "CA",
+            "ST": "ShenZhen"
+        }
+    ]
+}
+
