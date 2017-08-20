@@ -1,0 +1,225 @@
+openstack endpoint create --region RegionOne \
+  object-store internal http://object1:8080/v1/AUTH_%\(tenant_id\)s
+
+openstack endpoint create --region RegionOne \
+  object-store admin http://object1:8080/v1
+mkfs.xfs /dev/sdb
+mkfs.xfs /dev/sdc
+mkfs.xfs /dev/sdd
+
+mkdir -p /srv/node/sdb
+mkdir -p /srv/node/sdc
+mkdir -p /srv/node/sdd
+
+/dev/sdb /srv/node/sdb xfs noatime,nodiratime,nobarrier,logbufs=8 0 2
+/dev/sdc /srv/node/sdc xfs noatime,nodiratime,nobarrier,logbufs=8 0 2
+mount /srv/node/sdb
+mount /srv/node/sdc
+mount /srv/node/sdd
+
+systemctl enable rsyncd.service
+systemctl start rsyncd.service
+
+curl -o /etc/swift/account-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/account-server.conf-sample?h=stable/mitaka
+curl -o /etc/swift/container-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/container-server.conf-sample?h=stable/mitaka
+curl -o /etc/swift/object-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/object-server.conf-sample?h=stable/mitaka
+
+mkdir -p /var/cache/swift
+chown -R root:swift /var/cache/swift
+chmod -R 775 /var/cache/swift
+创建账户轮
+# swift-ring-builder account.builder create 10 3 1
+
+swift-ring-builder account.builder \
+  add --region 1 --zone 1 --ip 172.19.6.29 --port 6202 \
+  --device sdb --weight 100
+swift-ring-builder account.builder \
+  add --region 1 --zone 1 --ip 172.19.6.29 --port 6202 \
+  --device sdc --weight 100
+swift-ring-builder account.builder \
+  add --region 1 --zone 1 --ip 172.19.6.29 --port 6202 \
+  --device sdd --weight 100
+
+swift-ring-builder account.builder \
+  add --region 1 --zone 2 --ip 172.19.6.30 --port 6202 \
+  --device sdb --weight 100
+swift-ring-builder account.builder \
+  add --region 1 --zone 2 --ip 172.19.6.30 --port 6202 \
+  --device sdc --weight 100
+swift-ring-builder account.builder \
+  add --region 1 --zone 2 --ip 172.19.6.30 --port 6202 \
+  --device sdd --weight 100
+
+创建容器轮
+swift-ring-builder container.builder create 10 3 1
+
+
+swift-ring-builder container.builder \
+  add --region 1 --zone 1 --ip 172.19.6.29 --port 6201 \
+  --device sdb --weight 100
+swift-ring-builder container.builder \
+  add --region 1 --zone 1 --ip 172.19.6.29 --port 6201 \
+  --device sdc --weight 100
+swift-ring-builder container.builder \
+  add --region 1 --zone 1 --ip 172.19.6.29 --port 6201 \
+  --device sdd --weight 100
+
+swift-ring-builder container.builder \
+  add --region 1 --zone 2 --ip 172.19.6.30 --port 6201 \
+  --device sdb --weight 100
+swift-ring-builder container.builder \
+  add --region 1 --zone 2 --ip 172.19.6.30 --port 6201 \
+  --device sdc --weight 100
+swift-ring-builder container.builder \
+  add --region 1 --zone 2 --ip 172.19.6.30 --port 6201 \
+  --device sdd --weight 100
+
+
+swift-ring-builder object.builder create 10 3 1
+
+
+swift-ring-builder object.builder \
+  add --region 1 --zone 1 --ip 172.19.6.29 --port 6200 \
+  --device sdb --weight 100
+swift-ring-builder object.builder \
+  add --region 1 --zone 1 --ip 172.19.6.29 --port 6200 \
+  --device sdc --weight 100
+swift-ring-builder object.builder \
+  add --region 1 --zone 1 --ip 172.19.6.29 --port 6200 \
+  --device sdd --weight 100
+
+swift-ring-builder object.builder \
+  add --region 1 --zone 2 --ip 172.19.6.30 --port 6200 \
+  --device sdb --weight 100
+swift-ring-builder object.builder \
+  add --region 1 --zone 2 --ip 172.19.6.30 --port 6200 \
+  --device sdc --weight 100
+swift-ring-builder object.builder \
+  add --region 1 --zone 2 --ip 172.19.6.30 --port 6200 \
+  --device sdd --weight 100
+
+scp account.ring.gz container.ring.gz and object.ring.gz 172.19.6.28:/etc/swift/
+
+[root@object1 ~]# openssl rand -hex 10
+ee359d377532c4c707fd object1
+[root@object1 ~]# openssl rand -hex 10
+42fbba862ea250ce675c object1
+[root@object1 ~]# openssl rand -hex 10
+241e2b4af2f5f0ffd8ff  object2
+[root@object1 ~]# openssl rand -hex 10
+35b8b86a50b9ca5bc46d  object2
+[root@object1 ~]# openssl rand -hex 10
+f266c2d93304f4dc68c8  object3
+[root@object1 ~]# openssl rand -hex 10
+82e87bb494fdf94493ce   object3
+
+syslog.target network-online.target
+
+systemctl enable openstack-swift-proxy.service memcached.service
+systemctl start openstack-swift-proxy.service memcached.service
+
+
+systemctl enable openstack-swift-account.service openstack-swift-account-auditor.service \
+ openstack-swift-account-reaper.service openstack-swift-account-replicator.service
+
+systemctl start openstack-swift-account.service openstack-swift-account-auditor.service \
+  openstack-swift-account-reaper.service openstack-swift-account-replicator.service
+
+import memcache#012ImportError: No module named memcache
+
+
+systemctl enable openstack-swift-container.service \
+  openstack-swift-container-auditor.service openstack-swift-container-replicator.service \
+  openstack-swift-container-updater.service
+
+
+systemctl start openstack-swift-container.service \
+  openstack-swift-container-auditor.service openstack-swift-container-replicator.service \
+
+
+
+systemctl enable openstack-swift-account.service openstack-swift-account-auditor.service   openstack-swift-account-reaper.service openstack-swift-account-replicator.service
+systemctl start openstack-swift-account.service openstack-swift-account-auditor.service   openstack-swift-account-reaper.service openstack-swift-account-replicator.service
+systemctl enable openstack-swift-container.service   openstack-swift-container-auditor.service openstack-swift-container-replicator.service   openstack-swift-container-updater.service
+systemctl start openstack-swift-container.service   openstack-swift-container-auditor.service openstack-swift-container-replicator.service   openstack-swift-container-updater.service
+systemctl enable openstack-swift-object.service openstack-swift-object-auditor.service   openstack-swift-object-replicator.service openstack-swift-object-updater.service
+systemctl stop openstack-swift-object.service openstack-swift-object-auditor.service   openstack-swift-object-replicator.service openstack-swift-object-updater.service
+
+systemctl disable firewalld
+setenforce 0
+history 
+DisneyTravel_java_branches
+
+【日报】王义杰-2017.4.05
+今日工作内容：
+1，容器集群kubernets 1.6 kubeadm工具部署文档整理。
+2. 云存储swift测试环境准备。
+3. 云存储swift测试环境部署，已经初步完成。
+明天熟悉swift的使用和对接象谱
+
+systemctl start openstack-swift-account-reaper.service \
+openstack-swift-account-replicator.service \
+ openstack-swift-container.service \
+ openstack-swift-container-auditor.service \
+ openstack-swift-container-replicator.service \
+ openstack-swift-container-updater.service \
+ openstack-swift-object.service \
+ openstack-swift-object-auditor.service \
+ openstack-swift-object-replicator.service \
+openstack-swift-object-updater.service \
+
+
+systemctl stop openstack-swift-proxy.service memcached.service
+
+systemctl stop openstack-swift-account-reaper.service openstack-swift-account-replicator.service  openstack-swift-container.service  openstack-swift-container-auditor.service  openstack-swift-container-replicator.service  openstack-swift-container-updater.service  openstack-swift-object.service  openstack-swift-object-auditor.service  openstack-swift-object-replicator.service openstack-swift-object-updater.service 
+
+rm -rf /srv/node/sdb/*
+rm -rf /srv/node/sdc/*
+rm -rf /srv/node/sdd/*
+export PORT=3001
+export ROOT_URL=http://172.19.7.119:3001/
+export MONGO_URL=mongodb://172.19.7.109:27017/rocketchat2
+export INSTANCE_IP=172.19.7.119
+
+【日报】王义杰-2017.4.06
+今日工作内容：
+1. 熟悉使用swift，尝试对接象谱，象谱-文件上传-存储类-AmazonS3有个性化属性，不能直接使用，需要修改功能代码，明天和MC的同事沟通可行性。
+2. 测试一个更类似亚马逊接口的云存储minio，更接近需要深入对比。
+3. 周列会学习交流。
+明天继续测试云存储和对接象谱
+
+http://172.19.6.26:9000/minio/download/suneee/329.pem?token=eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0OTE1MzY2NzksImlhdCI6MTQ5MTQ1MDI3OSwic3ViIjoiRk44Q05CRVoyRDZMNUFHUlNSTlcifQ.yPF0dJVVG3HRGwNzJGEMHrXem3voMnPUH_KsOBVP-IimYP14thynWUYhjmdgGjb6Tbv6YPOX0GgGEAcs9JieYg
+
+Credentials
+
+DELETE /examplebucket/puppy.jpg HTTP/1.1
+Host: s3-us-west-2.amazonaws.com
+Date: Mon, 11 Apr 2016 12:00:00 GMT
+x-amz-date: Mon, 11 Apr 2016 12:00:00 GMT
+Authorization: authorization string
+
+suneee.s3.amazonaws.com
+Endpoint:  http://172.17.0.20:9000  http://127.0.0.1:9000
+AccessKey: FN8CNBEZ2D6L5AGRSRNW 
+SecretKey: 80F3lW0EHhaJoLRjQVVwaCRTU8bi0TUjIyJvJIWT 
+Region:    us-east-1
+SQS ARNs:  <none>
+
+curl -v -d '{"auth": {"tenantName": "admin", "passwordCredentials":{"username": "admin", "password": "11111111"}}}' -H "Content-type: application/json" http://172.19.6.22:5000/v2.0/tokens
+
+http://172.19.6.26:9000/minio/suneee/172.19.5.116:3000/2577iqfj8EWZLSNaz/YNnFDxf56YAxswHzw/4TXBsesajQyKwz9W4?AWSAccessKeyId=FN8CNBEZ2D6L5AGRSRNW&Expires=1491556578&Signature=kFF7A6JGYYMCvid8FBsqOOJ7HHA%3D
+
+Endpoint:  http://172.17.0.20:9000  http://127.0.0.1:9000
+AccessKey: FN8CNBEZ2D6L5AGRSRNW 
+SecretKey: 80F3lW0EHhaJoLRjQVVwaCRTU8bi0TUjIyJvJIWT 
+Region:    us-east-1
+SQS ARNs:  <none>
+
+
+
+		
+
+
+
+
+
