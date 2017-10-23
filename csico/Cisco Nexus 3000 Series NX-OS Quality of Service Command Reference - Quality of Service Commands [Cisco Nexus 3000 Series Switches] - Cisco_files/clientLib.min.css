@@ -1,0 +1,163 @@
+div.c42-pilot,div.c46-pilot{padding:0;background:#f2f2f2 none center center no-repeat;border:1px solid #ccc;position:relative;zoom:1;text-align:inherit}
+#dg-psm-container{width:460px;margin:0 10px}
+#wcq #dg-psm-container{margin:0}
+div.smallbusiness{margin-right:15px}
+div.topfix{margin-top:10px}
+div.rightfix{margin-right:10px}
+div.bottomfix{margin-bottom:10px}
+div.leftfix{margin-left:10px}
+div.smallbusiness,div.dg-psm div.c42v1,div.dg-psm div.c46v1,div.dg-psm div.c46v3{margin-bottom:20px}
+div.c42v4,div.c46v2,div.c46v4{height:187px;padding:6px 0 0 15px}
+.rtl div.c42v4,.rtl div.c46v2,.rtl div.c46v4{padding:6px 15px 0 0}
+div.c42v8,div.c46v8{padding:0;border:1px solid #e6e6e6;border-bottom:0}
+div.c42-pilot,div.c46-pilot,div.c42-pilot.default,div.c46-pilot.default,div.c42v1.blend,div.c46v1.blend,div.c46v1.tines,div.c46v3.blend,div.c46v3.tines{background:#f2f2f2 url("//www.static-cisco.com/assets/pilot/c46/backgrounds/green_tines.jpg") center right no-repeat;border-bottom-color:#b3b3b3}
+.rtl div.c42-pilot.default,.rtl div.c46-pilot.default,.rtl div.c42v1.blend,.rtl div.c46v1.blend,.rtl div.c46v1.tines,.rtl div.c46v3.blend,.rtl div.c46v3.tines{background:#f2f2f2 url("//www.static-cisco.com/assets/pilot/c46/backgrounds/green_tines_rtl.jpg") center left no-repeat}
+div.c46-sage{background:#efe url("//www.static-cisco.com/assets/pilot/c42/backgrounds/sage.jpg") center center repeat-x;border:1px solid #ccc}
+div.c42v4,div.c46v4,div.c42v4.blend,div.c42v4.mbwtile,div.c46v2.blend,div.c46v4.blend,div.c46v4.mbwtile{background:#fff url("//www.static-cisco.com/assets/pilot/c42/backgrounds/mbw_tile.jpg") center center repeat-x!important}
+div.c46v3.cloud,div.c46v4.cloud{background-image:url("//www.static-cisco.com/assets/pilot/c46/backgrounds/cloud-option1.jpg");background-position:center center}
+div.c42v8,div.c46v8{background:#f4f4f4 url("//www.static-cisco.com/assets/pilot/c42/backgrounds/c42v8_grey.gif") bottom center repeat-x}
+div.c42-pilot div h3,div.c46-pilot div h3{margin-bottom:6px;font-size:14px;color:#2f6681;overflow:hidden}
+div.c42v1 div h3,div.c46v1 div h3,div.c46v3 div h3{color:#444;font-size:14px}
+div.c46v3.cloud h3{color:#fff;font-weight:normal;font-size:18px;line-height:1.2em}
+div.c42v4 div h3,div.c46v2 div h3,div.c46v4 div h3{max-height:68px;margin-bottom:6px;color:#444;font-weight:bold;line-height:22px}
+div.c46v4.cloud h3{color:#fff;font-weight:normal;font-size:18px;line-height:1.1em}
+div.c42v8 .copy h3,div.c46v8 .copy h3{color:#333;font-size:14px;font-weight:bold}
+div.c42-pilot div p,div.c46-pilot div p{margin-bottom:0;font-size:13px!important;color:#424e52;line-height:1.333;overflow:hidden}
+div.c42v1 div.copy p,div.c46v1 div.copy p,div.c46v3 div.copy p{color:#444;padding-right:130px}
+.rtl div.c42v1 div.copy p,.rtl div.c46v1 div.copy p,.rtl div.c46v3 div.copy p{padding-left:130px;padding-right:0}
+div.c42v4 div.copy p,div.c46v2 div.copy p,div.c46v4 div.copy p{color:#666;max-height:70px;overflow:visible!important}
+div.c46v3.cloud div.copy p,div.c46v4.cloud div.copy p{color:#fff}
+div.c42v4 div.best p,div.c42v4 div.case p,div.c42v4 div.chat p,div.c42v4 div.event p,div.c42v4 div.pdf p,div.c42v4 div.purchase p,div.c42v4 div.report p,div.c42v4 div.video p,div.c42v4 div.paper p,div.c46v2 div.best p,div.c46v2 div.case p,div.c46v2 div.chat p,div.c46v2 div.event p,div.c46v2 div.news p,div.c46v2 div.pdf p,div.c46v2 div.purchase p,div.c46v2 div.report p,div.c46v2 div.video p,div.c46v2 div.paper p,div.c46v4 div.best p,div.c46v4 div.case p,div.c46v4 div.chat p,div.c46v4 div.event p,div.c46v4 div.news p,div.c46v4 div.pdf p,div.c46v4 div.purchase p,div.c46v4 div.report p,div.c46v4 div.video p,div.c46v4 div.paper p{width:100px}
+div.c42v8 .copy p,div.c46v8 .copy p{color:#333;font-size:12px}
+div.c42-pilot div,div.c46-pilot div{background-color:transparent;background-repeat:no-repeat}
+div.c42-pilot div.copy,div.c46-pilot div.copy{margin:11px}
+div.c42v1 div.copy,div.c46v1 div.copy,div.c46v3 div.copy{min-height:52px;margin:0 5px 0 15px;padding:12px 10px 12px 4px;background:transparent none center left no-repeat}
+div.c42v1 div.best,div.c42v1 div.case,div.c42v1 div.chat,div.c42v1 div.event,div.c42v1 div.pdf,div.c42v1 div.purchase,div.c42v1 div.report,div.c42v1 div.video,div.c42v1 div.paper,div.c46v1 div.best,div.c46v1 div.case,div.c46v1 div.chat,div.c46v1 div.event,div.c46v1 div.news,div.c46v1 div.pdf,div.c46v1 div.purchase,div.c46v1 div.report,div.c46v1 div.video,div.c46v1 div.paper,div.c46v3 div.best,div.c46v3 div.case,div.c46v3 div.chat,div.c46v3 div.event,div.c46v3 div.news,div.c46v3 div.pdf,div.c46v3 div.purchase,div.c46v3 div.report,div.c46v3 div.video,div.c46v3 div.paper,div.c46v3.cloud div.best,div.c46v3.cloud div.case,div.c46v3.cloud div.chat,div.c46v3.cloud div.event,div.c46v3.cloud div.news,div.c46v3.cloud div.pdf,div.c46v3.cloud div.purchase,div.c46v3.cloud div.report,div.c46v3.cloud div.video,div.c46v3.cloud div.paper{padding-left:70px}
+.rtl div.c42v1 div.copy,.rtl div.c46v1 div.copy,.rtl div.c46v3 div.copy{margin:0 15px 0 5px;padding:12px 4px 12px 10px;background:transparent none center right no-repeat}
+.rtl div.c42v1 div.best,.rtl div.c42v1 div.case,.rtl div.c42v1 div.chat,.rtl div.c42v1 div.event,.rtl div.c42v1 div.pdf,.rtl div.c42v1 div.purchase,.rtl div.c42v1 div.report,.rtl div.c42v1 div.video,.rtl div.c42v1 div.paper,.rtl div.c46v1 div.best,.rtl div.c46v1 div.case,.rtl div.c46v1 div.chat,.rtl div.c46v1 div.event,.rtl div.c46v1 div.news,.rtl div.c46v1 div.pdf,.rtl div.c46v1 div.purchase,.rtl div.c46v1 div.report,.rtl div.c46v1 div.video,.rtl div.c46v1 div.paper,.rtl div.c46v3 div.best,.rtl div.c46v3 div.case,.rtl div.c46v3 div.chat,.rtl div.c46v3 div.event,.rtl div.c46v3 div.news,.rtl div.c46v3 div.pdf,.rtl div.c46v3 div.purchase,.rtl div.c46v3 div.report,.rtl div.c46v3 div.video,.rtl div.c46v3 div.paper{padding:12px 70px 12px 10px!important}
+div.c42v1 div.best,div.c46v1 div.best,div.c46v3 div.best{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/best-practices-56.png")}
+div.c42v1 div.case,div.c46v1 div.case,div.c46v3 div.case{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/case-study-56.png")}
+div.c42v1 div.chat,div.c46v1 div.chat,div.c46v3 div.chat{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/chat-56.png")}
+div.c42v1 div.event,div.c46v1 div.event,div.c46v3 div.event{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/online-event-56.png")}
+div.c46v1 div.news,div.c46v3 div.news{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/news-56.png")}
+div.c42v1 div.pdf,div.c46v1 div.pdf,div.c46v3 div.pdf{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/pdf-56.png")}
+div.c42v1 div.purchase,div.c46v1 div.purchase,div.c46v3 div.purchase{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/purchase-56.png")}
+div.c42v1 div.report,div.c46v1 div.report,div.c46v3 div.report{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/analyst-report-56.png")}
+div.c42v1 div.video,div.c46v1 div.video,div.c46v3 div.video{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/video-56.png")}
+div.c42v1 div.paper,div.c46v1 div.paper,div.c46v3 div.paper{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/white-paper-56.png")}
+div.c42v4 div.copy,div.c46v2 div.copy,div.c46v4 div.copy{height:183px;margin:0;padding-right:15px;background:transparent none right bottom no-repeat}
+.rtl div.c42v4 div.copy,.rtl div.c46v2 div.copy,.rtl div.c46v4 div.copy{padding-left:15px;padding-right:0;background:transparent none left bottom no-repeat}
+div.c42v4 div.best,div.c46v2 div.best,div.c46v4 div.best{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_best.png")}
+.rtl div.c42v4 div.best,.rtl div.c46v2 div.best,.rtl div.c46v4 div.best{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_best_rtl.png")}
+div.c42v4 div.case,div.c46v2 div.case,div.c46v4 div.case{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_case.png")}
+.rtl div.c42v4 div.case,.rtl div.c46v2 div.case,.rtl div.c46v4 div.case{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_case_rtl.png")}
+div.c42v4 div.chat,div.c46v2 div.chat,div.c46v4 div.chat{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_chat.png")}
+.rtl div.c42v4 div.chat,.rtl div.c46v2 div.chat,.rtl div.c46v4 div.chat{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_chat_rtl.png")}
+div.c42v4 div.event,div.c46v2 div.event,div.c46v4 div.event{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_event.png")}
+.rtl div.c42v4 div.event,.rtl div.c46v2 div.event,.rtl div.c46v4 div.event{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_event_rtl.png")}
+div.c46v2 div.news,div.c46v4 div.news{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_enews.png")}
+div.c42v4 div.pdf,div.c46v2 div.pdf,div.c46v4 div.pdf{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_pdf.png")}
+.rtl div.c46v2 div.news,.rtl div.c46v4 div.news{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_enews_rtl.png")}
+.rtl div.c42v4 div.pdf,.rtl div.c46v2 div.pdf,.rtl div.c46v4 div.pdf{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_pdf_rtl.png")}
+div.c42v4 div.purchase,div.c46v2 div.purchase,div.c46v4 div.purchase{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_purchase.png")}
+.rtl div.c42v4 div.purchase,.rtl div.c46v2 div.purchase,.rtl div.c46v4 div.purchase{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_purchase_rtl.png")}
+div.c42v4 div.report,div.c46v2 div.report,div.c46v4 div.report{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_report.png")}
+.rtl div.c42v4 div.report,.rtl div.c46v2 div.report,.rtl div.c46v4 div.report{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_report_rtl.png")}
+div.c42v4 div.video,div.c46v2 div.video,div.c46v4 div.video{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_video.png")}
+.rtl div.c42v4 div.video,.rtl div.c46v2 div.video,.rtl div.c46v4 div.video{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_video_rtl.png")}
+div.c42v4 div.paper,div.c46v2 div.paper,div.c46v4 div.paper{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_paper.png")}
+.rtl div.c42v4 div.paper,.rtl div.c46v2 div.paper,.rtl div.c46v4 div.paper{background-image:url("//www.static-cisco.com/assets/pilot/c42/icons/mbw_150_paper_rtl.png")}
+div.c42v8 div.copy,div.c46v8 div.copy{margin:13px 22px 15px 22px}
+div.c42v1 div.cta,div.c46v1 div.cta{position:absolute;bottom:0;right:15px}
+div.c46v3 div.cta{float:right}
+.rtl div.c42v1 div.cta,.rtl div.c46v1 div.cta,.rtl div.c46v3 div.cta{padding-right:10px;padding-left:5px;left:110px;right:inherit}
+div.c42v4 div.cta,div.c46v2 div.cta,div.c46v4 div.cta{height:24px;width:190px;padding:0;position:absolute;bottom:15px;left:15px}
+.rtl div.c42v4 div.cta,.rtl div.c46v2 div.cta,.rtl div.c46v4 div.cta{left:inherit;right:15px}
+.ie67 div.c42v4 div.cta,.ie67 div.c46v2 div.cta,.ie67 div.c46v4 div.cta{bottom:8px;left:20px}
+.rtl .ie67 div.c42v4 div.cta,.rtl .ie67 div.c46v2 div.cta,.rtl .ie67 div.c46v4 div.cta{left:inherit;right:20px}
+div.c42v8 div.cta,div.c46v8 div.cta{padding:0 22px 5px 36px;position:absolute;bottom:0;right:0}
+.rtl div.c42v8 div.cta,.rtl div.c46v8 div.cta{min-height:72px;padding:0 36px 13px 22px;left:0;right:inherit}
+div.c42-pilot div.cta a.dg-cta,div.c42-pilot div.cta a.dg-cta b,div.c42-pilot div.cta a.dg-cta b i,div.c46-pilot div.cta a.dg-cta,div.c46-pilot div.cta a.dg-cta b,div.c46-pilot div.cta a.dg-cta b i{background-image:url("//www.static-cisco.com/assets/pilot/common/button-24-blue.png");color:#fff;text-decoration:none;font-weight:bold;cursor:pointer;outline:0;padding:0;margin:0;height:24px;line-height:24px;display:-moz-inline-box;display:inline-block;font-size:11px;-moz-box-align:center;background-repeat:no-repeat}
+div.c46-pilot.cloud div.cta a.dg-cta,div.c46-pilot.cloud div.cta a.dg-cta b,div.c46-pilot.cloud div.cta a.dg-cta b i{background-image:url("//www.static-cisco.com/assets/pilot/c46/sprites/button-24-yellow.png")}
+#ie6 div.c42-pilot div.cta a.dg-cta,#ie6 div.c42-pilot div.cta a.dg-cta b,#ie6 div.c42-pilot div.cta a.dg-cta b i,#ie6 div.c46-pilot div.cta a.dg-cta,#ie6 div.c46-pilot div.cta a.dg-cta b,#ie6 div.c46-pilot div.cta a.dg-cta b i{background-image:url("//www.static-cisco.com/assets/pilot/a00/blue_button_sprite.gif")}
+div.c42-pilot div.cta a.dg-cta,div.c46-pilot div.cta a.dg-cta{background-position:right -48px;position:absolute;right:20px;bottom:15px}
+div.c46v2 div.cta a.dg-cta,div.c46v4 div.cta a.dg-cta{position:static}
+div.c42-pilot div.cta a.dg-cta b,div.c46-pilot div.cta a.dg-cta b{background-position:0 -24px}
+div.c42-pilot div.cta a.dg-cta b i,div.c46-pilot div.cta a.dg-cta b i{background-repeat:repeat-x;background-position:0 0;padding:0 13px;margin:0 3px;font-style:normal}
+div.c42-pilot div.cta a.dg-cta:hover,div.c46-pilot div.cta a.dg-cta:hover{background-position:right -120px;text-decoration:none}
+div.c42-pilot div.cta a.dg-cta:hover b,div.c46-pilot div.cta a.dg-cta:hover b{background-position:0 -96px}
+div.c42-pilot div.cta a.dg-cta:hover b i,div.c46-pilot div.cta a.dg-cta:hover b i{background-repeat:repeat-x;background-position:0 -72px;font-style:normal}
+div.c42-pilot div.cta .a00v1,margin:0 0 12px 0!important;div.c46-pilot div.cta .a00v1{float:none}
+div.c42-pilot div.cta .a00v1-alt1,div.c42-pilot div.cta .a00v1-alt2,div.c42-pilot div.cta .a00v1-alt-orange,div.c46-pilot div.cta .a00v1-alt1,div.c46-pilot div.cta .a00v1-alt2,div.c46-pilot div.cta .a00v1-alt-orange{color:#fff!important}
+div.c42-pilot div.cta .a00v1-alt-red,div.c46-pilot div.cta .a00v1-alt-red{color:#ffcb50!important}
+div.c42v4 div.cta .a00v1,div.c46v2 div.cta .a00v1,div.c46v4 div.cta .a00v1{margin:0!important}
+div.c42-pilot div.cta .a00v1,div.c42-pilot div.cta .a00v1 span,div.c46-pilot div.cta .a00v1,div.c46-pilot div.cta .a00v1 span{background-image:url("//www.static-cisco.com/assets/pilot/c42/sprites/a00v1.png")!important}
+#ie6 div.c42-pilot div.cta .a00v1,#ie6 div.c42-pilot div.cta .a00v1 span,#ie6 div.c46-pilot div.cta .a00v1,#ie6 div.c46-pilot div.cta .a00v1 span{background-image:url("//www.static-cisco.com/assets/pilot/c42/sprites/a00v1.gif")!important}
+div.c42-pilot div.cta .a00v1-alt1,div.c42-pilot div.cta .a00v1-alt1 span,div.c46-pilot div.cta .a00v1-alt1,div.c46-pilot div.cta .a00v1-alt1 span{background-image:url("//www.static-cisco.com/assets/pilot/c46/sprites/a00v1-alt1-wide.png")!important}
+#ie6 div.c42-pilot div.cta .a00v1-alt1,#ie6 div.c42-pilot div.cta .a00v1-alt1 span,#ie6 div.c46-pilot div.cta .a00v1-alt1,#ie6 div.c46-pilot div.cta .a00v1-alt1 span{background-image:url("//www.static-cisco.com/assets/pilot/c42/sprites/a00v1-alt1.gif")!important}
+div.c42-pilot div.cta .a00v1-alt2,div.c42-pilot div.cta .a00v1-alt2 span,div.c46-pilot div.cta .a00v1-alt2,div.c46-pilot div.cta .a00v1-alt2 span{background-image:url("//www.static-cisco.com/assets/pilot/c46/sprites/a00v1-alt2-wide.png")!important}
+#ie6 div.c42-pilot div.cta .a00v1-alt2,#ie6 div.c42-pilot div.cta .a00v1-alt2 span,#ie6 div.c46-pilot div.cta .a00v1-alt2,#ie6 div.c46-pilot div.cta .a00v1-alt2 span{background-image:url("//www.static-cisco.com/assets/pilot/c42/sprites/a00v1-alt2.gif")!important}
+div.c42-pilot div.cta .a00v1-alt-orange,div.c42-pilot div.cta .a00v1-alt-orange span,div.c46-pilot div.cta .a00v1-alt-orange,div.c46-pilot div.cta .a00v1-alt-orange span{background-image:url("//www.static-cisco.com/assets/pilot/c42/sprites/a00v1-alt-orange.png")!important}
+div.c42-pilot div.cta .a00v1-alt-red,div.c42-pilot div.cta .a00v1-alt-red span,div.c46-pilot div.cta .a00v1-alt-red,div.c46-pilot div.cta .a00v1-alt-red span{background-image:url("//www.static-cisco.com/assets/pilot/c42/sprites/a00v1-alt-red.png")!important}
+#ie6 div.c42-pilot div.cta .a00v1-alt-red,#ie6 div.c42-pilot div.cta .a00v1-alt-red span,#ie6 div.c46-pilot div.cta .a00v1-alt-red,#ie6 div.c46-pilot div.cta .a00v1-alt-red span{background-image:url("//www.static-cisco.com/assets/pilot/c42/sprites/a00v1-alt-red.gif")!important}
+div.c42v8 .a00v1-alt2-big,div.c46v8 .a00v1-alt2-big{font-size:12px;color:#fff!important;padding:7px 22px 0 20px}
+.rtl div.c42v8 .a00v1-alt2-big,.rtl div.c46v8 .a00v1-alt2-big{padding:7px 20px 0 22px}
+div.c42v8 div.cta .a00v1-alt2-big,div.c42v8 div.cta .a00v1-alt2-big span,div.c46v8 div.cta .a00v1-alt2-big,div.c46v8 div.cta .a00v1-alt2-big span{line-height:1.2;background-image:url("//www.static-cisco.com/assets/pilot/c42/sprites/a00v1-alt2-big.png")!important}
+.a00v1-alt2-big .tl{margin-left:-22px;margin-top:-7px;height:24px}
+.rtl .a00v1-alt2-big .tl{margin-right:-22px}
+.c42v8 .a00v1-alt2-big .tl,.c46v8 .a00v1-alt2-big .tl{height:27px}
+.a00v1-alt2-big .bl{margin-left:-22px;background-position:left -26px;bottom:-2px}
+.rtl .a00v1-alt2-big .bl{margin-right:-22px;background-position:right -26px}
+.c42v8 .a00v1-alt2-big .bl,.c46v8 .a00v1-alt2-big .bl{bottom:-2px}
+.a00v1-alt2-big .br{background-position:right -26px;bottom:-2px}
+.rtl .a00v1-alt2-big .br{background-position:left -26px}
+.c42v8 .a00v1-alt2-big .br,.c46v8 .a00v1-alt2-big .br{bottom:-2px}
+.a00v1-alt2-big:hover,.a00v1-alt2-big:hover span{background-position:right -31px}
+.rtl .a00v1-alt2-big:hover,.rtl .a00v1-alt2-big:hover span{background-position:left -31px}
+.a00v1-alt2-big:hover span.tl{background-position:left -31px}
+.rtl .a00v1-alt2-big:hover span.tl{background-position:right -31px}
+.a00v1-alt2-big:hover span.bl{background-position:left -57px}
+.rtl .a00v1-alt2-big:hover span.bl{background-position:right -57px}
+.a00v1-alt2-big:hover span.br{background-position:right -57px}
+.rtl .a00v1-alt2-big:hover span.br{background-position:left -57px}
+.c42v1,.c42v2,.c42v3,.c42v4,.c46v1,.c46v2,.c46v3,.c46v4{-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px}
+.c42v8,.c46v8{-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px}
+.ie67 .c42v1,.ie67 .c42v2,.ie67 .c42v3,.ie67 .c42v4,.ie67 .c46v1,.ie67 .c46v2,.ie67 .c46v3,.ie67 .c46v4,#ie8 .c42v1,#ie8 .c42v2,#ie8 .c42v3,#ie8 .c42v4,#ie8 .c46v1,#ie8 .c46v2,#ie8 .c46v3,#ie8 .c46v4{position:relative;behavior:url("/web/fw/lib/PIE.htc")}
+#ie8 .c42v4,#ie8 .c46v4{background:none!important}
+div.c46v9.pal-1,div.c46v10.pal-1{background:#009cdf}
+div.c46v9.pal-2,div.c46v10.pal-2{background:#398b95}
+div.c46v9.pal-3,div.c46v10.pal-3{background:#3ca749}
+.c46v9,.c46v10{-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px}
+div.c46v9{padding:0 20px;border:0}
+div.c46v9 div.copy{margin:0;padding:12px 0}
+div.c46v9 div.copy p{padding-right:106px}
+div.c46v9 div.analyst,div.c46v9 div.best,div.c46v9 div.design,div.c46v9 div.events,div.c46v9 div.purchase,div.c46v9 div.video,div.c46v9 div.paper{padding-left:60px;background-position:left center}
+div.c46v9 div.analyst{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/analystreport-50.png")}
+div.c46v9 div.best{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/bestpractices-50.png")}
+div.c46v9 div.design{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/designguide-50.png")}
+div.c46v9 div.events{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/events-50.png")}
+div.c46v9 div.purchase{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/purchaseoffer-50.png")}
+div.c46v9 div.video{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/video-50.png")}
+div.c46v9 div.paper{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/whitepaper-50.png")}
+div.c46v9 div.copy h3,div.c46v9 div.copy p,div.c46v10 div.copy h3,div.c46v10 div.copy p{color:#fff}
+div.c46v9 div.cta a.dg-cta{bottom:15px;position:absolute;right:20px;background-image:none}
+div.c46v9 div.cta a.dg-cta b,div.c46v10 div.cta a.dg-cta b{-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;border:1px solid;background-image:none}
+div.c46v9 div.cta a.dg-cta b i,div.c46v10 div.cta a.dg-cta b i{background-image:none;margin:0 2px}
+div.c46v10{height:187px;padding:15px;border:0}
+div.c46v10 div.copy{height:183px;margin:0}
+div.c46v10 div.analyst p,div.c46v10 div.best p,div.c46v10 div.design p,div.c46v10 div.events p,div.c46v10 div.purchase p,div.c46v10 div.video p,div.c46v10 div.paper p{padding-right:80px}
+div.c46v10 div.analyst,div.c46v10 div.best,div.c46v10 div.design,div.c46v10 div.events,div.c46v10 div.purchase,div.c46v10 div.video,div.c46v10 div.paper{background-position:100% 50%}
+div.c46v10 div.analyst{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/analystreport-70.png")}
+div.c46v10 div.best{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/bestpractices-70.png")}
+div.c46v10 div.design{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/designguide-70.png")}
+div.c46v10 div.events{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/events-70.png")}
+div.c46v10 div.purchase{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/purchaseoffer-70.png")}
+div.c46v10 div.video{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/video-70.png")}
+div.c46v10 div.paper{background-image:url("//www.static-cisco.com/assets/pilot/c46/icons/whitepaper-70.png")}
+div.c46v10 div.cta{width:188px;bottom:15px;position:absolute}
+div.c46v10 div.cta a.dg-cta{width:100%;position:static;background-image:none}
+div.c46v10 div.cta a.dg-cta b{box-sizing:border-box;text-align:center;width:100%;height:auto;background-image:none}
+.rtl div.c46v9 div.analyst,.rtl div.c46v9 div.best,.rtl div.c46v9 div.design,.rtl div.c46v9 div.events,.rtl div.c46v9 div.purchase,.rtl div.c46v9 div.video,.rtl div.c46v9 div.paper{padding-right:60px;padding-left:0;background-position:right center}
+.rtl div.c46v9 div.copy p{padding-left:106px;padding-right:0}
+.rtl div.c46v9 div.cta a.dg-cta{left:20px;right:unset}
+.rtl div.c46v10 div.copy{padding-left:0}

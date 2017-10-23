@@ -1,0 +1,13 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Character-level Convolutional Networks}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Key Modules}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Character quantization}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Model Design}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Data Augmentation using Thesaurus}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Comparison Models}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{Traditional Methods}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.2}{Deep Learning Methods}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.3}{Choice of Alphabet}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Large-scale Datasets and Results}{}% 11
+\BOOKMARK [1][-]{section.5}{Discussion}{}% 12
+\BOOKMARK [1][-]{section.6}{Conclusion and Outlook}{}% 13

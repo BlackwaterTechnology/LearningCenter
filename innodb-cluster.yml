@@ -1,0 +1,110 @@
+version: "3.3"
+services: 
+  shell:
+    image: innodb/shell:1.0.9
+    command: /usr/sbin/init
+    networks:
+      mynet:
+    privileged: true
+    volumes:
+      - /usr/sbin/init:/usr/sbin/init
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == xp69
+
+  innodb1:
+    image: mysql
+    command: tail -f /etc/profile
+    networks:
+      mynet:
+    environment:
+      MYSQL_ROOT_PASSWORD: suneee
+    configs:
+       - source: innodb1.my.cnf
+         target: /etc/my.cnf
+    volumes:
+      - type: volume
+        source: data1
+        target: /var/lib/mysql1 
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == xp68
+
+  innodb2:
+    image: mysql
+    command: tail -f /etc/profile
+    networks:
+      mynet:
+    environment:
+      MYSQL_ROOT_PASSWORD: suneee
+    configs:
+       - source: innodb2.my.cnf
+         target: /etc/my.cnf1
+    volumes:
+      - type: volume
+        source: data2
+        target: /var/lib/mysql
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == xp68
+
+  innodb3:
+    image: mysql
+    command: tail -f /etc/profile
+    networks:
+      mynet:
+    environment:
+      MYSQL_ROOT_PASSWORD: suneee
+    configs:
+       - source: innodb3.my.cnf
+         target: /etc/my.cnf1
+    volumes:
+      - type: volume
+        source: data3
+        target: /var/lib/mysql
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == xp68
+  innodb4:
+    image: mysql
+    command: tail -f /etc/profile
+    networks:
+      mynet:
+    environment:
+      MYSQL_ROOT_PASSWORD: suneee
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == xp68
+
+
+volumes:
+   data1:
+   data2:
+   data3:
+
+configs:
+  innodb1.my.cnf:
+    external: true
+  innodb2.my.cnf:
+    external: true
+  innodb3.my.cnf:
+    external: true
+ 
+networks:
+  mynet:
+    driver: overlay
+    internal: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.20.90.0/24 

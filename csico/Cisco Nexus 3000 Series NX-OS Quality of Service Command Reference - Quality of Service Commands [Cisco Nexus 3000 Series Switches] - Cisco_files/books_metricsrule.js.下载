@@ -1,0 +1,167 @@
+var metricRules = [
+    //breadcrumb
+    ['#fw-breadcrumb li a[href]', {
+        lpos: "dest_pg_breadcrumb",
+        lid: "dest_pg_breadcrumb"
+    }],
+    //backtolink
+    ['#fw-backtolink a[href]', {
+        lpos: "dest_pg_backtoalldocs",
+        lid: "dest_pg_backtoalldocs"
+    }],
+    //book toc
+    ['#actionBar button.bookToc', {
+        lpos: "dest_pg_book_content",
+        lid: "dest_pg_book_content_open"
+    }],
+    ['#simpleOverlay-container.bookToc #bookToc li button', {
+        lpos: "dest_pg_book_content",
+        lid: "dest_pg_book_content_nav",
+        linktext: "expand"
+    }],
+    ['#simpleOverlay-container.bookToc #bookToc li.open button', {
+        lpos: "dest_pg_book_content",
+        lid: "dest_pg_book_content_nav",
+        linktext: "collapse"
+    }],
+    ['#simpleOverlay-container.bookToc button.close-button', {
+        lpos: "dest_pg_book_content",
+        lid: "dest_pg_book_content_nav",
+        linktext: "close"
+    }],
+    ['#simpleOverlay-container.bookToc #bookToc li a[href]', {
+        lpos: "dest_pg_book_content",
+        lid: "dest_pg_book_chap_click"
+    }],
+    // translations 
+    ['#actionBar .utilities button.translations-link',  {
+        lpos: "dest_pg_expand",
+        lid: "dest_pg_expand_other_lang"
+    }],
+    ['#simpleOverlay-container.translations .content a[href]', {
+        lpos: "dest_pg_other_lang",
+        lid: "dest_pg_other_lang"
+    }],
+    //download options
+    ['#actionBar .utilities button.downloadOptions', {
+        lpos: "dest_pg_expand",
+        lid: "dest_pg_expand_dldoc"
+    }],
+    ['#simpleOverlay-container.downloadOptions .content a[href].pdfIcon, #simpleOverlay-container.downloadOptions .content a[href].pdfIcon + .chapter', {
+        lpos: "dest_pg_dl",
+        lid: "dest_pg_dl_pdf"
+    }],
+    ['#simpleOverlay-container.downloadOptions .content a[href].epubIcon', {
+        lpos: "dest_pg_dl",
+        lid: "dest_pg_dl_epub"
+    }],
+    ['#simpleOverlay-container.downloadOptions .content a[href].mobiIcon', {
+        lpos: "dest_pg_dl",
+        lid: "dest_pg_dl_mobi"
+    }],
+    //print
+    ['#actionBar .utilities button.print', {
+        lpos: "dest_pg_print",
+        lid: "dest_pg_print"
+    }],
+    //chapter toc
+    ['#chapterToc > button', {
+        lpos: "dest_pg_chap_content",
+        lid: "dest_pg_chap_content_nav",
+        linktext: "expand"
+    }],
+    ['#chapterToc.open > button', {
+        lpos: "dest_pg_chap_content",
+        lid: "dest_pg_chap_content_nav",
+        linktext: "collapse"
+    }],
+    ['#chapterToc.open > div > button', {
+        lpos: "dest_pg_chap_content",
+        lid: "dest_pg_chap_content_nav",
+        linktext: "close"
+    }],
+    ['#chapterToc.open li a[href]', {
+        lpos: "dest_pg_chap_content",
+        lid: "dest_pg_chap_content_subchap_click",
+    }],
+    //about translation
+    ['#documentInfo button', {
+        lpos: "dest_pg_abt_tran",
+        lid: "dest_pg_abt_tran"
+    }],
+    //rating
+    ['.eot-feedback button.eot-feedback-btn', {
+        lpos: "dest_pg_rating",
+        lid: "dest_pg_rating"
+    }],
+    //feedback
+    ['.eot-feedback a.eot-feedback-ol[href]', {
+        lpos: "dest_pg_feedback",
+        lid: "dest_pg_feedback"
+    }],
+    // recommendation
+    ['.eot-vav li a[href]', {
+        lpos: "dest_pg_reco",
+        lid: "dest_pg_reco"
+    }],
+    //let us help
+    ['.eotLetUsHelp li:first-child a[href]', {
+        lpos: "dest_pg_help",
+        lid: "dest_pg_help_case"
+    }],
+    ['.eotLetUsHelp li:last-child a[href]', {
+        lpos: "dest_pg_help",
+        lid: "dest_pg_help_contract"
+    }],
+    //community
+    ['#eotCommunityDisc li a[href], #eotCommunityDisc .supportCommunityLink a[href]', {
+        lpos: "dest_pg_community",
+        lid: "dest_pg_community"
+    }],
+    //applies to products
+    ['.eot-tdatp li a[href]', {
+        lpos: "dest_pg_applies_to_prod",
+        lid: "dest_pg_applies_to_prod"
+    }],
+    //share
+    ['.share a[href].icons-googleplus', {
+        lpos: "dest_pg_share",
+        lid: "dest_pg_share",
+        linktext: "google plus"
+    }],
+    ['.share a[href].icons-twitter', {
+        lpos: "dest_pg_share",
+        lid: "dest_pg_share",
+        linktext: "twitter"
+    }],
+    ['.share a[href].icons-facebook', {
+        lpos: "dest_pg_share",
+        lid: "dest_pg_share",
+        linktext: "facebook"
+    }],
+    ['.share a[href].icons-linkedin', {
+        lpos: "dest_pg_share",
+        lid: "dest_pg_share",
+        linktext: "linkedin"
+    }],
+    ['.share a[href].icons-email', {
+        lpos: "dest_pg_share",
+        lid: "dest_pg_share",
+        linktext: "email"
+    }],
+    //Short URL
+    ['#shortUrlComponent a[href]', {
+        lpos: "dest_pg_shorturl",
+        lid: "dest_pg_shorturl"
+    }],
+    //body links
+    ['.cdc-books #chapterContent a[href]', {
+        lpos: "dest_pg_body",
+        lid: "dest_pg_body_links"
+    }]
+];
+
+var i = 0;
+for (i; i <= metricRules.length - 1; i++) {
+    cdc.util.addMetricsRule(metricRules[i][0], metricRules[i][1]);
+}

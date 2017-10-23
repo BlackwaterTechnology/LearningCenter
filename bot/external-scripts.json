@@ -1,0 +1,22 @@
+[
+  "hubot-diagnostics",
+  "hubot-help",
+  "hubot-google-images",
+  "hubot-google-translate",
+  "hubot-pugme",
+  "hubot-maps",
+  "hubot-rules",
+  "hubot-shipit",
+  "hubot-plusplus",
+  "hubot-2048",
+  "hubot-business-cat",
+  "hubot-seen",
+  "hubot-timezoneio",
+  "hubot-thesimpsons",
+  "hubot-http-status",
+  "hubot-devops-reactions",
+  "hubot-thank-you",
+  "hubot-victory",
+  "hubot-redis-brain",
+  "hubot-codinglove"
+]

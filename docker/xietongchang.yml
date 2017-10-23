@@ -1,0 +1,513 @@
+version: "3.3"
+services:
+  cdn:
+    image: xiangpu/cdn:1.5
+    command: tail -f /etc/profile
+    networks:
+      mynet:
+    ports:
+      - target: 80
+        published: 80
+        mode: host
+    volumes:
+      - /data/volumes/cdn-conf.d:/etc/nginx/conf.d
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp68]
+  
+  web_elasticsearch:
+    image: xiangpu/web_elasticsearch:1.5
+    networks:
+      mynet:
+    ports:
+     - target: 9200
+       published: 9200
+       mode: host
+     - target: 9300
+       published: 9300
+       mode: host
+    volumes:
+      - /data/volumes/web-elasticsearch-data:/usr/share/elasticsearch/data
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp69]
+
+  web_redis:
+    image: xiangpu/web_redis:1.5
+    networks:
+      mynet:
+    ports:
+     - target: 6379
+       published: 6379
+       mode: host
+    volumes:
+     - /data/volumes/web-redis-data:/data
+    command: redis-server --requirepass cms
+    deploy:
+     replicas: 1
+     placement:
+       constraints: [node.hostname == xp70]
+
+  web_rabbitmq:
+    image: xiangpu/web_rabbitmq:1.5
+    hostname: web_rabbitmq
+    networks:
+      mynet:
+    ports:
+     - target: 25672
+       published: 5673
+       mode: host
+     - target: 4369
+       published: 4369
+       mode: host
+     - target: 5671
+       published: 5671
+       mode: host
+     - target: 5672
+       published: 5672
+       mode: host
+    volumes:
+     - /data/volumes/web-rabbitmq-data:/var/lib/rabbitmq
+    deploy:
+     replicas: 1
+     placement:
+       constraints: [node.hostname == xp69]
+  web_nginx:
+    image: xiangpu/web_nginx:1.5
+    #command: tail -f /etc/profile
+    networks:
+      mynet:
+    ports:
+     - target: 80
+       published: 3080
+       mode: host
+    volumes:
+     - /data/volumes/web-nginx-data:/usr/share/nginx/html
+    deploy:
+     replicas: 1
+     placement:
+       constraints: [node.hostname == xp68]
+
+  web_app:
+    image: xiangpu/web_app:1.5
+    networks:
+      mynet:
+    configs:
+      - source: web_app_config
+        target: /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/config.properties
+    depends_on:
+     - web_redis
+     - web_rabbitmq
+     - web_elasticsearch
+    ports:
+     - target: 8080
+       published: 3008
+       mode: host
+    deploy:
+     replicas: 1
+     placement:
+       constraints: [node.hostname == xp68]
+  web_api:
+    image: xiangpu/web_api:1.5
+    networks:
+      mynet:
+    configs:
+      - source: web_api_config
+        target: /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/config.properties
+    #command: tail -f /etc/profile
+    depends_on:
+     - web_redis
+     - web_rabbitmq
+     - web_elasticsearch
+    ports:
+     - target: 8080
+       published: 3009
+       mode: host
+    deploy:
+     replicas: 1
+     placement:
+       constraints: [node.hostname == xp68]
+  web_publish:
+    image: xiangpu/web_publish:1.5
+    networks:
+      mynet:
+    depends_on:
+     - web_redis
+     - web_rabbitmq
+     - web_elasticsearch
+    ports:
+     - target: 8080
+       published: 3010
+       mode: host
+    deploy:
+     replicas: 1
+     placement:
+       constraints: [node.hostname == xp68]  
+
+  web_yidaiyilu:
+    image: yilu/web:1.0
+    networks:
+      mynet:
+    ports:
+     - target: 80
+       published: 3013
+       mode: host       
+    volumes:
+     - /data/volumes/www:/usr/share/nginx/html
+    deploy:
+     replicas: 1
+     placement:
+       constraints: [node.hostname == xp69]  
+
+
+  command_centre:
+    image: 172.16.43.73:5000/command_centre:0.5
+    networks:
+      mynet:
+    configs:
+      - source: command_config
+        target: /usr/local/tomcat/webapps/command/WEB-INF/classes/config/beans.xml
+      - source: command_properties
+        target: /usr/local/tomcat/webapps/command/WEB-INF/classes/config.properties
+      - source: command_webjs
+        target: /usr/local/tomcat/webapps/command-web/static/js/config.js
+      - source: command_webjs
+        target: /usr/local/tomcat/webapps/command-centre/static/js/config.js
+    ports:
+      - target: 8080
+        published: 3004
+        mode: ingress
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp68]
+
+
+  learn_centre:
+    image: xiangpu/learn_centre:1.5
+    networks:
+      mynet:
+    configs:
+      - source: learn_config
+        target: /usr/local/tomcat/webapps/learn/WEB-INF/classes/dbConfig.properties
+      - source: learn_cfg
+        target: /usr/local/tomcat/webapps/learn/WEB-INF/classes/hibernate.cfg.xml
+    ports:
+      - target: 8080
+        published: 3005
+        mode: ingress
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp68]
+  chat:
+    image: xiangpu/chat:1.5
+    command: tail -f /etc/profile
+    networks:
+      mynet:
+    ports:
+      - target: 8080
+        published: 3011
+        mode: ingress
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp68]
+
+  vr:
+    image: xiangpu/vr:1.5
+    networks:
+      mynet:
+    ports:
+      - target: 8080
+        published: 3003
+        mode: ingress
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp68]
+
+  oa:
+    image: xiangpu/oa:1.5
+    networks:
+      mynet:
+    ports:
+      - target: 8080
+        published: 3002
+        mode: ingress
+    configs:
+      - source: oa_config
+        target: /usr/local/tomcat/webapps/bpmx/WEB-INF/classes/conf/app.properties
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp68]
+  vsftp:
+    image: xiangpu/vsftp:1.5
+    networks:
+      mynet:
+    environment:
+     - FTP_USER=oa
+     - FTP_PASSWORD=ucp2oa
+    ports:
+     - target: 21
+       published: 21
+       protocol: tcp/udp
+       mode: ingress
+     - target: 4559
+       published: 4559
+       protocol: tcp/udp
+       mode: ingress
+    volumes:
+     - /data/volumes/oa_ftp_data:/srv
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp70]
+
+
+  mysqlproxy:
+    image: xiangpu/mysqlproxy:1.5
+    ports:
+     - target: 3306
+       published: 13306
+       protocol: tcp
+       mode: host
+    networks:
+      mynet:
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp68]
+  db_maxscale:
+    image: xiangpu/mariadb_maxscale:2.1
+    command: maxscale -d
+    ports:
+     - target: 3306
+       published: 23306
+       protocol: tcp
+       mode: host
+    networks:
+      mynet:
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp68]
+
+  db_mysql1:
+    image: xiangpu/db_mysql:1.5
+    networks: 
+      mynet:
+    environment: 
+     - MYSQL_ROOT_PASSWORD=suneee 
+     - MYSQL_INITDB_SKIP_TZINFO=yes
+    command: mysqld --wsrep_cluster_address=gcomm://db_mysql1,db_mysql2,db_mysql3                        # mysqld --wsrep-new-cluster
+    ports:
+     - target: 3306
+       published: 3306
+       protocol: tcp
+       mode: host
+    volumes: 
+     - /data/volumes/mysqldata:/var/lib/mysql
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp68]
+
+  db_mysql2:
+    image: xiangpu/db_mysql:1.5
+    networks: 
+      mynet:    
+    depends_on:
+     - "db_mysql1"
+    environment: 
+     - MYSQL_ROOT_PASSWORD=suneee 
+    command: mysqld --wsrep_cluster_address=gcomm://db_mysql1,db_mysql2,db_mysql3
+    ports:
+     - target: 3306
+       published: 3307
+       protocol: tcp
+       mode: host
+    volumes:
+     - /data/volumes/mysqldata:/var/lib/mysql
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp69]
+
+  db_mysql3:
+    image: xiangpu/db_mysql:1.5
+    networks: 
+      mynet:   
+    depends_on:
+     - "db_mysql1"
+    environment: 
+     - MYSQL_ROOT_PASSWORD=suneee 
+    command: mysqld --wsrep_cluster_address=gcomm://db_mysql1,db_mysql2,db_mysql3
+    ports:
+     - target: 3306
+       published: 3308
+       protocol: tcp
+       mode: host
+    volumes:
+     - /data/volumes/mysqldata:/var/lib/mysql
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp70]
+
+  db_mysql4:
+    image: mariadb:latest
+    networks: 
+      mynet:   
+    environment: 
+     - MYSQL_ROOT_PASSWORD=suneee 
+    command: tail -f /etc/profile
+    ports:
+     - target: 3306
+       published: 3309
+       protocol: tcp
+       mode: host
+    volumes:
+     - /data/volumes/mysqldata4:/var/lib/mysql
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp70]
+  ucp:
+    image: xiangpu/ucp:1.5
+    networks:
+      mynet:
+    #ports:
+    # - target: 3001
+    #   published: 3001
+    #   mode: host
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: dnsrr
+      placement:
+        constraints: [node.hostname == xp68]
+      
+
+  db_mongodb1:
+    image: xiangpu/db_mongodb:1.5
+    command: mongod --auth --keyFile /var/run/secrets/mongo_key --replSet rs0
+    #command: tail -f /etc/profile
+    networks:
+      mynet:
+    ports:
+     - target: 27017
+       published: 27017
+       mode: host
+    volumes:
+     - type: bind
+       source: /data/volumes/mongo-data1/db
+       target: /data/db
+     - type: bind
+       source: /data/volumes/mongo-data1/configdb
+       target: /data/configdb
+    secrets:
+      - source: mongo_key
+        target: mongo_key
+        uid: '999'
+        gid: '999'
+        mode: 0400
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp68]
+
+  db_mongodb2:
+    image: xiangpu/db_mongodb:1.5
+    command: mongod --auth --keyFile /var/run/secrets/mongo_key --replSet rs0
+    #command: tail -f /etc/profile
+    networks:
+      mynet:
+    ports:
+     - target: 27017
+       published: 27018
+       mode: host
+    volumes:
+     - type: bind
+       source: /data/volumes/mongo-data2/db
+       target: /data/db
+     - type: bind
+       source: /data/volumes/mongo-data2/configdb
+       target: /data/configdb
+    secrets:
+      - source: mongo_key
+        target: mongo_key
+        uid: '999'
+        gid: '999'
+        mode: 0400
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp69]
+
+  db_mongodb3:
+    command: mongod --auth --keyFile /var/run/secrets/mongo_key --replSet rs0
+    #command: tail -f /etc/profile
+    image: xiangpu/db_mongodb:1.5
+    networks:
+      mynet:
+    ports:
+     - target: 27017
+       published: 27019
+       mode: host
+    volumes:
+     - type: bind
+       source: /data/volumes/mongo-data3/db
+       target: /data/db
+     - type: bind
+       source: /data/volumes/mongo-data3/configdb
+       target: /data/configdb
+    secrets:
+      - source: mongo_key
+        target: mongo_key
+        uid: '999'
+        gid: '999'
+        mode: 0400
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp70]
+
+networks:
+  mynet:
+    driver: overlay
+    internal: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.20.2.0/24
+
+configs:
+  oa_config:
+    external: true
+
+  command_config:
+    external: true
+  command_properties:
+    external: true
+  command_webjs:
+    external: true
+
+  learn_config:
+    external: true
+
+  learn_cfg:
+    external: true
+
+  web_app_config:
+    external: true
+
+  web_api_config:
+    external: true
+
+secrets:
+  mongo_key:
+    external: true

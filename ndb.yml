@@ -1,0 +1,52 @@
+version: "3.3"
+services:
+  dbd_mgm:
+    image: centos
+    networks:
+      ndb:
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp69]
+
+
+
+  ndb_mysql:
+    image: centos
+    networks: 
+      ndb:
+    ports:
+      - target: 8080
+        published: 3006
+        protocol: tcp
+        mode: host
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp68]
+
+
+  fileservice:
+    image: xiangpu/fileservice:1.5
+    networks:
+      usercentre:
+    ports:
+      - target: 8080
+        published: 3007
+        protocol: tcp
+        mode: host
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == xp68]
+   
+
+networks:
+  ndb:
+    driver: overlay
+    internal: false
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.20.9.0/24
+

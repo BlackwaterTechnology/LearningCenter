@@ -1,0 +1,6 @@
+//tealium universal tag - utag.63 ut4.0.201704062016, Copyright 2017 Tealium.com Inc. All Rights Reserved.
+window._bizo_data_partner_id="7320";try{(function(id,loader,u){try{u=utag.o[loader].sender[id]={}}catch(e){u=utag.sender[id]};u.ev={'view':1};u.base_url=(window.location.protocol==="https:"?"https://sjs.":"http://js.")+"bizographics.com/insight.min.js";u.map={};u.extend=[function(a,b){try{if(1){function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!='function'){window.onload=func;}else{window.onload=function(){if(oldonload){oldonload();}
+func();};}}
+utag.onload_flag=utag.onload_flag||{};if(!utag.onload_flag[id]){if(document.readyState!="complete"){addLoadEvent(function(){utag.view(utag_data,null,[id]);});return false;}
+utag.onload_flag[id]=1;}}}catch(e){utag.DB(e)}}];u.send=function(a,b){if(u.ev[a]||typeof u.ev.all!="undefined"){for(c=0;c<u.extend.length;c++){try{d=u.extend[c](a,b);if(d==false)return}catch(e){}};u.s=document.getElementsByTagName("script")[0];u.scr=document.createElement("script");u.scr.type="text/javascript";u.scr.src=u.base_url;u.s.parentNode.insertBefore(u.scr,u.s);}}
+try{utag.o[loader].loader.LOAD(id)}catch(e){utag.loader.LOAD(id)}})('63','cisco.support');}catch(e){}

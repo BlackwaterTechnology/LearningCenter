@@ -1,0 +1,2211 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://kubernetes.io/docs/admin/kubeadm/ -->
+<html id="docs" class="Reference Documentation"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="https://kubernetes.io/images/favicon.png">
+    <link rel="stylesheet" type="text/css" href="./Kubeadm - Kubernetes_files/css">
+    <link rel="stylesheet" type="text/css" href="./Kubeadm - Kubernetes_files/css(1)">
+    <link rel="stylesheet" type="text/css" href="https://d33wubrfki0l68.cloudfront.net/css/8c5ae4787eec926f0fd88618adf932a041e8d60a/css/styles.css"><!-- default styles.css on -->
+    <link rel="stylesheet" type="text/css" href="https://d33wubrfki0l68.cloudfront.net/bundles/6e4b79687351c615cad26dc23d8f5d7238cfbd48.css">
+    
+    
+    
+    
+    <!-- no custom css detected -->
+
+    
+    <meta name="description" content="Kubeadm">
+    
+
+    <script async="" src="./Kubeadm - Kubernetes_files/analytics.js.下载"></script><script id="pd-rating-js" src="./Kubeadm - Kubernetes_files/rating.js.下载"></script><script src="https://d33wubrfki0l68.cloudfront.net/bundles/8afb7e92e9887b112e11472c9a3f20ea0ea49c97.js"></script>
+    <!-- Begin Jekyll SEO tag v2.1.0 -->
+<title>Kubeadm - Kubernetes</title>
+<meta property="og:title" content="Kubeadm">
+<meta name="description" content="Production-Grade Container Orchestration">
+<meta property="og:description" content="Production-Grade Container Orchestration">
+<link rel="canonical" href="https://kubernetes.io/docs/admin/kubeadm/">
+<meta property="og:url" content="https://kubernetes.io/docs/admin/kubeadm/">
+<meta property="og:site_name" content="Kubernetes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@kubernetesio">
+<script type="application/ld+json">
+{"@context": "http://schema.org",
+"@type": "WebPage",
+"headline": "Kubeadm",
+"description": "Production-Grade Container Orchestration",
+"publisher": {"@type": "Organization",
+"logo": {"@type": "ImageObject",
+"url": "https://kubernetes.io/images/favicon.png"}},
+"url": "https://kubernetes.io/docs/admin/kubeadm/"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+
+<body>
+
+<div id="cellophane" onclick="kub.toggleMenu()"></div>
+
+<header>
+    <a href="https://kubernetes.io/" class="logo"></a>
+
+    <div class="nav-buttons" data-auto-burger="primary">
+        <ul class="global-nav">
+            <li><a href="https://kubernetes.io/docs/home/">Documentation</a></li>
+            <li><a href="http://blog.kubernetes.io/">Blog</a></li>
+            <li><a href="https://kubernetes.io/partners/">Partners</a></li>
+            <li><a href="https://kubernetes.io/community/">Community</a></li>
+            <li><a href="https://kubernetes.io/case-studies/">Case Studies</a></li>
+            <li>
+                <a href="https://kubernetes.io/docs/admin/kubeadm/#">
+                    v1.8 <span class="ui-icon ui-icon-carat-1-s"></span>
+                </a>
+                <ul>
+                
+                  <li><a href="https://kubernetes.io/docs/home/">v1.8</a></li>
+                
+                  <li><a href="https://kubernetes-io-v1-7.netlify.com/docs/home/">v1.7</a></li>
+                
+                  <li><a href="https://v1-6.docs.kubernetes.io/docs/home/">v1.6</a></li>
+                
+                  <li><a href="https://v1-5.docs.kubernetes.io/docs/">v1.5</a></li>
+                
+                  <li><a href="https://v1-4.docs.kubernetes.io/docs/">v1.4</a></li>
+                
+                </ul>
+              </li>
+            
+        </ul>
+        <!-- <a href="/docs/home" class="button" id="viewDocs" data-auto-burger-exclude>View Documentation</a> -->
+        <a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/" class="button" id="tryKubernetes" data-auto-burger-exclude="">Try Kubernetes</a>
+        <button id="hamburger" onclick="kub.toggleMenu()" data-auto-burger-exclude=""><div></div></button>
+    </div>
+
+    <nav id="mainNav">
+        <main data-auto-burger="primary">
+        <div class="nav-box">
+            <h3><a href="https://kubernetes.io/docs/tutorials/stateless-application/hello-minikube/">Get Started</a></h3>
+            <p>Ready to get your hands dirty? Build a simple Kubernetes cluster that runs "Hello World" for Node.js.</p>
+        </div>
+        <div class="nav-box">
+            <h3><a href="https://kubernetes.io/docs/home/">Documentation</a></h3>
+            <p>Learn how to use Kubernetes with the use of walkthroughs, samples, and reference documentation. You can even <a href="https://kubernetes.io/editdocs/" data-auto-burger-exclude="">help contribute to the docs</a>!</p>
+        </div>
+        <div class="nav-box">
+            <h3><a href="https://kubernetes.io/community/">Community</a></h3>
+            <p>If you need help, you can connect with other Kubernetes users and the Kubernetes authors, attend community events, and watch video presentations from around the web.</p>
+        </div>
+        <div class="nav-box">
+            <h3><a href="http://blog.kubernetes.io/">Blog</a></h3>
+            <p>Read the latest news for Kubernetes and the containers space in general, and get technical how-tos hot off the presses.</p>
+        </div>
+        </main>
+        <main data-auto-burger="primary">
+        <div class="left">
+            <h5 class="github-invite">Interested in hacking on the core Kubernetes code base?</h5>
+            <a href="https://github.com/kubernetes/kubernetes" class="button" data-auto-burger-exclude="">View On Github</a>
+        </div>
+
+        <div class="right">
+            <h5 class="github-invite">Explore the community</h5>
+            <div class="social">
+                <a href="https://twitter.com/kubernetesio" class="twitter"><span>Twitter</span></a>
+                <a href="https://github.com/kubernetes/kubernetes" class="github"><span>Github</span></a>
+                <a href="http://slack.k8s.io/" class="slack"><span>Slack</span></a>
+                <a href="http://stackoverflow.com/questions/tagged/kubernetes" class="stack-overflow"><span>Stack Overflow</span></a>
+                <a href="https://groups.google.com/forum/#!forum/kubernetes-users" class="mailing-list"><span>Mailing List</span></a>
+                <a href="https://calendar.google.com/calendar/embed?src=nt2tcnbtbied3l6gi2h29slvc0%40group.calendar.google.com" class="calendar"><span>Events Calendar</span></a>
+            </div>
+        </div>
+        <div class="clear" style="clear: both"></div>
+        </main>
+    </nav>
+</header>
+
+
+<!--  HERO  -->
+<section id="hero" class="light-text">
+  <h1>Reference Documentation</h1>
+  <h5>Design docs, concept definitions, and references for APIs and CLIs.</h5>
+  <div id="vendorStrip" class="light-text">
+    <ul>
+      <li><a href="https://kubernetes.io/docs/home/">HOME</a></li>
+      <li><a href="https://kubernetes.io/docs/setup/">SETUP</a></li>
+      <li><a href="https://kubernetes.io/docs/concepts/">CONCEPTS</a></li>
+      <li><a href="https://kubernetes.io/docs/tasks/">TASKS</a></li>
+      <li><a href="https://kubernetes.io/docs/tutorials/">TUTORIALS</a></li>
+      <li><a href="https://kubernetes.io/docs/reference/" class="YAH">REFERENCE</a></li>
+    </ul>
+    <div id="searchBox">
+      <input type="text" id="search" placeholder="Search" onkeydown="if (event.keyCode==13) window.location.replace(&#39;/docs/search/?q=&#39; + this.value)" autofocus="autofocus">
+    </div>
+  </div>
+</section>
+
+
+
+
+<section id="encyclopedia">
+  <div id="docsToc">
+        <div class="pi-accordion">
+          
+  
+
+    
+
+    
+      <a class="item" data-title="Reference Documentation" href="https://kubernetes.io/docs/reference/"></a>
+    
+  
+
+  
+    <div class="item" data-title="Using the API">
+      <div class="container">
+        
+  
+
+    
+
+    
+      <a class="item" data-title="Kubernetes API Overview" href="https://kubernetes.io/docs/reference/api-overview/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Client Libraries" href="https://kubernetes.io/docs/reference/client-libraries/"></a>
+    
+  
+
+  
+    <div class="item" data-title="Accessing the API">
+      <div class="container">
+        
+  
+
+    
+
+    
+      <a class="item" data-title="Controlling Access to the Kubernetes API" href="https://kubernetes.io/docs/admin/accessing-the-api/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Authenticating" href="https://kubernetes.io/docs/admin/authentication/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Authenticating with Bootstrap Tokens" href="https://kubernetes.io/docs/admin/bootstrap-tokens/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Using Admission Controllers" href="https://kubernetes.io/docs/admin/admission-controllers/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Dynamic Admission Control" href="https://kubernetes.io/docs/admin/extensible-admission-controllers/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Managing Service Accounts" href="https://kubernetes.io/docs/admin/service-accounts-admin/"></a>
+    
+  
+
+
+      </div>
+    </div>
+  
+
+  
+    <div class="item" data-title="Authorization">
+      <div class="container">
+        
+  
+
+    
+
+    
+      <a class="item" data-title="Overview" href="https://kubernetes.io/docs/admin/authorization/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="ABAC Mode" href="https://kubernetes.io/docs/admin/authorization/abac/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Using RBAC Authorization" href="https://kubernetes.io/docs/admin/authorization/rbac/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Using Node Authorization" href="https://kubernetes.io/docs/admin/authorization/node/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Webhook Mode" href="https://kubernetes.io/docs/admin/authorization/webhook/"></a>
+    
+  
+
+
+      </div>
+    </div>
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Kubernetes Deprecation Policy" href="https://kubernetes.io/docs/reference/deprecation-policy/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Workloads API changes in versions 1.8 and 1.9" href="https://kubernetes.io/docs/reference/workloads-18-19/"></a>
+    
+  
+
+
+      </div>
+    </div>
+  
+
+  
+    <div class="item" data-title="API Reference">
+      <div class="container">
+        
+  
+
+    
+
+    
+      <a class="item" data-title="v1.8" href="https://kubernetes.io/docs/api-reference/v1.8/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="v1.7" href="https://kubernetes.io/docs/api-reference/v1.7/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="v1.6" href="https://kubernetes.io/docs/api-reference/v1.6/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="v1.5" href="https://kubernetes.io/docs/api-reference/v1.5/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Well-Known Labels, Annotations and Taints" href="https://kubernetes.io/docs/reference/labels-annotations-taints/"></a>
+    
+  
+
+  
+    <div class="item" data-title="OpenAPI and Swagger">
+      <div class="container">
+        
+  
+
+    
+
+    
+      <a class="item" data-title="OpenAPI Spec" href="https://git.k8s.io/kubernetes/api/openapi-spec/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Swagger Spec" href="https://git.k8s.io/kubernetes/api/swagger-spec/"></a>
+    
+  
+
+
+      </div>
+    </div>
+  
+
+
+      </div>
+    </div>
+  
+
+  
+    <div class="item" data-title="Federation API">
+      <div class="container">
+        
+  
+
+    
+
+    
+      <a class="item" data-title="v1 Operations" href="https://kubernetes.io/docs/reference/federation/v1/operations/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="v1 Model Definitions" href="https://kubernetes.io/docs/reference/federation/v1/definitions/"></a>
+    
+  
+
+  
+
+    
+
+    
+  
+
+  
+
+    
+
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="extensions/v1beta1 Operations" href="https://kubernetes.io/docs/reference/federation/extensions/v1beta1/operations/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="extensions/v1beta1 Model Definitions" href="https://kubernetes.io/docs/reference/federation/extensions/v1beta1/definitions/"></a>
+    
+  
+
+
+      </div>
+    </div>
+  
+
+  
+    <div class="item" data-title="kubectl CLI">
+      <div class="container">
+        
+  
+
+    
+
+    
+      <a class="item" data-title="Overview of kubectl" href="https://kubernetes.io/docs/user-guide/kubectl-overview/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="kubectl" href="https://kubernetes.io/docs/user-guide/kubectl/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="v1.8 Commands" href="https://kubernetes.io/docs/user-guide/kubectl/v1.8/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="v1.7 Commands" href="https://kubernetes.io/docs/user-guide/kubectl/v1.7/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="v1.6 Commands" href="https://kubernetes.io/docs/user-guide/kubectl/v1.6/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="v1.5 Commands" href="https://kubernetes.io/docs/user-guide/kubectl/v1.5/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="kubectl for Docker Users" href="https://kubernetes.io/docs/user-guide/docker-cli-to-kubectl/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="kubectl Usage Conventions" href="https://kubernetes.io/docs/user-guide/kubectl-conventions/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="JSONPath Support" href="https://kubernetes.io/docs/user-guide/jsonpath/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="kubectl Cheat Sheet" href="https://kubernetes.io/docs/user-guide/kubectl-cheatsheet/"></a>
+    
+  
+
+
+      </div>
+    </div>
+  
+
+  
+    <div class="item" data-title="Cloud Controller Manager">
+      <div class="container">
+        
+  
+
+    
+
+    
+      <a class="item" data-title="cloud-controller-manager" href="https://kubernetes.io/docs/admin/cloud-controller-manager/"></a>
+    
+  
+
+
+      </div>
+    </div>
+  
+
+  
+    <div class="item" data-title="Setup Tools">
+      <div class="container">
+        
+  
+
+    
+
+    
+      <a class="item" data-title="Kubeadm" href="https://kubernetes.io/docs/admin/kubeadm/"></a>
+    
+  
+
+  
+    <div class="item" data-title="Kubefed">
+      <div class="container">
+        
+  
+
+    
+
+    
+      <a class="item" data-title="kubefed" href="https://kubernetes.io/docs/admin/kubefed/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="kubefed options" href="https://kubernetes.io/docs/admin/kubefed_options/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="kubefed init" href="https://kubernetes.io/docs/admin/kubefed_init/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="kubefed join" href="https://kubernetes.io/docs/admin/kubefed_join/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="kubefed unjoin" href="https://kubernetes.io/docs/admin/kubefed_unjoin/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="kubefed version" href="https://kubernetes.io/docs/admin/kubefed_version/"></a>
+    
+  
+
+
+      </div>
+    </div>
+  
+
+
+      </div>
+    </div>
+  
+
+  
+    <div class="item" data-title="Config Reference">
+      <div class="container">
+        
+  
+
+    
+
+    
+      <a class="item" data-title="kubelet" href="https://kubernetes.io/docs/admin/kubelet/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="kube-apiserver" href="https://kubernetes.io/docs/admin/kube-apiserver/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="kube-controller-manager" href="https://kubernetes.io/docs/admin/kube-controller-manager/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="kube-proxy" href="https://kubernetes.io/docs/admin/kube-proxy/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="kube-scheduler" href="https://kubernetes.io/docs/admin/kube-scheduler/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="federation-apiserver" href="https://kubernetes.io/docs/admin/federation-apiserver/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="federation-controller-manager" href="https://kubernetes.io/docs/admin/federation-controller-manager/"></a>
+    
+  
+
+
+      </div>
+    </div>
+  
+
+  
+    <div class="item" data-title="Kubernetes Design Docs">
+      <div class="container">
+        
+  
+
+    
+
+    
+      <a class="item" data-title="Kubernetes Architecture" href="https://git.k8s.io/community/contributors/design-proposals/architecture/architecture.md"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Kubernetes Design Overview" href="https://github.com/kubernetes/kubernetes/tree/release-1.6/docs/design"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Kubernetes Identity and Access Management" href="https://git.k8s.io/community/contributors/design-proposals/auth/access.md"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Kubernetes OpenVSwitch GRE/VxLAN networking" href="https://kubernetes.io/docs/admin/ovs-networking/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Security Contexts" href="https://git.k8s.io/community/contributors/design-proposals/auth/security_context.md"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Security in Kubernetes" href="https://git.k8s.io/community/contributors/design-proposals/auth/security.md"></a>
+    
+  
+
+
+      </div>
+    </div>
+  
+
+  
+    <div class="item" data-title="Kubernetes Issues and Security">
+      <div class="container">
+        
+  
+
+    
+
+    
+      <a class="item" data-title="Kubernetes Issue Tracker on GitHub" href="https://github.com/kubernetes/kubernetes/issues/"></a>
+    
+  
+
+  
+
+    
+
+    
+      <a class="item" data-title="Kubernetes Security and Disclosure Information" href="https://kubernetes.io/security/"></a>
+    
+  
+
+
+      </div>
+    </div>
+  
+
+
+        </div> <!-- /pi-accordion -->
+    <button class="push-menu-close-button" onclick="kub.toggleToc()"></button>
+  </div> <!-- /docsToc -->
+
+  <div id="docsContent">
+        <p><a href="https://kubernetes.io/editdocs#docs/admin/kubeadm.md" id="editPageButton">Edit This Page</a></p>
+
+        
+
+        <h1 id="kubeadm-setup-tool-reference-guide">kubeadm Setup Tool Reference Guide</h1>
+
+<p>This document provides information on how to use kubeadm’s advanced options.</p>
+
+<ul id="markdown-toc">
+  <li><a href="https://kubernetes.io/docs/admin/kubeadm/#kubeadm-setup-tool-reference-guide" id="markdown-toc-kubeadm-setup-tool-reference-guide">kubeadm Setup Tool Reference Guide</a>    <ul>
+      <li><a href="https://kubernetes.io/docs/admin/kubeadm/#usage" id="markdown-toc-usage">Usage</a>        <ul>
+          <li><a href="https://kubernetes.io/docs/admin/kubeadm/#kubeadm-init" id="markdown-toc-kubeadm-init"><code class="highlighter-rouge">kubeadm init</code></a></li>
+          <li><a href="https://kubernetes.io/docs/admin/kubeadm/#kubeadm-join" id="markdown-toc-kubeadm-join"><code class="highlighter-rouge">kubeadm join</code></a></li>
+          <li><a href="https://kubernetes.io/docs/admin/kubeadm/#kubeadm-completion" id="markdown-toc-kubeadm-completion"><code class="highlighter-rouge">kubeadm completion</code></a></li>
+          <li><a href="https://kubernetes.io/docs/admin/kubeadm/#kubeadm-config" id="markdown-toc-kubeadm-config"><code class="highlighter-rouge">kubeadm config</code></a></li>
+          <li><a href="https://kubernetes.io/docs/admin/kubeadm/#kubeadm-reset" id="markdown-toc-kubeadm-reset"><code class="highlighter-rouge">kubeadm reset</code></a></li>
+          <li><a href="https://kubernetes.io/docs/admin/kubeadm/#kubeadm-token" id="markdown-toc-kubeadm-token"><code class="highlighter-rouge">kubeadm token</code></a></li>
+          <li><a href="https://kubernetes.io/docs/admin/kubeadm/#kubeadm-alpha-phases" id="markdown-toc-kubeadm-alpha-phases"><code class="highlighter-rouge">kubeadm alpha phases</code></a></li>
+        </ul>
+      </li>
+      <li><a href="https://kubernetes.io/docs/admin/kubeadm/#config-file" id="markdown-toc-config-file">Using kubeadm with a configuration file</a>        <ul>
+          <li><a href="https://kubernetes.io/docs/admin/kubeadm/#sample-master-configuration" id="markdown-toc-sample-master-configuration">Sample Master Configuration</a></li>
+          <li><a href="https://kubernetes.io/docs/admin/kubeadm/#sample-node-configuration" id="markdown-toc-sample-node-configuration">Sample Node Configuration</a></li>
+        </ul>
+      </li>
+      <li><a href="https://kubernetes.io/docs/admin/kubeadm/#securing-more" id="markdown-toc-securing-more">Securing your installation even more</a>        <ul>
+          <li><a href="https://kubernetes.io/docs/admin/kubeadm/#turning-off-auto-approval-of-node-client-certificates" id="markdown-toc-turning-off-auto-approval-of-node-client-certificates">Turning off auto-approval of Node Client Certificates</a></li>
+          <li><a href="https://kubernetes.io/docs/admin/kubeadm/#turning-off-public-access-to-the-cluster-info-configmap" id="markdown-toc-turning-off-public-access-to-the-cluster-info-configmap">Turning off public access to the cluster-info ConfigMap</a></li>
+        </ul>
+      </li>
+      <li><a href="https://kubernetes.io/docs/admin/kubeadm/#manage-tokens" id="markdown-toc-manage-tokens">Managing Tokens</a></li>
+      <li><a href="https://kubernetes.io/docs/admin/kubeadm/#automating-kubeadm" id="markdown-toc-automating-kubeadm">Automating kubeadm</a></li>
+      <li><a href="https://kubernetes.io/docs/admin/kubeadm/#security-model" id="markdown-toc-security-model">Security model</a>        <ul>
+          <li><a href="https://kubernetes.io/docs/admin/kubeadm/#token-based-discovery-with-ca-pinning" id="markdown-toc-token-based-discovery-with-ca-pinning">Token-based discovery with CA pinning</a></li>
+          <li><a href="https://kubernetes.io/docs/admin/kubeadm/#token-based-discovery-without-ca-pinning" id="markdown-toc-token-based-discovery-without-ca-pinning">Token-based discovery without CA pinning</a></li>
+          <li><a href="https://kubernetes.io/docs/admin/kubeadm/#file-or-https-based-discovery" id="markdown-toc-file-or-https-based-discovery">File or HTTPS-based discovery</a></li>
+        </ul>
+      </li>
+      <li><a href="https://kubernetes.io/docs/admin/kubeadm/#use-kubeadm-with-other-cri-runtimes" id="markdown-toc-use-kubeadm-with-other-cri-runtimes">Use kubeadm with other CRI runtimes</a></li>
+      <li><a href="https://kubernetes.io/docs/admin/kubeadm/#custom-images" id="markdown-toc-custom-images">Using custom images</a></li>
+      <li><a href="https://kubernetes.io/docs/admin/kubeadm/#running-kubeadm-without-an-internet-connection" id="markdown-toc-running-kubeadm-without-an-internet-connection">Running kubeadm without an internet connection</a></li>
+      <li><a href="https://kubernetes.io/docs/admin/kubeadm/#kubelet-drop-in" id="markdown-toc-kubelet-drop-in">Managing the kubeadm drop-in file for the kubelet</a></li>
+      <li><a href="https://kubernetes.io/docs/admin/kubeadm/#cloud-provider-integrations-experimental" id="markdown-toc-cloud-provider-integrations-experimental">Cloud provider integrations (experimental)</a></li>
+      <li><a href="https://kubernetes.io/docs/admin/kubeadm/#environment-variables" id="markdown-toc-environment-variables">Environment variables</a></li>
+      <li><a href="https://kubernetes.io/docs/admin/kubeadm/#custom-certificates" id="markdown-toc-custom-certificates">Using custom certificates</a></li>
+      <li><a href="https://kubernetes.io/docs/admin/kubeadm/#self-hosting" id="markdown-toc-self-hosting">Self-hosting the Kubernetes control plane</a>        <ul>
+          <li><a href="https://kubernetes.io/docs/admin/kubeadm/#caveats" id="markdown-toc-caveats">Caveats</a></li>
+          <li><a href="https://kubernetes.io/docs/admin/kubeadm/#process" id="markdown-toc-process">Process</a></li>
+        </ul>
+      </li>
+      <li><a href="https://kubernetes.io/docs/admin/kubeadm/#releases-and-release-notes" id="markdown-toc-releases-and-release-notes">Releases and release notes</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>Running <code class="highlighter-rouge">kubeadm init</code> bootstraps a Kubernetes master node. This consists of the
+following steps:</p>
+
+<ol>
+  <li>
+    <p>kubeadm runs a series of pre-flight checks to validate the system state
+before making changes. Some checks only trigger warnings, others are
+considered errors and will exit kubeadm until the problem is corrected or the
+user specifies <code class="highlighter-rouge">--skip-preflight-checks</code>.</p>
+  </li>
+  <li>
+    <p>kubeadm generates a token that additional nodes can use to register
+themselves with the master in future.  Optionally, the user can provide a
+token via <code class="highlighter-rouge">--token</code>, as described in the
+<a href="https://kubernetes.io/docs/admin/kubeadm/#manage-tokens">section on managing tokens</a> below.</p>
+  </li>
+  <li>
+    <p>kubeadm generates a self-signed CA to provision identities for each component
+(including nodes) in the cluster.  It also generates client certificates to
+be used by various components.  If the user has provided their own CA by
+dropping it in the cert directory configured via <code class="highlighter-rouge">--cert-dir</code>
+(<code class="highlighter-rouge">/etc/kubernetes/pki</code> by default) this step is skipped as described in the
+<a href="https://kubernetes.io/docs/admin/kubeadm/#custom-certificates">section on using custom certificates</a>.</p>
+  </li>
+  <li>
+    <p>kubeadm writes kubeconfig files in <code class="highlighter-rouge">/etc/kubernetes/</code>  for
+the kubelet, the controller-manager and the scheduler to use to connect to the
+API server, each one with their respective identities, as well as an additional
+kubeconfig file for administration.</p>
+  </li>
+  <li>
+    <p>kubeadm generates static Pod manifests for the API server,
+controller manager and scheduler; in case an external etcd is not provided,
+an additional static Pod manifest will be generated for etcd.</p>
+
+    <p>Static Pod manifests are written in <code class="highlighter-rouge">/etc/kubernetes/manifests</code>; the kubelet
+watches this directory for Pods to create on startup, as described in
+the <a href="https://kubernetes.io/docs/admin/kubeadm/#kubelet-drop-in">section about kubelet drop-in</a>.</p>
+
+    <p>Once control plane Pods are up and running kubeadm init sequence can continue.</p>
+  </li>
+  <li>
+    <p>kubeadm “labels” and “taints” the master node so that only control plane
+components will run there.</p>
+  </li>
+  <li>
+    <p>Kubeadm makes all the necessary configurations for allowing node joining with the
+<a href="https://kubernetes.io/docs/admin/bootstrap-tokens/">Bootstrap Tokens</a> and
+<a href="https://kubernetes.io/docs/admin/kubelet-tls-bootstrapping/">TLS Bootstrap</a>
+mechanism:</p>
+
+    <ul>
+      <li>
+        <p>Write a ConfigMap for making available all the information required
+for joining and set up related RBAC access rules.</p>
+      </li>
+      <li>
+        <p>Ensure access to the CSR signing API for bootstrap tokens.</p>
+      </li>
+      <li>
+        <p>Configure auto approval for new CSR requests.</p>
+      </li>
+    </ul>
+
+    <p>See <a href="https://kubernetes.io/docs/admin/kubeadm/#securing-more">Securing your installation</a> for hardening.</p>
+  </li>
+  <li>
+    <p>kubeadm installs add-on components via the API server.  Right now this is
+the internal DNS server and the kube-proxy DaemonSet.</p>
+  </li>
+  <li>
+    <p>If <code class="highlighter-rouge">kubeadm init</code> is invoked with the alpha self-hosting feature enabled,
+(<code class="highlighter-rouge">--feature-gates=SelfHosting=true</code>), the static Pod based control plane will
+be transformed into a <a href="https://kubernetes.io/docs/admin/kubeadm/#self-hosting">self-hosted control plane</a>.</p>
+  </li>
+</ol>
+
+<p>Running <code class="highlighter-rouge">kubeadm join</code> on each node in the cluster consists of the following
+steps:</p>
+
+<ol>
+  <li>
+    <p>kubeadm downloads necessary cluster information from the API server.
+By default, it uses the bootstrap token and the CA key hash to verify the
+authenticity of that data. The root CA can also be discovered directly via a
+file or URL.</p>
+  </li>
+  <li>
+    <p>Once the cluster information are known, kubelet can start the TLS bootstrapping
+process (in v.1.7 this step was managed by kubeadm).</p>
+
+    <p>The TLS bootstrap uses the shared token to temporarily authenticate
+with the Kubernetes Master to submit a certificate signing request (CSR); by
+default the control plane will sign this CSR request automatically.</p>
+  </li>
+  <li>
+    <p>Finally, kubeadm will configures the local kubelet to connect to the API
+server with the definitive identity assigned to the node.</p>
+  </li>
+</ol>
+
+<h2 id="usage">Usage</h2>
+
+<p>Fields that support multiple values do so either with comma separation, or by
+specifying the flag multiple times.</p>
+
+<p>The kubeadm command line interface is currently in <strong>beta</strong>.  We are aiming to
+not break any scripted use of the main <code class="highlighter-rouge">kubeadm init</code> and <code class="highlighter-rouge">kubeadm join</code>.
+Exceptions to this are documented below.</p>
+
+<h3 id="kubeadm-init"><code class="highlighter-rouge">kubeadm init</code></h3>
+
+<p>It is usually sufficient to run <code class="highlighter-rouge">kubeadm init</code> without any flags, but in some
+cases you might like to override the default behaviour. Here we specify all the
+flags that can be used to customise the Kubernetes installation.</p>
+
+<p><strong>Options for <code class="highlighter-rouge">kubeadm init</code>:</strong></p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">--apiserver-advertise-address</code></p>
+
+    <p>This is the address the API Server will advertise to other members of the
+cluster.  This is also the address used to construct the suggested <code class="highlighter-rouge">kubeadm
+join</code> line at the end of the init process.  If not set (or set to 0.0.0.0) then
+IP for the default interface will be used.</p>
+
+    <p>This address is also added to the certificate that the API Server uses.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--apiserver-bind-port</code></p>
+
+    <p>The port that the API server will bind on.  This defaults to 6443.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--apiserver-cert-extra-sans</code></p>
+
+    <p>Additional hostnames or IP addresses that should be added to the Subject
+Alternate Name section for the certificate that the API Server will use.  If you
+expose the API Server through a load balancer and public DNS you could specify
+this with</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>--apiserver-cert-extra-sans=kubernetes.example.com,kube.example.com,10.100.245.1
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--cert-dir</code></p>
+
+    <p>The path where to save and store the certificates.  The default is
+“/etc/kubernetes/pki”.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--config</code></p>
+
+    <p>A kubeadm specific <a href="https://kubernetes.io/docs/admin/kubeadm/#config-file">config file</a>.  This can be used to specify an
+extended set of options including passing arbitrary command line flags to the
+control plane components.</p>
+
+    <p><strong>Note</strong>: Since 1.8, other flags are not allowed alongside <code class="highlighter-rouge">--config</code> except
+for flags used to define kubeadm behaviour (not configuration) such as
+<code class="highlighter-rouge">--skip-preflight-checks</code>.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--dry-run</code></p>
+
+    <p>This flag tells kubeadm to don’t apply any changes; just output what would be done.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--feature-gates</code></p>
+
+    <p>A set of key=value pairs that describe feature gates for alpha/experimental
+features. Options are:</p>
+
+    <ul>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>SelfHosting=true</td>
+              <td>false (ALPHA - default=false)</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>StoreCertsInSecrets=true</td>
+              <td>false (ALPHA - default=false)</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+
+    <p>See <a href="https://kubernetes.io/docs/admin/kubeadm/#self-hosting">self-hosted control plane</a> for more detail.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--kubernetes-version</code> (default ‘latest’) the kubernetes version to initialise</p>
+
+    <p>The <strong>v1.6</strong> version of kubeadm only supports building clusters that are at
+least <strong>v1.6.0</strong>.  There are many reasons for this including kubeadm’s use of
+RBAC, the Bootstrap Token system, and enhancements to the Certificates API. With
+this flag you can try any future version of Kubernetes.  Check <a href="https://github.com/kubernetes/kubernetes/releases">releases
+page</a> for a full list of
+available versions.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--node-name</code></p>
+
+    <p>Allow to specify the node name, if something different than O.S. hostname should be used e.g. in case of Amazon EC2 instances.</p>
+
+    <p>The node-name is also added to the certificate that the API Server uses.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--pod-network-cidr</code></p>
+
+    <p>For certain networking solutions the Kubernetes master can also play a role in
+allocating network ranges (CIDRs) to each node. This includes many cloud
+providers and flannel. You can specify a subnet range that will be broken down
+and handed out to each node with the <code class="highlighter-rouge">--pod-network-cidr</code> flag. This should be a
+minimum of a /16 so controller-manager is able to assign /24 subnets to each
+node in the cluster. If you are using flannel with <a href="https://github.com/coreos/flannel/blob/master/Documentation/kube-flannel.yml">this
+manifest</a>
+you should use <code class="highlighter-rouge">--pod-network-cidr=10.244.0.0/16</code>. Most CNI based networking
+solutions do not require this flag.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--service-cidr</code> (default ‘10.96.0.0/12’)</p>
+
+    <p>You can use the <code class="highlighter-rouge">--service-cidr</code> flag to override the subnet Kubernetes uses to
+assign pods IP addresses. If you do, you will also need to update the
+<code class="highlighter-rouge">/etc/systemd/system/kubelet.service.d/10-kubeadm.conf</code> file to reflect this
+change else DNS will not function correctly.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--service-dns-domain</code> (default ‘cluster.local’)</p>
+
+    <p>By default, <code class="highlighter-rouge">kubeadm init</code> deploys a cluster that assigns services with DNS
+names <code class="highlighter-rouge">&lt;service_name&gt;.&lt;namespace&gt;.svc.cluster.local</code>. You can use the
+<code class="highlighter-rouge">--service-dns-domain</code> to change the DNS name suffix. Again, you will need to
+update the <code class="highlighter-rouge">/etc/systemd/system/kubelet.service.d/10-kubeadm.conf</code> file
+accordingly else DNS will not function correctly.</p>
+
+    <p><strong>Note</strong>: This flag has an effect (it’s needed for the kube-dns Deployment
+manifest and the API Server’s serving certificate) but not as you might expect,
+since you will have to modify the arguments to the kubelets in the cluster for
+it to work fully. Specifying DNS parameters using this flag only is not enough.
+Rewriting the kubelet’s CLI arguments is out of scope for kubeadm as it should
+be agnostic to how you run the kubelet. However, making all kubelets in the
+cluster pick up information dynamically via the API <em>is</em> in scope and is a
+<a href="https://github.com/kubernetes/kubeadm/issues/28">planned feature</a> for upcoming
+releases.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--skip-preflight-checks</code></p>
+
+    <p>By default, kubeadm runs a series of preflight checks to validate the system
+before making any changes. Advanced users can use this flag to bypass these if
+necessary.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--skip-token-print</code></p>
+
+    <p>By default, kubeadm prints the token at the end of the init procedure. Advanced
+users can use this flag to bypass these if necessary.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--token</code></p>
+
+    <p>By default, <code class="highlighter-rouge">kubeadm init</code> automatically generates the token used to initialise
+each new node. If you would like to manually specify this token, you can use the
+<code class="highlighter-rouge">--token</code> flag. The token must be of the format <code class="highlighter-rouge">[a-z0-9]{6}\.[a-z0-9]{16}</code>.  A
+compatible random token can be generated <code class="highlighter-rouge">kubeadm token generate</code>.  Tokens can
+be managed through the API after the cluster is created.  See the <a href="https://kubernetes.io/docs/admin/kubeadm/#manage-tokens">section on
+managing tokens</a> below.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--token-ttl</code></p>
+
+    <p>This sets an expiration time for the token.  This is specified as a duration
+from the current time.  After this time the token will no longer be valid and
+will be removed. A value of 0 specifies that the token never expires.  The
+default is 24 hours.  See the <a href="https://kubernetes.io/docs/admin/kubeadm/#manage-tokens">section on managing tokens</a> below.</p>
+  </li>
+</ul>
+
+<h3 id="kubeadm-join"><code class="highlighter-rouge">kubeadm join</code></h3>
+
+<p>When joining a kubeadm initialized cluster, we need to establish bidirectional
+trust. This is split into discovery (having the Node trust the Kubernetes
+master) and TLS bootstrap (having the Kubernetes master trust the Node).</p>
+
+<p>There are two main schemes for discovery:</p>
+
+<ul>
+  <li>
+    <p><strong>Using a shared token</strong> along with the IP address of the API server and a
+hash of the root CA key:</p>
+
+    <p><code class="highlighter-rouge">kubeadm join --discovery-token abcdef.1234567890abcdef --discovery-token-ca-cert-hash sha256:1234..cdef 1.2.3.4:6443</code></p>
+  </li>
+  <li>
+    <p><strong>Using a file</strong> (a subset of the standard kubeconfig file). This file can
+be a local file or downloaded via an HTTPS URL:</p>
+
+    <p><code class="highlighter-rouge">kubeadm join --discovery-file path/to/file.conf</code></p>
+
+    <p><code class="highlighter-rouge">kubeadm join --discovery-file https://url/file.conf</code></p>
+  </li>
+</ul>
+
+<p>Only one form can be used. If the discovery information is loaded from a URL,
+HTTPS must be used and the host installed CA bundle is used to verify the
+connection. For details on the security tradeoffs of these mechanisms, see the
+<a href="https://kubernetes.io/docs/admin/kubeadm/#security-model">security model</a> section below.</p>
+
+<p>The TLS bootstrap mechanism is also driven via a shared token. This is used to
+temporarily authenticate with the Kubernetes master to submit a certificate
+signing request (CSR) for a locally created key pair. By default kubeadm will
+set up the Kubernetes master to automatically approve these signing requests.
+This token is passed in with the <code class="highlighter-rouge">--tls-bootstrap-token abcdef.1234567890abcdef</code>
+flag.</p>
+
+<p>Often times the same token is used for both parts. In this case, the <code class="highlighter-rouge">--token</code> flag
+can be used instead of specifying the each token individually.</p>
+
+<p>Here’s an example on how to use it:</p>
+
+<p><code class="highlighter-rouge">kubeadm join --token=abcdef.1234567890abcdef --discovery-token-ca-cert-hash sha256:1234..cdef 192.168.1.1:6443</code></p>
+
+<p><strong>Options for <code class="highlighter-rouge">kubeadm join</code>:</strong></p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">--config</code></p>
+
+    <p>Extended options are specified in the <a href="https://kubernetes.io/docs/admin/kubeadm/#config-file">kubeadm specific config file</a>.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--discovery-file</code></p>
+
+    <p>A local file path or HTTPS URL.  The file specified must be a kubeconfig file
+with nothing but an unnamed cluster entry.  This is used to find both the
+location of the API server to join along with a root CA bundle to use when
+talking to that server.</p>
+
+    <p>This might look something like this:</p>
+
+    <div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="s">clusters</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">cluster</span><span class="pi">:</span>
+    <span class="s">certificate-authority-data</span><span class="pi">:</span> <span class="s">&lt;really long certificate data&gt;</span>
+    <span class="s">server</span><span class="pi">:</span> <span class="s">https://10.138.0.2:6443</span>
+  <span class="s">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+<span class="s">contexts</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="s">current-context</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+<span class="s">kind</span><span class="pi">:</span> <span class="s">Config</span>
+<span class="s">preferences</span><span class="pi">:</span> <span class="pi">{}</span>
+<span class="s">users</span><span class="pi">:</span> <span class="pi">[]</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--discovery-token</code></p>
+
+    <p>The discovery token is used along with the address of the API server (as an
+unnamed argument) to download and verify information about the cluster.  The
+most critical part of the cluster information is the root CA bundle used to
+verify the identity of the server during subsequent TLS connections.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--discovery-token-ca-cert-hash</code></p>
+
+    <p>The CA key hash is used to verify the full root CA certificate discovered during
+token-based bootstrapping. It has the format <code class="highlighter-rouge">sha256:&lt;hex_encoded_hash&gt;</code>. By
+default, the hash value is returned in the <code class="highlighter-rouge">kubeadm join</code> command printed at the
+end of <code class="highlighter-rouge">kubeadm init</code>. It is in a standard format (see
+<a href="https://tools.ietf.org/html/rfc7469#section-2.4">RFC7469</a>) and can also be
+calculated by 3rd party tools or provisioning systems. For example, using the
+OpenSSL CLI:
+<code class="highlighter-rouge">openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2&gt;&amp;/dev/null | openssl dgst -sha256 -hex</code></p>
+
+    <p><em>Skipping this flag is allowed in Kubernetes 1.8, but makes certain spoofing
+attacks possible.</em> See the <a href="https://kubernetes.io/docs/admin/kubeadm/#security-model">security model</a> for details.
+Pass <code class="highlighter-rouge">--discovery-token-unsafe-skip-ca-verification</code> to silence warnings (which
+will become errors in Kubernetes 1.9).</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--discovery-token-unsafe-skip-ca-verification</code></p>
+
+    <p>Disable the warning/error that occurs when <code class="highlighter-rouge">--discovery-token-ca-cert-hash</code> is
+not provided. Passing this flag is an acknowledgement of the
+<a href="https://kubernetes.io/docs/admin/kubeadm/#security-model">security tradeoffs</a> involved in skipping this verification
+(which may or may not be appropriate in your environment).</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--node-name</code></p>
+
+    <p>Specify the Node name. The default is to use the OS hostname. This is useful
+on some cloud providers such as AWS. This name is also added to the node’s
+TLS certificate.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--tls-bootstrap-token</code></p>
+
+    <p>The token used to authenticate to the API server for the purposes of TLS
+bootstrapping.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--token=&lt;token&gt;</code></p>
+
+    <p>Often times the same token is used for both <code class="highlighter-rouge">--discovery-token</code> and
+<code class="highlighter-rouge">--tls-bootstrap-token</code>.  This option specifies the same token for both.  Other
+flags override this flag if present.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">--skip-preflight-checks</code></p>
+
+    <p>By default, kubeadm runs a series of preflight checks to validate the system
+before making any changes. Advanced users can use this flag to bypass these if
+necessary.</p>
+  </li>
+</ul>
+
+<h3 id="kubeadm-completion"><code class="highlighter-rouge">kubeadm completion</code></h3>
+
+<p>Output shell completion code for the specified shell (bash or zsh).</p>
+
+<h3 id="kubeadm-config"><code class="highlighter-rouge">kubeadm config</code></h3>
+
+<p>Kubeadm v1.8.0+ automatically creates a ConfigMap with all the parameters
+used during <code class="highlighter-rouge">kubeadm init</code>.</p>
+
+<p>If you initialized your cluster using kubeadm v1.7.x or lower, you must use
+the <code class="highlighter-rouge">kubeadm config upload</code> command to create this ConfigMap in order
+for <code class="highlighter-rouge">kubeadm upgrade</code> to be able to configure your upgraded cluster correctly.</p>
+
+<h3 id="kubeadm-reset"><code class="highlighter-rouge">kubeadm reset</code></h3>
+
+<p>Reverts any changes made to this host by <code class="highlighter-rouge">kubeadm init</code> or <code class="highlighter-rouge">kubeadm join</code>.</p>
+
+<h3 id="kubeadm-token"><code class="highlighter-rouge">kubeadm token</code></h3>
+
+<p>Manage tokens on a running cluster. See <a href="https://kubernetes.io/docs/admin/kubeadm/#manage-tokens">managing tokens</a> below
+for further details.</p>
+
+<h3 id="kubeadm-alpha-phases"><code class="highlighter-rouge">kubeadm alpha phases</code></h3>
+
+<p><strong>WARNING:</strong> While kubeadm command line interface is in beta, commands under
+this entry is still considered alpha and may change in future versions.</p>
+
+<p><code class="highlighter-rouge">kubeadm phase</code> introduces a set of kubeadm CLI commands allowing to invoke
+individually each phase of the kubeadm init sequence; phases provide a reusable
+and composable API/toolbox for building your own automated cluster installer.</p>
+
+<p><strong>Options for <code class="highlighter-rouge">kubeadm phases</code>:</strong></p>
+
+<p>Each kubeadm phase exposes a subset of relevant options from <code class="highlighter-rouge">kubeadm init</code>.</p>
+
+<h2 id="config-file">Using kubeadm with a configuration file</h2>
+
+<p><strong>WARNING:</strong> While kubeadm command line interface is in beta, the config file is
+still considered alpha and may change in future versions.</p>
+
+<p>It’s possible to configure kubeadm with a configuration file instead of command
+line flags, and some more advanced features may only be available as
+configuration file options.  This file is passed in to the <code class="highlighter-rouge">--config</code> option on
+both <code class="highlighter-rouge">kubeadm init</code> and <code class="highlighter-rouge">kubeadm join</code>.</p>
+
+<h3 id="sample-master-configuration">Sample Master Configuration</h3>
+
+<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">apiVersion</span><span class="pi">:</span> <span class="s">kubeadm.k8s.io/v1alpha1</span>
+<span class="s">kind</span><span class="pi">:</span> <span class="s">MasterConfiguration</span>
+<span class="s">api</span><span class="pi">:</span>
+  <span class="s">advertiseAddress</span><span class="pi">:</span> <span class="s">&lt;address|string&gt;</span>
+  <span class="s">bindPort</span><span class="pi">:</span> <span class="s">&lt;int&gt;</span>
+<span class="s">etcd</span><span class="pi">:</span>
+  <span class="s">endpoints</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">&lt;endpoint1|string&gt;</span>
+  <span class="pi">-</span> <span class="s">&lt;endpoint2|string&gt;</span>
+  <span class="s">caFile</span><span class="pi">:</span> <span class="s">&lt;path|string&gt;</span>
+  <span class="s">certFile</span><span class="pi">:</span> <span class="s">&lt;path|string&gt;</span>
+  <span class="s">keyFile</span><span class="pi">:</span> <span class="s">&lt;path|string&gt;</span>
+  <span class="s">dataDir</span><span class="pi">:</span> <span class="s">&lt;path|string&gt;</span>
+  <span class="s">extraArgs</span><span class="pi">:</span>
+    <span class="s">&lt;argument&gt;</span><span class="pi">:</span> <span class="s">&lt;value|string&gt;</span>
+    <span class="s">&lt;argument&gt;</span><span class="pi">:</span> <span class="s">&lt;value|string&gt;</span>
+  <span class="s">image</span><span class="pi">:</span> <span class="s">&lt;string&gt;</span>
+<span class="s">networking</span><span class="pi">:</span>
+  <span class="s">dnsDomain</span><span class="pi">:</span> <span class="s">&lt;string&gt;</span>
+  <span class="s">serviceSubnet</span><span class="pi">:</span> <span class="s">&lt;cidr&gt;</span>
+  <span class="s">podSubnet</span><span class="pi">:</span> <span class="s">&lt;cidr&gt;</span>
+<span class="s">kubernetesVersion</span><span class="pi">:</span> <span class="s">&lt;string&gt;</span>
+<span class="s">cloudProvider</span><span class="pi">:</span> <span class="s">&lt;string&gt;</span>
+<span class="s">nodeName</span><span class="pi">:</span> <span class="s">&lt;string&gt;</span>
+<span class="s">authorizationModes</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">&lt;authorizationMode1|string&gt;</span>
+<span class="pi">-</span> <span class="s">&lt;authorizationMode2|string&gt;</span>
+<span class="s">token</span><span class="pi">:</span> <span class="s">&lt;string&gt;</span>
+<span class="s">tokenTTL</span><span class="pi">:</span> <span class="s">&lt;time duration&gt;</span>
+<span class="s">selfHosted</span><span class="pi">:</span> <span class="s">&lt;bool&gt;</span>
+<span class="s">apiServerExtraArgs</span><span class="pi">:</span>
+  <span class="s">&lt;argument&gt;</span><span class="pi">:</span> <span class="s">&lt;value|string&gt;</span>
+  <span class="s">&lt;argument&gt;</span><span class="pi">:</span> <span class="s">&lt;value|string&gt;</span>
+<span class="s">controllerManagerExtraArgs</span><span class="pi">:</span>
+  <span class="s">&lt;argument&gt;</span><span class="pi">:</span> <span class="s">&lt;value|string&gt;</span>
+  <span class="s">&lt;argument&gt;</span><span class="pi">:</span> <span class="s">&lt;value|string&gt;</span>
+<span class="s">schedulerExtraArgs</span><span class="pi">:</span>
+  <span class="s">&lt;argument&gt;</span><span class="pi">:</span> <span class="s">&lt;value|string&gt;</span>
+  <span class="s">&lt;argument&gt;</span><span class="pi">:</span> <span class="s">&lt;value|string&gt;</span>
+<span class="s">apiServerCertSANs</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">&lt;name1|string&gt;</span>
+<span class="pi">-</span> <span class="s">&lt;name2|string&gt;</span>
+<span class="s">certificatesDir</span><span class="pi">:</span> <span class="s">&lt;string&gt;</span>
+<span class="s">imageRepository</span><span class="pi">:</span> <span class="s">&lt;string&gt;</span>
+<span class="s">unifiedControlPlaneImage</span><span class="pi">:</span> <span class="s">&lt;string&gt;</span>
+<span class="s">featureGates</span><span class="pi">:</span>
+  <span class="s">&lt;feature&gt;</span><span class="pi">:</span> <span class="s">&lt;bool&gt;</span>
+  <span class="s">&lt;feature&gt;</span><span class="pi">:</span> <span class="s">&lt;bool&gt;</span>
+</code></pre>
+</div>
+<p>In addition, if authorizationMode is set to <code class="highlighter-rouge">ABAC</code>, you should write the config to <code class="highlighter-rouge">/etc/kubernetes/abac_policy.json</code>.
+However, if authorizationMode is set to <code class="highlighter-rouge">Webhook</code>, you should write the config to <code class="highlighter-rouge">/etc/kubernetes/webhook_authz.conf</code>.</p>
+
+<h3 id="sample-node-configuration">Sample Node Configuration</h3>
+
+<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">apiVersion</span><span class="pi">:</span> <span class="s">kubeadm.k8s.io/v1alpha1</span>
+<span class="s">kind</span><span class="pi">:</span> <span class="s">NodeConfiguration</span>
+<span class="s">caCertPath</span><span class="pi">:</span> <span class="s">&lt;path|string&gt;</span>
+<span class="s">discoveryFile</span><span class="pi">:</span> <span class="s">&lt;path|string&gt;</span>
+<span class="s">discoveryToken</span><span class="pi">:</span> <span class="s">&lt;string&gt;</span>
+<span class="s">discoveryTokenAPIServers</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">&lt;address|string&gt;</span>
+<span class="pi">-</span> <span class="s">&lt;address|string&gt;</span>
+<span class="s">nodeName</span><span class="pi">:</span> <span class="s">&lt;string&gt;</span>
+<span class="s">tlsBootstrapToken</span><span class="pi">:</span> <span class="s">&lt;string&gt;</span>
+<span class="s">token</span><span class="pi">:</span> <span class="s">&lt;string&gt;</span>
+<span class="s">discoveryTokenCACertHashes</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">&lt;SHA-256 hash|string&gt;</span>
+<span class="pi">-</span> <span class="s">&lt;SHA-256 hash|string&gt;</span>
+<span class="s">discoveryTokenUnsafeSkipCAVerification</span><span class="pi">:</span> <span class="s">&lt;bool&gt;</span>
+</code></pre>
+</div>
+
+<h2 id="securing-more">Securing your installation even more</h2>
+
+<p>The defaults for kubeadm may not work for everyone. This section documents how to tighten up a kubeadm install
+at the cost of some usability.</p>
+
+<h3 id="turning-off-auto-approval-of-node-client-certificates">Turning off auto-approval of Node Client Certificates</h3>
+
+<p>By default, there is an CSR auto-approver enabled that basically approves any client certificate request
+for a kubelet when a Bootstrap Token was used when authenticating. If you don’t want the cluster to
+automatically approve kubelet client certs, you can turn it off by executing this command:</p>
+
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">kubectl</span><span class="kv"> delete clusterrole kubeadm:node-autoapprove-bootstrap
+</span></code></pre>
+</div>
+
+<p>After that, <code class="highlighter-rouge">kubeadm join</code> will block until the admin has manually approved the CSR in flight:</p>
+
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">kubectl</span><span class="kv"> get csr
+</span>NAME                                                   AGE       REQUESTOR                 CONDITION
+node-csr-c69HXe7aYcqkS1bKmH4faEnHAWxn6i2bHZ2mD04jZyQ   18s       system:bootstrap:878f07   Pending
+
+<span class="w">$ </span><span class="nc">kubectl</span><span class="kv"> certificate approve node-csr-c69HXe7aYcqkS1bKmH4faEnHAWxn6i2bHZ2mD04jZyQ
+</span>certificatesigningrequest "node-csr-c69HXe7aYcqkS1bKmH4faEnHAWxn6i2bHZ2mD04jZyQ" approved
+
+<span class="w">$ </span><span class="nc">kubectl</span><span class="kv"> get csr
+</span>NAME                                                   AGE       REQUESTOR                 CONDITION
+node-csr-c69HXe7aYcqkS1bKmH4faEnHAWxn6i2bHZ2mD04jZyQ   1m        system:bootstrap:878f07   Approved,Issued
+</code></pre>
+</div>
+
+<p>Only after <code class="highlighter-rouge">kubectl certificate approve</code> has been run, <code class="highlighter-rouge">kubeadm join</code> can proceed.</p>
+
+<h3 id="turning-off-public-access-to-the-cluster-info-configmap">Turning off public access to the cluster-info ConfigMap</h3>
+
+<p>In order to achieve the joining flow using the token as the only piece of validation information, a
+public ConfigMap with some data needed for validation of the master’s identity is exposed publicly by
+default. While there is no private data in this ConfigMap, some users are sensitive and wish to turn
+it off regardless. Doing so will disable the ability to use the <code class="highlighter-rouge">--discovery-token</code> flag of the
+<code class="highlighter-rouge">kubeadm join</code> flow. Here are the steps to do so:</p>
+
+<p>Fetch the <code class="highlighter-rouge">cluster-info</code> file from the API Server:</p>
+
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">kubectl</span><span class="kv"> -n kube-public get cm cluster-info -o yaml | grep "kubeconfig:" -A11 | grep "apiVersion" -A10 | sed "s/    //" | tee cluster-info.yaml
+</span>apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: &lt;ca-cert&gt;
+    server: https://&lt;ip&gt;:&lt;port&gt;
+  name: ""
+contexts: []
+current-context: ""
+kind: Config
+preferences: {}
+users: []
+</code></pre>
+</div>
+
+<p>You can then use the <code class="highlighter-rouge">cluster-info.yaml</code> file as an argument to <code class="highlighter-rouge">kubeadm join --discovery-file</code>.</p>
+
+<p>Turning of public access to the <code class="highlighter-rouge">cluster-info</code> ConfigMap:</p>
+
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">kubectl</span><span class="kv"> -n kube-public delete rolebinding kubeadm:bootstrap-signer-clusterinfo
+</span></code></pre>
+</div>
+
+<p>These command should be run after <code class="highlighter-rouge">kubeadm init</code> but before <code class="highlighter-rouge">kubeadm join</code>.</p>
+
+<h2 id="manage-tokens">Managing Tokens</h2>
+
+<p>You can use the <code class="highlighter-rouge">kubeadm</code> tool to manage tokens on a running cluster.  It will
+automatically grab the default admin credentials on a master from a <code class="highlighter-rouge">kubeadm</code>
+created cluster (<code class="highlighter-rouge">/etc/kubernetes/admin.conf</code>).  You can specify an alternate
+kubeconfig file for credentials with the <code class="highlighter-rouge">--kubeconfig</code> to the following
+commands.</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">kubeadm token list</code> - List tokens (along with their expirations, usages, and groups).</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">kubeadm token create</code> - Create a new token.</p>
+
+    <ul>
+      <li>
+        <p><code class="highlighter-rouge">--description &lt;description&gt;</code></p>
+
+        <p>Set the human-readable description for the new token.</p>
+      </li>
+      <li>
+        <p><code class="highlighter-rouge">--ttl &lt;duration&gt;</code></p>
+
+        <p>Set the expiration time-to-live of the token relative to the current time.
+Default is 24 hours. A value of 0 means “never expire”. The default unit
+of the duration is seconds but other units can be specified (e.g., <code class="highlighter-rouge">15m</code>, <code class="highlighter-rouge">1h</code>).</p>
+      </li>
+      <li>
+        <p><code class="highlighter-rouge">--usages &lt;usage&gt;[,&lt;usage&gt;...]</code></p>
+
+        <p>Set the ways that the token can be used.  The default is
+<code class="highlighter-rouge">signing,authentication</code>.  These are the usages as described above.</p>
+      </li>
+      <li>
+        <p><code class="highlighter-rouge">--groups &lt;group&gt;[,&lt;group&gt;...]</code></p>
+
+        <p>Add extra bootstrap groups that the new token will authenticate as. Can be
+specified multiple times. Each extra group must start with
+<code class="highlighter-rouge">system:bootstrappers:</code>. This is an advanced feature meant for custom
+bootstrap scenarios where you want to change how CSR approval works for
+different groups of nodes.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">kubeadm token delete &lt;token id&gt;|&lt;token id&gt;.&lt;token secret&gt;</code> - Delete a token.</p>
+
+    <p>The token can either be identified with just an ID or with the
+entire token value.  Only the ID is used; the token is still deleted if the
+secret does not match.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">kubeadm token generate</code> - Generate a token locally.</p>
+
+    <p>Locally generate a token but do not create it on the server. This token is of
+the correct form for specifying with the <code class="highlighter-rouge">--token</code> argument to <code class="highlighter-rouge">kubeadm init</code>.</p>
+  </li>
+</ul>
+
+<p>For the gory details on how the tokens are implemented (including managing them
+outside of kubeadm) see the <a href="https://kubernetes.io/docs/admin/bootstrap-tokens/">Bootstrap Token docs</a>.</p>
+
+<h2 id="automating-kubeadm">Automating kubeadm</h2>
+
+<p>Rather than copying the token you obtained from <code class="highlighter-rouge">kubeadm init</code> to each node, as
+in the <a href="https://kubernetes.io/docs/admin/kubeadm/">basic kubeadm tutorial</a>, you can parallelize the
+token distribution for easier automation. To implement this automation, you must
+know the IP address that the master will have after it is started.</p>
+
+<ol>
+  <li>
+    <p>Generate a token. This token must have the form  <code class="highlighter-rouge">&lt;6 character string&gt;.&lt;16
+character string&gt;</code>.  More formally, it must match the regex:
+<code class="highlighter-rouge">[a-z0-9]{6}\.[a-z0-9]{16}</code>.</p>
+
+    <p>kubeadm can generate a token for you:</p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>kubeadm token generate
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Start both the master node and the worker nodes concurrently with this token.
+As they come up they should find each other and form the cluster.  The same
+<code class="highlighter-rouge">--token</code> argument can be used on both <code class="highlighter-rouge">kubeadm init</code> and <code class="highlighter-rouge">kubeadm join</code>.</p>
+  </li>
+</ol>
+
+<p>Once the cluster is up, you can grab the admin credentials from the master node
+at <code class="highlighter-rouge">/etc/kubernetes/admin.conf</code> and use that to talk to the cluster.</p>
+
+<p>Note that this style of bootstrap has some relaxed security guarantees because
+it does not allow the root CA hash to be validated with
+<code class="highlighter-rouge">--discovery-token-ca-cert-hash</code> (since it’s not generated when the nodes are
+provisioned). For details, see the <a href="https://kubernetes.io/docs/admin/kubeadm/#security-model">security model</a>.</p>
+
+<h2 id="security-model">Security model</h2>
+<p>The kubeadm discovery system has several options, each with security tradeoffs.
+The right method for your environment depends on how you provision nodes and the
+security expectations you have about your network and node lifecycles.</p>
+
+<h3 id="token-based-discovery-with-ca-pinning">Token-based discovery with CA pinning</h3>
+<p><em>This is the default mode in Kubernetes 1.8.</em> In this mode, kubeadm downloads
+the cluster configuration (including root CA) and validates it using the token
+as well as validating that the root CA public key matches the provided hash and
+that the API server certificate is valid under the root CA.</p>
+
+<p><strong>Example <code class="highlighter-rouge">kubeadm join</code> command:</strong></p>
+
+<ul>
+  <li><code class="highlighter-rouge">kubeadm join --discovery-token abcdef.1234567890abcdef --discovery-token-ca-cert-hash sha256:1234..cdef 1.2.3.4:6443</code></li>
+</ul>
+
+<p><strong>Advantages:</strong></p>
+
+<ul>
+  <li>
+    <p>Allows bootstrapping nodes to securely discover a root of trust for the
+master even if other worker nodes or the network are compromised.</p>
+  </li>
+  <li>
+    <p>Convenient to execute manually since all of the information required fits
+into a single <code class="highlighter-rouge">kubeadm join</code> command that is easy to copy and paste.</p>
+  </li>
+</ul>
+
+<p><strong>Disadvantages:</strong></p>
+
+<ul>
+  <li>The CA hash is not normally known until the master has been provisioned,
+which can make it more difficult to build automated provisioning tools that
+use kubeadm.</li>
+</ul>
+
+<h3 id="token-based-discovery-without-ca-pinning">Token-based discovery without CA pinning</h3>
+<p><em>This was the default in Kubernetes 1.7 and earlier</em>, but comes with some
+important caveats. This mode relies only on the symmetric token to sign
+(HMAC-SHA256) the discovery information that establishes the root of trust for
+the master. It’s still possible in Kubernetes 1.8 and above using the
+<code class="highlighter-rouge">--discovery-token-unsafe-skip-ca-verification</code> flag, but you should consider
+using one of the other modes if possible.</p>
+
+<p><strong>Example <code class="highlighter-rouge">kubeadm join</code> command:</strong></p>
+
+<ul>
+  <li><code class="highlighter-rouge">kubeadm join --discovery-token abcdef.1234567890abcdef --discovery-token-unsafe-skip-ca-verification 1.2.3.4:6443</code></li>
+</ul>
+
+<p><strong>Advantages:</strong></p>
+
+<ul>
+  <li>
+    <p>Still protects against many network-level attacks.</p>
+  </li>
+  <li>
+    <p>The token can be generated ahead of time and shared with the master and
+worker nodes, which can then bootstrap in parallel without coordination. This
+allows it to be used in many provisioning scenarios.</p>
+  </li>
+</ul>
+
+<p><strong>Disadvantages:</strong></p>
+
+<ul>
+  <li>If an attacker is able to steal a bootstrap token via some vulnerability,
+they can use that token (along with network-level access) to impersonate the
+master to other bootstrapping nodes. This may or may not be an appropriate
+tradeoff in your environment.</li>
+</ul>
+
+<h3 id="file-or-https-based-discovery">File or HTTPS-based discovery</h3>
+<p>This provides an out-of-band way to establish a root of trust between the master
+and bootstrapping nodes.   Consider using this mode if you are building automated provisioning
+using kubeadm.</p>
+
+<p><strong>Example <code class="highlighter-rouge">kubeadm join</code> commands:</strong></p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">kubeadm join --discovery-file path/to/file.conf</code> (local file)</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">kubeadm join --discovery-file https://url/file.conf</code> (remote HTTPS URL)</p>
+  </li>
+</ul>
+
+<p><strong>Advantages:</strong></p>
+
+<ul>
+  <li>Allows bootstrapping nodes to securely discover a root of trust for the
+master even if other worker nodes or the network are compromised.</li>
+</ul>
+
+<p><strong>Disadvantages:</strong></p>
+
+<ul>
+  <li>
+    <p>Requires that you have some way to carry the discovery information from
+the master to the bootstrapping nodes. This might be possible, for example,
+via your cloud provider or provisioning tool. The information in this file is
+not secret, but HTTPS or equivalent is required to ensure its integrity.</p>
+  </li>
+  <li>
+    <p>Less convenient to use manually since the file is difficult to copy and paste
+between nodes.</p>
+  </li>
+</ul>
+
+<h2 id="use-kubeadm-with-other-cri-runtimes">Use kubeadm with other CRI runtimes</h2>
+
+<p>Since <a href="https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md#node-components-1">Kubernetes 1.6 release</a>,
+Kubernetes container runtimes have been transferred to using CRI by default.
+Currently, the built-in container runtime is Docker which is enabled by built-in
+<code class="highlighter-rouge">dockershim</code> in <code class="highlighter-rouge">kubelet</code>.</p>
+
+<p>Using other CRI based runtimes with kubeadm is very simple, and currently
+supported runtimes are:</p>
+
+<ul>
+  <li><a href="https://github.com/kubernetes-incubator/cri-o">cri-o</a></li>
+  <li><a href="https://github.com/kubernetes/frakti">frakti</a></li>
+  <li><a href="https://github.com/kubernetes-incubator/rktlet">rkt</a></li>
+</ul>
+
+<p>After you have successfully installed <code class="highlighter-rouge">kubeadm</code> and <code class="highlighter-rouge">kubelet</code>, please follow
+these two steps:</p>
+
+<ol>
+  <li>
+    <p>Install runtime shim on every node. You will need to follow the installation
+document in the runtime shim project listing above.</p>
+  </li>
+  <li>
+    <p>Configure kubelet to use remote CRI runtime. Please remember to change
+<code class="highlighter-rouge">RUNTIME_ENDPOINT</code> to your own value like <code class="highlighter-rouge">/var/run/{your_runtime}.sock</code>:</p>
+  </li>
+</ol>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>  <span class="nv">$ </span>cat &gt; /etc/systemd/system/kubelet.service.d/20-cri.conf <span class="sh">&lt;&lt;EOF
+Environment="KUBELET_EXTRA_ARGS=--container-runtime=remote --container-runtime-endpoint=$RUNTIME_ENDPOINT --feature-gates=AllAlpha=true"
+EOF
+</span>  <span class="nv">$ </span>systemctl daemon-reload
+</code></pre>
+</div>
+
+<p>Now <code class="highlighter-rouge">kubelet</code> is ready to use the specified CRI runtime, and you can continue
+with <code class="highlighter-rouge">kubeadm init</code> and <code class="highlighter-rouge">kubeadm join</code> workflow to deploy Kubernetes cluster.</p>
+
+<h2 id="custom-images">Using custom images</h2>
+
+<p>By default, kubeadm will pull images from <code class="highlighter-rouge">gcr.io/google_containers</code>, unless
+requested kubernetes version is a ci version; in this case
+<code class="highlighter-rouge">gcr.io/kubernetes-ci-image</code> will be used.</p>
+
+<p>This behaviour can be overridden by <a href="https://kubernetes.io/docs/admin/kubeadm/#config-file">using kubeadm with a configuration file</a>.
+Allowed customization are:
+- provide an alternative <code class="highlighter-rouge">imageRepository</code> to be used instead of
+  <code class="highlighter-rouge">gcr.io/google_containers</code> (NB. does not works for ci version)
+- provide an <code class="highlighter-rouge">unifiedControlPlaneImage</code> to be used instead of single images
+  for control plane components
+- provide an <code class="highlighter-rouge">etcd.image</code> name to be used</p>
+
+<h2 id="running-kubeadm-without-an-internet-connection">Running kubeadm without an internet connection</h2>
+
+<p>All of the control plane components run in Pods started by the kubelet and
+the following images are required for the cluster works will be automatically
+pulled by the kubelet if they don’t exist locally while <code class="highlighter-rouge">kubeadm init</code> is initializing
+your master:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Image Name</th>
+      <th>v1.7 release branch version</th>
+      <th>v1.8 release branch version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>gcr.io/google_containers/kube-apiserver-${ARCH}</td>
+      <td>v1.7.x</td>
+      <td>v1.8.x</td>
+    </tr>
+    <tr>
+      <td>gcr.io/google_containers/kube-controller-manager-${ARCH}</td>
+      <td>v1.7.x</td>
+      <td>v1.8.x</td>
+    </tr>
+    <tr>
+      <td>gcr.io/google_containers/kube-scheduler-${ARCH}</td>
+      <td>v1.7.x</td>
+      <td>v1.8.x</td>
+    </tr>
+    <tr>
+      <td>gcr.io/google_containers/kube-proxy-${ARCH}</td>
+      <td>v1.7.x</td>
+      <td>v1.8.x</td>
+    </tr>
+    <tr>
+      <td>gcr.io/google_containers/etcd-${ARCH}</td>
+      <td>3.0.17</td>
+      <td>3.0.17</td>
+    </tr>
+    <tr>
+      <td>gcr.io/google_containers/pause-${ARCH}</td>
+      <td>3.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <td>gcr.io/google_containers/k8s-dns-sidecar-${ARCH}</td>
+      <td>1.14.4</td>
+      <td>1.14.4</td>
+    </tr>
+    <tr>
+      <td>gcr.io/google_containers/k8s-dns-kube-dns-${ARCH}</td>
+      <td>1.14.4</td>
+      <td>1.14.4</td>
+    </tr>
+    <tr>
+      <td>gcr.io/google_containers/k8s-dns-dnsmasq-nanny-${ARCH}</td>
+      <td>1.14.4</td>
+      <td>1.14.4</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Here <code class="highlighter-rouge">v1.7.x</code> means the “latest patch release of the v1.7 branch”.</p>
+
+<p><code class="highlighter-rouge">${ARCH}</code> can be one of: <code class="highlighter-rouge">amd64</code>, <code class="highlighter-rouge">arm</code>, <code class="highlighter-rouge">arm64</code>, <code class="highlighter-rouge">ppc64le</code> or <code class="highlighter-rouge">s390x</code>.</p>
+
+<h2 id="kubelet-drop-in">Managing the kubeadm drop-in file for the kubelet</h2>
+
+<p>The kubeadm deb package ships with configuration for how the kubelet should
+be run. Note that the <code class="highlighter-rouge">kubeadm</code> CLI command will never touch this drop-in file.
+This drop-in file belongs to the kubeadm deb/rpm package.</p>
+
+<p>This is what it looks like in v1.7:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[Service]
+Environment="KUBELET_KUBECONFIG_ARGS=--kubeconfig=/etc/kubernetes/kubelet.conf --require-kubeconfig=true"
+Environment="KUBELET_SYSTEM_PODS_ARGS=--pod-manifest-path=/etc/kubernetes/manifests --allow-privileged=true"
+Environment="KUBELET_NETWORK_ARGS=--network-plugin=cni --cni-conf-dir=/etc/cni/net.d --cni-bin-dir=/opt/cni/bin"
+Environment="KUBELET_DNS_ARGS=--cluster-dns=10.96.0.10 --cluster-domain=cluster.local"
+Environment="KUBELET_AUTHZ_ARGS=--authorization-mode=Webhook --client-ca-file=/etc/kubernetes/pki/ca.crt"
+Environment="KUBELET_CADVISOR_ARGS=--cadvisor-port=0"
+ExecStart=
+ExecStart=/usr/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_SYSTEM_PODS_ARGS $KUBELET_NETWORK_ARGS $KUBELET_DNS_ARGS $KUBELET_AUTHZ_ARGS $KUBELET_CADVISOR_ARGS $KUBELET_EXTRA_ARGS
+</code></pre>
+</div>
+
+<p>A breakdown of what/why:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">--kubeconfig=/etc/kubernetes/kubelet.conf</code> points to the kubeconfig file that
+ tells the kubelet where the API server is. This file also has the kubelet’s
+ credentials.</li>
+  <li><code class="highlighter-rouge">--require-kubeconfig=true</code> the kubelet should fail fast if the kubeconfig file
+ is not present. This makes the kubelet crash loop during the time the service is
+ started until <code class="highlighter-rouge">kubeadm init</code> is run.</li>
+  <li><code class="highlighter-rouge">--pod-manifest-path=/etc/kubernetes/manifests</code> specifies from where to read
+ Static Pod manifests used for spinning up the control plane</li>
+  <li><code class="highlighter-rouge">--allow-privileged=true</code> allows this kubelet to run privileged Pods</li>
+  <li><code class="highlighter-rouge">--network-plugin=cni</code> uses CNI networking</li>
+  <li><code class="highlighter-rouge">--cni-conf-dir=/etc/cni/net.d</code> specifies where to look for the
+ <a href="https://github.com/containernetworking/cni/blob/master/SPEC.md">CNI spec file(s)</a></li>
+  <li><code class="highlighter-rouge">--cni-bin-dir=/opt/cni/bin</code> specifies where to look for the actual CNI binaries</li>
+  <li><code class="highlighter-rouge">--cluster-dns=10.96.0.10</code> use this cluster-internal DNS server for <code class="highlighter-rouge">nameserver</code>
+ entries in Pods’ <code class="highlighter-rouge">/etc/resolv.conf</code></li>
+  <li><code class="highlighter-rouge">--cluster-domain=cluster.local</code> uses this cluster-internal DNS domain for
+ <code class="highlighter-rouge">search</code> entries in Pods’ <code class="highlighter-rouge">/etc/resolv.conf</code></li>
+  <li><code class="highlighter-rouge">--client-ca-file=/etc/kubernetes/pki/ca.crt</code> authenticates requests to the Kubelet
+ API using this CA certificate.</li>
+  <li><code class="highlighter-rouge">--authorization-mode=Webhook</code> authorizes requests to the Kubelet API by <code class="highlighter-rouge">POST</code>-ing
+ a <code class="highlighter-rouge">SubjectAccessReview</code> to the API Server</li>
+  <li>
+    <p><code class="highlighter-rouge">--cadvisor-port=0</code> disables cAdvisor from listening to <code class="highlighter-rouge">0.0.0.0:4194</code> by default.
+ cAdvisor will still be run inside of the kubelet and its API can be accessed at
+ <code class="highlighter-rouge">https://{node-ip}:10250/stats/</code>. If you want to enable cAdvisor to listen on a
+ wide-open port, run:</p>
+
+    <p><code class="highlighter-rouge">
+ sed -e "/cadvisor-port=0/d" -i /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+ systemctl daemon-reload
+ systemctl restart kubelet
+</code></p>
+  </li>
+</ul>
+
+<h2 id="cloud-provider-integrations-experimental">Cloud provider integrations (experimental)</h2>
+
+<p>Enabling specific cloud providers is a common request. This currently requires
+manual configuration and is therefore not yet fully supported. If you wish to do
+so, edit the kubeadm drop-in for the kubelet service
+(<code class="highlighter-rouge">/etc/systemd/system/kubelet.service.d/10-kubeadm.conf</code>) on all nodes,
+including the master. If your cloud provider requires any extra packages
+installed on the host, for example for volume mounting/unmounting, install those
+packages.</p>
+
+<p>Specify the <code class="highlighter-rouge">--cloud-provider</code> flag for the kubelet and set it to the cloud of your
+choice. If your cloud provider requires a configuration file, create the file
+<code class="highlighter-rouge">/etc/kubernetes/cloud-config</code> on every node. The exact format and content of
+that file depends on the requirements imposed by your cloud provider. If you use
+the <code class="highlighter-rouge">/etc/kubernetes/cloud-config</code> file, you must append it to the kubelet
+arguments as follows: <code class="highlighter-rouge">--cloud-config=/etc/kubernetes/cloud-config</code></p>
+
+<p>Note that there is most likely other per-provider configuration that may be needed
+(IAM roles for AWS) that is currently underdocumented.</p>
+
+<p>Next, specify the cloud provider in the kubeadm config file.  Create a file called
+<code class="highlighter-rouge">kubeadm.conf</code> with the following contents:</p>
+
+<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">kind</span><span class="pi">:</span> <span class="s">MasterConfiguration</span>
+<span class="s">apiVersion</span><span class="pi">:</span> <span class="s">kubeadm.k8s.io/v1alpha1</span>
+<span class="s">cloudProvider</span><span class="pi">:</span> <span class="s">&lt;cloud provider&gt;</span>
+</code></pre>
+</div>
+
+<p>Lastly, run <code class="highlighter-rouge">kubeadm init --config=kubeadm.conf</code> to bootstrap your cluster with
+the cloud provider.</p>
+
+<p>This workflow is not yet fully supported, however we hope to make it extremely
+easy to spin up clusters with cloud providers in the future. (See <a href="https://github.com/kubernetes/community/pull/128">this
+proposal</a> for more
+information) The <a href="https://github.com/kubernetes/kubernetes/pull/29459">Kubelet Dynamic
+Settings</a> feature may also
+help to fully automate this process in the future.</p>
+
+<h2 id="environment-variables">Environment variables</h2>
+
+<p><strong>Note:</strong> These environment variables are deprecated and will stop functioning in v1.8!</p>
+
+<p>There are some environment variables that modify the way that kubeadm works.
+Most users will have no need to set these. These environment variables are a
+short-term solution, eventually they will be integrated in the kubeadm
+configuration file.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">KUBE_KUBERNETES_DIR</code></td>
+      <td><code class="highlighter-rouge">/etc/kubernetes</code></td>
+      <td>Where most configuration files are written to and read from</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">KUBE_HYPERKUBE_IMAGE</code></td>
+      <td>&nbsp;</td>
+      <td>If set, use a single hyperkube image with this name. If not set, individual images per server component will be used.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">KUBE_ETCD_IMAGE</code></td>
+      <td><code class="highlighter-rouge">gcr.io/google_containers/etcd-&lt;arch&gt;:3.0.17</code></td>
+      <td>The etcd container image to use.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">KUBE_REPO_PREFIX</code></td>
+      <td><code class="highlighter-rouge">gcr.io/google_containers</code></td>
+      <td>The image prefix for all images that are used.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If <code class="highlighter-rouge">KUBE_KUBERNETES_DIR</code> is specified, you may need to rewrite the arguments of the kubelet.
+(e.g. –kubeconfig, –pod-manifest-path)</p>
+
+<p>If <code class="highlighter-rouge">KUBE_REPO_PREFIX</code> is specified, you may need to set the kubelet flag
+<code class="highlighter-rouge">--pod-infra-container-image</code> which specifies which pause image to use.</p>
+
+<p>Defaults to <code class="highlighter-rouge">gcr.io/google_containers/pause-${ARCH}:3.0</code> where <code class="highlighter-rouge">${ARCH}</code>
+can be one of <code class="highlighter-rouge">amd64</code>, <code class="highlighter-rouge">arm</code>, <code class="highlighter-rouge">arm64</code>, <code class="highlighter-rouge">ppc64le</code> or <code class="highlighter-rouge">s390x</code>.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>cat &gt; /etc/systemd/system/kubelet.service.d/20-pod-infra-image.conf <span class="sh">&lt;&lt;EOF
+[Service]
+Environment="KUBELET_EXTRA_ARGS=--pod-infra-container-image=&lt;your-image&gt;"
+EOF
+</span>systemctl daemon-reload
+systemctl restart kubelet
+</code></pre>
+</div>
+
+<p>If you want to use kubeadm with an http proxy, you may need to configure it to
+support http_proxy, https_proxy, or no_proxy.</p>
+
+<p>For example, if your kube master node IP address is 10.18.17.16 and you have a
+proxy which supports both http/https on 10.18.17.16 port 8080, you can use the
+following command:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PROXY_PORT</span><span class="o">=</span>8080
+<span class="nb">export </span><span class="nv">PROXY_IP</span><span class="o">=</span>10.18.17.16
+<span class="nb">export </span><span class="nv">http_proxy</span><span class="o">=</span>http://<span class="nv">$PROXY_IP</span>:<span class="nv">$PROXY_PORT</span>
+<span class="nb">export </span><span class="nv">HTTP_PROXY</span><span class="o">=</span><span class="nv">$http_proxy</span>
+<span class="nb">export </span><span class="nv">https_proxy</span><span class="o">=</span><span class="nv">$http_proxy</span>
+<span class="nb">export </span><span class="nv">HTTPS_PROXY</span><span class="o">=</span><span class="nv">$http_proxy</span>
+<span class="nb">export </span><span class="nv">no_proxy</span><span class="o">=</span><span class="s2">"localhost,127.0.0.1,localaddress,.localdomain.com,example.com,10.18.17.16"</span>
+</code></pre>
+</div>
+
+<p>Remember to change <code class="highlighter-rouge">proxy_ip</code> and add a kube master node IP address to
+<code class="highlighter-rouge">no_proxy</code>.</p>
+
+<h2 id="custom-certificates">Using custom certificates</h2>
+
+<p>By default kubeadm will generate all the certificates needed for a cluster to run.
+You can override this behaviour by providing your own certificates.</p>
+
+<p>To do so, you must place them in whatever directory is specified by the
+<code class="highlighter-rouge">--cert-dir</code> flag or <code class="highlighter-rouge">CertificatesDir</code> configuration file key. By default this
+is <code class="highlighter-rouge">/etc/kubernetes/pki</code>.</p>
+
+<p>If a given certificate and private key pair both exist, kubeadm will skip the
+generation step and those files will be validated and used for the prescribed
+use-case.</p>
+
+<p>This means you can, for example, prepopulate <code class="highlighter-rouge">/etc/kubernetes/pki/ca.crt</code>
+and <code class="highlighter-rouge">/etc/kubernetes/pki/ca.key</code> with an existing CA, which then will be used
+for signing the rest of the certs.</p>
+
+<p>Only for the CA, it is possible to provide the <code class="highlighter-rouge">ca.crt</code> file but not the <code class="highlighter-rouge">ca.key</code>
+file; if all other certificates and kubeconfig files already are in place kubeadm
+recognise this condition and activates the so called “ExternalCA” mode, which also
+implies the csrsignercontroller in controller-manager won’t be started.</p>
+
+<h2 id="self-hosting">Self-hosting the Kubernetes control plane</h2>
+<p>As of 1.8, kubeadm can experimentally create a <em>self-hosted</em> Kubernetes control
+plane. This means that key components such as the API server, controller
+manager, and scheduler run as <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet pods</a>
+configured via the Kubernetes API instead of <a href="https://kubernetes.io/docs/tasks/administer-cluster/static-pod/">static pods</a>
+configured in the kubelet via static files.</p>
+
+<p>Self-hosting is alpha in kubeadm 1.8 but is expected to become the default in
+a future version. To create a self-hosted cluster, pass the <code class="highlighter-rouge">--feature-gates=SelfHosting=true</code>
+flag to <code class="highlighter-rouge">kubeadm init</code>.</p>
+
+<h4 id="caveats">Caveats</h4>
+<p>Kubeadm self-hosting in 1.8 has some important limitations. In particular, a
+self-hosted cluster cannot currently recover from a reboot of the master node
+without manual intervention. This and other limitations are expected to be
+resolved before self-hosting graduates from alpha.</p>
+
+<p>By default, self-hosted control plane pods rely on credentials loaded from
+<a href="https://kubernetes.io/docs/concepts/storage/volumes/#hostpath"><code class="highlighter-rouge">hostPath</code></a>
+volumes. Except for initial creation, these credentials are not managed by
+kubeadm. You can use <code class="highlighter-rouge">--feature-gates=StoreCertsInSecrets=true</code> to enable an
+experimental mode where control plane credentials are loaded from Secrets
+instead. This requires very careful control over the authentication and
+authorization configuration for your cluster, and may not be appropriate for
+your environment.</p>
+
+<p>In 1.8, the self-hosted portion of the control plane does not include etcd,
+which still runs as a static pod.</p>
+
+<h4 id="process">Process</h4>
+<p>The self-hosting bootstrap process is documented in <a href="https://github.com/kubernetes/kubeadm/blob/master/docs/design/design_v1.8.md#optional-self-hosting">the kubeadm 1.8 design
+document</a>.
+In summary, <code class="highlighter-rouge">kubeadm init --feature-gates=SelfHosting=true</code> works as follows:</p>
+
+<ol>
+  <li>
+    <p>As usual, kubeadm creates static pod YAML files in <code class="highlighter-rouge">/etc/kubernetes/manifests/</code>.</p>
+  </li>
+  <li>
+    <p>Kubelet loads these files and launches the initial static control plane.
+    Kubeadm waits for this initial static control plane to be running and
+    healthy. This is identical to the <code class="highlighter-rouge">kubeadm init</code> process without self-hosting.</p>
+  </li>
+  <li>
+    <p>Kubeadm uses the static control plane pod manifests to construct a set of
+    DaemonSet manifests that will run the self-hosted control plane.</p>
+  </li>
+  <li>
+    <p>Kubeadm creates DaemonSets in the <code class="highlighter-rouge">kube-system</code> namespace and waits for the
+    resulting pods to be running.</p>
+  </li>
+  <li>
+    <p>Once the new control plane is running (but not yet active), kubeadm deletes
+    the static pod YAML files. This triggers kubelet to stop those static pods.</p>
+  </li>
+  <li>
+    <p>When the original static control plane stops, the new self-hosted control
+    plane is able to bind to listening ports and become active.</p>
+  </li>
+</ol>
+
+<p>This process (steps 3-6) can also be triggered with <code class="highlighter-rouge">kubeadm phase selfhosting convert-from-staticpods</code>.</p>
+
+<h2 id="releases-and-release-notes">Releases and release notes</h2>
+
+<p>If you already have kubeadm installed and want to upgrade, run <code class="highlighter-rouge">apt-get update
+&amp;&amp; apt-get upgrade</code> or <code class="highlighter-rouge">yum update</code> to get the latest version of kubeadm.</p>
+
+<p>Refer to the
+<a href="https://git.k8s.io/kubeadm/CHANGELOG.md">CHANGELOG.md</a>
+for more information.</p>
+
+
+        <p><a href="https://kubernetes.io/docs/admin/kubeadm/"><img src="https://kubernetes-site.appspot.com/UA-36037335-10/GitHub/docs/admin/kubeadm.md?pixel" alt="Analytics"></a></p>
+        
+        <script type="text/javascript">
+            PDRTJS_settings_8345992 = {
+                "id" : "8345992",
+                "unique_id" : "/docs/admin/kubeadm/",
+                "title" : "Kubeadm",
+                "permalink" : "http://kubernetes.github.io/docs/admin/kubeadm/"
+            };
+            (function(d,c,j){if(!document.getElementById(j)){var pd=d.createElement(c),s;pd.id=j;pd.src=('https:'==document.location.protocol)?'https://polldaddy.com/js/rating/rating.js':'http://i0.poll.fm/js/rating/rating.js';s=document.getElementsByTagName(c)[0];s.parentNode.insertBefore(pd,s);}}(document,'script','pd-rating-js'));
+        </script>
+        <a href="https://kubernetes.io/docs/admin/kubeadm/" onclick="window.open(&#39;https://github.com/kubernetes/kubernetes.github.io/issues/new?title=Issue%20with%20&#39; +
+        &#39;k8s.io&#39;+window.location.pathname)" class="button issue">Create an Issue</a>
+        <a href="https://kubernetes.io/editdocs#docs/admin/kubeadm.md" class="button issue">Edit this Page</a>
+    
+    </div>
+</section>
+
+<footer>
+    <main class="light-text">
+        <nav>
+            <a href="https://kubernetes.io/docs/tutorials/stateless-application/hello-minikube/">Get Started</a>
+            <a href="https://kubernetes.io/docs/home/">Documentation</a>
+            <a href="http://blog.kubernetes.io/">Blog</a>
+            <a href="https://kubernetes.io/partners/">Partners</a>
+            <a href="https://kubernetes.io/community/">Community</a>
+            <a href="https://kubernetes.io/case-studies/">Case Studies</a>
+        </nav>
+        <div class="social">
+            <div>
+                <a href="https://twitter.com/kubernetesio" class="twitter"><span>twitter</span></a>
+                <a href="https://github.com/kubernetes/kubernetes" class="github"><span>Github</span></a>
+                <a href="http://slack.k8s.io/" class="slack"><span>Slack</span></a>
+            </div>
+            <div>
+                <a href="http://stackoverflow.com/questions/tagged/kubernetes" class="stack-overflow"><span>Stack Overflow</span></a>
+                <a href="https://groups.google.com/forum/#!forum/kubernetes-users" class="mailing-list"><span>Mailing List</span></a>
+                <a href="https://calendar.google.com/calendar/embed?src=nt2tcnbtbied3l6gi2h29slvc0%40group.calendar.google.com" class="calendar"><span>Events Calendar</span></a>
+            </div>
+            <div>
+                <a href="https://kubernetes.io/docs/setup/pick-right-solution/" class="button">Get Kubernetes</a>
+                <a href="https://github.com/kubernetes/kubernetes" class="button">Contribute</a>
+            </div>
+        </div>
+        <div id="miceType" class="center">
+            © 2017 The Kubernetes Authors | Documentation Distributed under <a href="https://git.k8s.io/kubernetes.github.io/LICENSE" class="light-text">CC BY 4.0</a>
+        </div>
+        <div id="miceType" class="center">
+            Copyright © 2017 The Linux Foundation®. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our Trademark Usage page: <a href="https://www.linuxfoundation.org/trademark-usage" class="light-text">https://www.linuxfoundation.org/trademark-usage</a>
+        </div>
+    </main>
+</footer>
+
+<button class="flyout-button" onclick="kub.toggleToc()"></button>
+
+<style>
+.cse .gsc-control-cse, .gsc-control-cse, {
+    padding: 0;
+}
+  .gsc-control-cse table, .gsc-control-cse-en table {
+      margin:0px !important;
+  }
+  .gsc-above-wrapper-area {
+      border-bottom: 0;
+  }
+</style>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-36037335-10', 'auto');
+ga('send', 'pageview');
+
+// hide docs nav area if no nav is present, or if nav only contains a link to the current page
+(function () {
+    window.addEventListener('DOMContentLoaded', init)
+
+        // play nice with our neighbors
+        function init() {
+            window.removeEventListener('DOMContentLoaded', init)
+                hideNav()
+        }
+
+    function hideNav(toc){
+        if (!toc) toc = document.querySelector('#docsToc')
+            var container = toc.querySelector('.container')
+
+                // container is built dynamically, so it may not be present on the first runloop
+                if (container) {
+                    if (container.childElementCount === 0 || toc.querySelectorAll('a.item').length === 1) {
+                        toc.style.display = 'none'
+                            document.getElementById('docsContent').style.width = '100%'
+                    }
+                } else {
+                    requestAnimationFrame(function () {
+                        hideNav(toc)
+                    })
+                }
+    }
+})();
+</script>
+
+<!-- Commenting out AnswerDash for now; we need to work on our list of questions/answers/design first
+    <!-- Start of AnswerDash script <script>var AnswerDash;!function(e,t,n,s,a){if(!t.getElementById(s)){var i,r=t.createElement(n),c=t.getElementsByTagName(n)[0];e[a]||(i=e[a]=function(){i.__oninit.push(arguments)},i.__oninit=[]),r.type="text/javascript",r.async=!0,r.src="https://p1.answerdash.com/answerdash.min.js?siteid=756",r.setAttribute("id",s),c.parentNode.insertBefore(r,c)}}(window,document,"script","answerdash-script","AnswerDash");</script> <!-- End of AnswerDash script -->
+
+
+
+
+</body></html>

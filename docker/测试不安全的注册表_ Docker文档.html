@@ -1,0 +1,4436 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071)https://docs.docker.com/registry/insecure/#use-self-signed-certificates -->
+<html lang="en" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!--<base href="/registry/">--><base href=".">
+	
+	<style type="text/css">
+		@charset "UTF-8";
+		[ng\:cloak],
+		[ng-cloak],
+		[data-ng-cloak],
+		[x-ng-cloak],
+		.ng-cloak,
+		.x-ng-cloak,
+		.ng-hide:not(.ng-hide-animate) {
+			display: none !important;
+		}
+
+		ng\:form {
+			display: block;
+		}
+	</style>
+	
+	<script type="text/javascript" async="" src="./测试不安全的注册表_ Docker文档_files/analytics.js.下载"></script><script type="text/javascript" async="" src="./测试不安全的注册表_ Docker文档_files/linkid.js.下载"></script><script type="text/javascript" async="" src="./测试不安全的注册表_ Docker文档_files/gtm.js.下载"></script><script type="text/javascript" async="" src="./测试不安全的注册表_ Docker文档_files/analytics.js.下载"></script><script id="pd-rating-js" src="./测试不安全的注册表_ Docker文档_files/rating.js.下载"></script><script type="text/javascript" async="" src="./测试不安全的注册表_ Docker文档_files/analytics.min.js.下载"></script><script type="text/javascript">
+	  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+	  analytics.load("IWj9D0UpZHZdZUZX9jl98PcpBFWBnBMy");
+	  analytics.page();
+	  }}();
+	</script>
+	
+	<!-- favicon -->
+	<link rel="icon" type="image/x-icon" href="https://docs.docker.com/favicons/docs@2x.ico" sizes="129x128">
+	<meta name="msapplication-TileImage" content="/favicons/docs@2x.ico">
+	<link rel="apple-touch-icon" type="image/x-icon" href="https://docs.docker.com/favicons/docs@2x.ico" sizes="129x128">
+	<meta property="og:image" content="/favicons/docs@2x.ico">
+	<!-- metadata -->
+	<meta property="og:type" content="website">
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2017-09-20T00:48:08+00:00">
+	<meta property="og:image" itemprop="image primaryImageOfPage" content="/images/docs@2x.png">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:domain" content="docs.docker.com">
+	<meta name="twitter:site" content="@docker_docs">
+	<meta name="twitter:url" content="https://twitter.com/docker_docs">
+	<meta name="twitter:title" itemprop="title name" content="Test an insecure registry">
+	<meta name="twitter:description" property="og:description" itemprop="description" content="While it’s highly recommended to secure your registry using a TLS certificate issued by a known CA, you can choose to use self-signed certificates, or use your registry over an...">
+	<meta name="twitter:image:src" content="/images/docs@2x.png">
+	<meta name="twitter:image:alt" content="Docker Documentation">
+	<meta property="article:published_time" itemprop="datePublished" content="2017-09-20T00:48:08+00:00">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="registry, on-prem, images, tags, repository, distribution, insecure">
+	<link rel="stylesheet" href="./测试不安全的注册表_ Docker文档_files/font-awesome.min.css">
+	<link rel="stylesheet" href="./测试不安全的注册表_ Docker文档_files/bootstrap.min.css">
+	<link id="pygments" rel="stylesheet" href="./测试不安全的注册表_ Docker文档_files/perldoc.css">
+	<link id="pagestyle" rel="stylesheet" href="./测试不安全的注册表_ Docker文档_files/style.css">
+
+	<!-- Go get "Open Sans" font from Google -->
+	<link href="./测试不安全的注册表_ Docker文档_files/css" rel="stylesheet">
+	<!-- temp css will be removed -->
+	<link rel="stylesheet" href="./测试不安全的注册表_ Docker文档_files/temp.css"> <!-- Begin Jekyll SEO tag v2.2.2 -->
+<title>测试不安全的注册表|  Docker文档</title>
+<meta property="og:title" content="Test an insecure registry">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Deploying a Registry in an insecure fashion">
+<meta property="og:description" content="Deploying a Registry in an insecure fashion">
+<link rel="canonical" href="https://docs.docker.com/registry/insecure/">
+<meta property="og:url" content="https://docs.docker.com/registry/insecure/">
+<meta property="og:site_name" content="Docker Documentation">
+<script type="application/ld+json">
+{"@context":"http://schema.org","@type":"WebPage","headline":"Test an insecure registry","description":"Deploying a Registry in an insecure fashion","url":"https://docs.docker.com/registry/insecure/"}</script>
+<!-- End Jekyll SEO tag -->
+ 
+<script charset="utf-8" src="./测试不安全的注册表_ Docker文档_files/rate.php"></script><script charset="utf-8" src="./测试不安全的注册表_ Docker文档_files/rating-results.php"></script><style type="text/css" id="pd_popup_holder_style_8453675">#pd_popup_holder_8453675 { position:absolute; display:none; width:175px; height:auto; top:0px; left:0px; z-index:10000; border:solid 1px #CCC; background-color:white; padding:0px 15px;font-family:Arial,Sans;box-shadow: -10px 10px 20px rgba(0, 0, 0, .5);-webkit-box-shadow: 0px 0px 6px rgba(0, 0, 0, .25);-moz-box-shadow: 0px 0px 6px rgba(0, 0, 0, .25); }</style><link type="text/css" rel="stylesheet" charset="UTF-8" href="./测试不安全的注册表_ Docker文档_files/translateelement.css"></head>
+<body ng-app="Docker" ng-controller="DockerController" class="colums">
+	<header>
+		 <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="fan"></div>
+    <div class="container-fluid">
+<!--         <div class="ctrl-left">
+        <a href="javascript:void(0)" id="menu-toggle-left"><i class="fa fa-outdent" aria-hidden="true"></i></a>
+      </div> -->
+        <div class="navbar-header">
+            <a href="https://docs.docker.com/"><img class="logo" src="./测试不安全的注册表_ Docker文档_files/docker-docs-logo.svg" alt="Docker文档" title="Docker文档"></a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="search-form" id="search-div">
+    <form class="search-form form-inline ng-pristine ng-valid" id="searchForm" action="https://docs.docker.com/search/">
+        <input class="search-field form-control ds-input" id="st-search-input" value="" name="q" placeholder="Search the docs" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteContainer">
+            <div id="autocompleteResults"></div>
+        </div>
+        <!-- <button type="submit" class="search-submit btn btn-default">Search</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">切换导航</font></font></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container">
+    <div id="tabs">
+        <ul class="tabs">
+            
+
+  
+  
+<li id="guides"><a href="https://docs.docker.com/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">指南</font></font></a></li>
+
+  
+  
+<li id="manuals" class="active"><a href="https://docs.docker.com/manuals/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">产品说明书</font></font></a></li>
+
+  
+  
+<li id="glossary"><a href="https://docs.docker.com/glossary/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">词汇表</font></font></a></li>
+
+  
+  
+<li id="reference"><a href="https://docs.docker.com/reference/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">参考</font></font></a></li>
+
+  
+  
+<li id="samples"><a href="https://docs.docker.com/samples/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">样品</font></font></a></li>
+
+
+        </ul>
+    </div>
+    <div class="ctrl-right hidden-xs hidden-sm">
+        <a href="javascript:void(0)" id="menu-toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
+        <div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    Docker v17.06（当前）             </font></font><span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="https://docs.docker.com/v17.03/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker v17.03</font></font></a></li><li><a href="https://docs.docker.com/v1.13/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker v1.13</font></font></a></li><li><a href="https://docs.docker.com/v1.12/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker v1.12</font></font></a></li><li><a href="https://docs.docker.com/v1.11/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker v1.11</font></font></a></li><li><a href="https://docs.docker.com/v1.10/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker v1.10</font></font></a></li><li><a href="https://docs.docker.com/v1.9/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker v1.9</font></font></a></li><li><a href="https://docs.docker.com/v1.8/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker v1.8</font></font></a></li><li><a href="https://docs.docker.com/v1.7/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker v1.7</font></font></a></li><li><a href="https://docs.docker.com/v1.6/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker v1.6</font></font></a></li><li><a href="https://docs.docker.com/v1.5/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker v1.5</font></font></a></li><li><a href="https://docs.docker.com/v1.4/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker v1.4</font></font></a></li>
+  </ul>
+</div>
+
+    </div>
+</div>
+        </div>
+    </div>
+</nav>
+	</header>
+
+	<div class="wrapper right-open">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-body">
+					<main class="col-content content">
+						<section class="section">
+							
+								
+							<h1 id="title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">测试不安全的注册表</font></font></h1>  <span class="reading-time" title="预计阅读时间">
+  <span class="reading-time-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">预计阅读时间：</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+  
+  
+    4分钟
+  
+</font></font></span>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">强烈建议使用已知CA颁发的TLS证书保护注册表，您可以选择使用自签名证书，也可以通过未加密的HTTP连接使用注册表。</font><font style="vertical-align: inherit;">这些选择之一涉及安全性权衡和其他配置步骤。</font></font></p>
+
+<h2 id="deploy-a-plain-http-registry"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">部署纯HTTP注册表</font></font></h2>
+
+<blockquote class="warning">
+  <p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">警告</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">：不可能使用不安全的注册表进行基本身份验证。</font></font></p>
+</blockquote>
+
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">此过程配置Docker完全忽略注册表的安全性。</font><font style="vertical-align: inherit;">这是</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">非常</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">不安全的，不推荐。</font><font style="vertical-align: inherit;">它将您的注册表暴露给微不足道的中间人（MITM）攻击。</font><font style="vertical-align: inherit;">只能使用此解决方案进行隔离测试，或在严格控制，空气密集的环境中使用。</font></font></p>
+
+<ol>
+  <li>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">编辑</font></font><code class="highlighter-rouge">daemon.json</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文件，其默认位置
+ </font></font><code class="highlighter-rouge">/etc/docker/daemon.json</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在Linux或
+ </font></font><code class="highlighter-rouge">C:\ProgramData\docker\config\daemon.json</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Windows Server上。</font><font style="vertical-align: inherit;">如果您使用Docker for Mac或Docker for Windows，请单击Docker图标，选择
+ </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">“首选项”</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，然后选择“+ </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">守护进程”</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果</font></font><code class="highlighter-rouge">daemon.json</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文件不存在，请创建它。</font><font style="vertical-align: inherit;">假设文件中没有其他设置，它应该具有以下内容：</font></font></p>
+
+    <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"insecure-registries"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"myregistrydomain.com:5000"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+    </div>
+
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">将示例中的不安全注册表的地址替换为该安全注册表的地址。</font></font></p>
+
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通过启用不安全的注册表，Docker将执行以下步骤：</font></font></p>
+
+    <ul>
+      <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">首先，尝试使用HTTPS。
+        </font></font><ul>
+          <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果HTTPS可用但证书无效，请忽略有关证书的错误。</font></font></li>
+          <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果HTTPS不可用，请返回HTTP。</font></font></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">重新启动Docker以使更改生效。</font></font></p>
+  </li>
+</ol>
+
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在要访问注册表的每个引擎主机上重复这些步骤。</font></font></p>
+
+<h2 id="use-self-signed-certificates"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用自签名证书</font></font></h2>
+
+<blockquote class="warning">
+  <p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">警告</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">：与基本身份验证一起使用</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">也</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">需要</font><font style="vertical-align: inherit;">将证书信任到某些版本的Docker的OS证书存储区（见下文）</font></font></p>
+</blockquote>
+
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">这比不安全的注册表解决方案更安全。</font></font></p>
+
+<ol>
+  <li>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">生成自己的证书：</font></font></p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mkdir -p certs<font></font>
+<font></font>
+<span class="gp">$ </span>openssl req <span class="se">\</span>
+  -newkey rsa:4096 -nodes -sha256 -keyout certs/domain.key <span class="se">\</span><font></font>
+  -x509 -days 365 -out certs/domain.crt<font></font>
+</code></pre>
+    </div>
+
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">确保使用该名称</font></font><code class="highlighter-rouge">myregistrydomain.com</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作为CN。</font></font></p>
+  </li>
+  <li>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用结果</font></font><a href="https://docs.docker.com/registry/deploying/#get-a-certificate"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">启动您的注册表启用TLS</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+  </li>
+  <li>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">指示每个Docker守护进程信任该证书。</font><font style="vertical-align: inherit;">这样做取决于您的操作系统。</font></font></p>
+
+    <ul>
+      <li>
+        <p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Linux</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">：将</font></font><code class="highlighter-rouge">domain.crt</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文件</font><font style="vertical-align: inherit;">复制</font><font style="vertical-align: inherit;">到
+ </font></font><code class="highlighter-rouge">/etc/docker/certs.d/myregistrydomain.com:5000/ca.crt</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">每个Docker主机上。</font><strong><font style="vertical-align: inherit;">您不需要重新启动Docker。</font></strong></font></p>
+      </li>
+      <li>
+        <p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Windows Server</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">：</font></font></p>
+
+        <ol>
+          <li>
+            <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">打开Windows资源管理器，右键单击该</font></font><code class="highlighter-rouge">domain.crt</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+文件，然后选择安装证书。</font><font style="vertical-align: inherit;">出现提示时，选择以下选项：</font></font></p>
+
+            <table>
+              <tbody>
+                <tr>
+                  <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">商店位置</font></font></td>
+                  <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">本地机器</font></font></td>
+                </tr>
+                <tr>
+                  <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">将所有证书放在以下商店中</font></font></td>
+                  <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">选</font></font></td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+          <li>
+            <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">单击</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">浏览器</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">并选择</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">受信任的根证书颁发机构</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+          </li>
+          <li>
+            <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">单击</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">完成</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">重启Docker。</font></font></p>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker for Mac</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">：按照</font></font><a href="https://docs.docker.com/docker-for-mac/faqs/#how-do-i-add-custom-ca-certificates" target="_blank" class="_"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">添加自定义CA证书</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的说明进行操作
+ </font><font style="vertical-align: inherit;">。</font><strong><font style="vertical-align: inherit;">重启Docker。</font></strong></font></p>
+      </li>
+      <li>
+        <p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker for Windows</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">：按照</font></font><a href="https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-custom-ca-certificates" target="_blank" class="_"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">添加自定义CA证书</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的说明进行操作
+ </font><font style="vertical-align: inherit;">。</font><strong><font style="vertical-align: inherit;">重启Docker。</font></strong></font></p>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="troubleshoot-insecure-registry"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">排除不安全的注册表</font></font></h2>
+
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">本节列出了一些常见的故障以及如何从中恢复。</font></font></p>
+
+<h3 id="failing"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">失败…</font></font></h3>
+
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果配置引擎守护进程并尝试从不使用TLS的注册表中引用，则会导致以下消息：</font></font></p>
+
+<pre><code class="language-none">FATA[0000] Error response from daemon: v1 ping attempt failed with error:<font></font>
+Get https://myregistrydomain.com:5000/v1/_ping: tls: oversized record received with length 20527.<font></font>
+If this private registry supports only HTTP or HTTPS with an unknown CA certificate,please add<font></font>
+`--insecure-registry myregistrydomain.com:5000` to the daemon's arguments.<font></font>
+In the case of HTTPS, if you have access to the registry's CA certificate, no need for the flag;<font></font>
+simply place the CA certificate at /etc/docker/certs.d/myregistrydomain.com:5000/ca.crt<font></font>
+</code></pre>
+
+<h3 id="docker-still-complains-about-the-certificate-when-using-authentication"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker在使用身份验证时仍然抱怨该证书？</font></font></h3>
+
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用身份验证时，Docker的某些版本还要求您在操作系统级别信任证书。</font></font></p>
+
+<h4 id="ubuntu"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ubuntu的</font></font></h4>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>cp certs/domain.crt /usr/local/share/ca-certificates/myregistrydomain.com.crt<font></font>
+update-ca-certificates<font></font>
+</code></pre>
+</div>
+
+<h4 id="red-hat-enterprise-linux"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">红帽企业版Linux</font></font></h4>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>cp certs/domain.crt /etc/pki/ca-trust/source/anchors/myregistrydomain.com.crt<font></font>
+update-ca-trust<font></font>
+</code></pre>
+</div>
+
+<h4 id="oracle-linux"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Oracle Linux</font></font></h4>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>update-ca-trust <span class="nb">enable</span>
+</code></pre>
+</div>
+
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">重新启动Docker以使更改生效。</font></font></p>
+
+<h3 id="windows"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">视窗</font></font></h3>
+
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">打开Windows资源管理器，右键单击证书，然后选择
+ </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装证书</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">然后，选择以下选项：</font></font></p>
+
+<ul>
+  <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">店铺位置：本地机</font></font></li>
+  <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">所有证书在以下商店</font></font></strong></li>
+  <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">单击</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">浏览器</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，然后选择</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">受信任的根证书颁发机构</font></font></strong></li>
+  <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">单击</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">完成</font></font></strong></li>
+</ul>
+
+<p><a href="https://technet.microsoft.com/en-us/library/cc754841(v=ws.11).aspx#BKMK_addlocal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">进一步了解如何管理TLS证书</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">将CA证书添加到Windows后，重新启动Docker for Windows。</font></font></p>
+
+							<!-- tags -->
+							
+							
+							
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://docs.docker.com/glossary/?term=registry"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注册表</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，</font></font><a href="https://docs.docker.com/glossary/?term=on-prem"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">内部</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，</font></font><a href="https://docs.docker.com/glossary/?term=images"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">图像</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，</font></font><a href="https://docs.docker.com/glossary/?term=tags"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标签</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，</font></font><a href="https://docs.docker.com/glossary/?term=repository"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">存储库</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，</font></font><a href="https://docs.docker.com/glossary/?term=distribution"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">分发</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，</font></font><a href="https://docs.docker.com/glossary/?term=insecure"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">不安全</font></font></a></span>
+							
+							<!-- link corrections -->
+              <script language="JavaScript">
+							var x = document.links.length;
+							var baseHref = document.getElementsByTagName('base')[0].href
+							for (i = 0; i < x; i++) {
+							  var munged = false;
+							  var thisHREF = document.links[i].href;
+							  var originalURL = "/registry/insecure/";
+							  if (thisHREF.indexOf(baseHref + "#") > -1) {
+							    // hash fix
+							    //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
+							    thisHREF = originalURL + thisHREF.replace(baseHref, "");
+							    //console.log('AFTER: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
+							  }
+							  if ((thisHREF.indexOf(window.location.hostname) > -1 || thisHREF.indexOf('http') == -1) && document.links[i].className.indexOf("nomunge") < 0) {
+							    munged = true;
+							    thisHREF = thisHREF.replace(".md", "/").replace("/index/", "/");
+							    document.links[i].setAttribute('href', thisHREF);
+							  }
+							}
+							</script>
+							
+						  <div style="color:#b9c2cc; text-align: center; margin-top: 150px">
+								<div id="pd_rating_holder_8453675" style="display: inline-block;"><div class="rating-msg" id="PDRTJS_8453675_msg" style="text-align: center; font:normal normal 12px/20px verdana; color: #333333;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">评价本页：</font></font></div><p style="padding: 0px; margin: 0px; clear: both;"></p><div class="rating-icons" id="pd_rate_8453675" style="float:left;"><div class="rating-nero-icon" onmouseout="PDRTJS_8453675.rebuild();" onclick="PDRTJS_8453675.rate(1);" onmouseover="PDRTJS_8453675.hover(1);" id="PDRTJS_8453675_nero_1" style="background-size: 32px 32px !important; cursor: pointer; width: 16px; height: 16px;  line-height: 16px; background: url(https://polldaddy.com/images/ratings/nero-hand-sml.png) bottom left; float: left; padding: 0px; margin: 0px; margin: 0px;">&nbsp;</div><div class="rating-nero-value" id="PDRTJS_8453675_msg_1" style="text-align: center; font:normal normal 12px/20px verdana; color: #333333; float:left; padding: 0px 4px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">17</font></font></div><div class="rating-nero-icon" onmouseout="PDRTJS_8453675.rebuild();" onclick="PDRTJS_8453675.rate(2);" onmouseover="PDRTJS_8453675.hover(2);" id="PDRTJS_8453675_nero_2" style="background-size: 32px 32px !important; cursor: pointer; width: 16px; height: 16px;  line-height: 16px; background: url(https://polldaddy.com/images/ratings/nero-hand-sml.png) bottom right; float: left; padding: 0px; margin: 0px; margin: 0px;">&nbsp;</div><div class="rating-nero-value" id="PDRTJS_8453675_msg_2" style="text-align: center; font:normal normal 12px/20px verdana; color: #333333; float:left; padding: 0px 4px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">52</font></font></div></div><span style="float:left;">&nbsp;</span><div id="rating_info_8453675" style="display:none;float:left;background:url(https://polldaddy.com/images/ratings/info.png) no-repeat 3px 2px;width:16px;height:16px;cursor:pointer; null " onclick="javascript:PDRTJS_8453675.togglePopup();return false;"><span style="display:none;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一世</font></font></span></div><div class="pd_popup_holder" id="pd_popup_holder_8453675">&nbsp;</div></div>
+								<script type="text/javascript">
+									PDRTJS_settings_8453675 = {
+										"id": "8453675",
+										"unique_id": "registry/insecure.md",
+										"title": "Test an insecure registry",
+										"permalink": "https://github.com/docker/docker.github.io/blob/master/registry/insecure.md"
+									};
+									(function(d, c, j) {
+										if (!document.getElementById(j)) {
+											var pd = d.createElement(c),
+												s;
+											pd.id = j;
+											pd.src = ('https:' == document.location.protocol) ? 'https://polldaddy.com/js/rating/rating.js' : 'http://i0.poll.fm/js/rating/rating.js';
+											s = document.getElementsByTagName(c)[0];
+											s.parentNode.insertBefore(pd, s);
+										}
+									}(document, 'script', 'pd-rating-js'));
+								</script>
+							</div>
+							
+						</section>
+					</main>
+					<nav class="col-nav">
+						<div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+						<div id="navbar" class="nav-sidebar">
+    <ul class="nav">
+      
+
+
+
+<li><a data-target="#item1" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker企业版</font></font><span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item1" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/enterprise/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">关于Docker EE</font></font></a></li>
+
+
+
+<li><a href="https://docs.docker.com/engine/installation/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装Docker EE</font></font></a></li>
+
+
+
+<li><a href="https://docs.docker.com/enterprise/telemetry/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">管理使用数据收集</font></font></a></li>
+
+
+
+<li><a data-target="#item4" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发行说明</font></font><span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item4" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/enterprise/17.03/release-notes/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">17.03</font></font></a></li>
+
+
+
+<li><a href="https://docs.docker.com/enterprise/17.06/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">17.06</font></font></a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/install/linux/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在Linux上部署Docker EE标准</font></font></a></li>
+
+
+
+<li><a data-target="#item6" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通用控制平面</font></font><span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item6" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通用控制平面概述</font></font></a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/architecture/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">建筑</font></font></a></li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">行政</font></font><span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a data-target="#item1" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Install<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item1" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/install/system-requirements/">System requirements</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/install/plan-installation/">Plan your installation</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/install/">Install</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/install/install-offline/">Install offline</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/install/upgrade/">Upgrade</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/install/upgrade-offline/">Upgrade offline</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/install/uninstall/">Uninstall</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item2" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Configure<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item2" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/add-labels-to-cluster-nodes/">Add labels to cluster nodes</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/add-sans-to-cluster/">Add SANs to cluster certificates</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/">Join Windows worker nodes to a swarm</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/integrate-with-dtr/">Integrate with Docker Trusted Registry</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/external-auth/">Integrate with LDAP</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/external-auth/enable-ldap-config-file/">Integrate with LDAP by using a configuration file</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/license-your-installation/">License your installation</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/restrict-services-to-worker-nodes/">Restrict services to worker nodes</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/run-only-the-images-you-trust/">Run only the images you trust</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/scale-your-cluster/">Scale your cluster</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/set-session-timeout/">Set the user's session timeout</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/set-up-high-availability/">Set up high availability</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/store-logs-in-an-external-system/">Store logs in an external system</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/ucp-configuration-file/">UCP configuration file</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/use-a-load-balancer/">Use a load balancer</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/use-node-local-network-in-swarm/">Use a local node network in a swarm</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services/">Use domain names to access services</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/configure/use-your-own-tls-certificates/">Use your own TLS certificates</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Monitor and troubleshoot<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/">Monitor the cluster status</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-node-messages/">Troubleshoot node messages</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/">Troubleshoot with logs</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations/">Troubleshoot configurations</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-task-state/">Troubleshoot swarm task states</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/admin/backups-and-disaster-recovery/">Backups and disaster recovery</a></li>
+
+
+
+<li><a data-target="#item5" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">CLI reference<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item5" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/reference/cli/">docker/ucp overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/reference/cli/backup/">backup</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/reference/cli/dump-certs/">dump-certs</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/reference/cli/example-config/">example-config</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/reference/cli/fingerprint/">fingerprint</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/reference/cli/id/">id</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/reference/cli/images/">images</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/reference/cli/install/">install</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/reference/cli/restart/">restart</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/reference/cli/restore/">restore</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/reference/cli/stop/">stop</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/reference/cli/support/">support</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/reference/cli/uninstall-ucp/">uninstall-ucp</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/reference/cli/upgrade/">upgrade</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item4" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Access control<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item4" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/access-control/">Access control model</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/access-control/create-and-manage-users/">Create and manage users</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/access-control/create-and-manage-teams/">Create and manage teams</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/access-control/deploy-view-only-service/">Deploy a service with view-only access across an organization</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/access-control/grant-permissions/">Grant permissions to users based on roles</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/access-control/isolate-nodes-between-teams/">Isolate swarm nodes to a specific team</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/access-control/isolate-volumes-between-teams/">Isolate volumes between two different teams</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/access-control/manage-access-with-collections/">Manage access to resources by using collections</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/access-control/access-control-node/">Node access control</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/access-control/permission-levels/">Permission levels</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/access-control/access-control-design-ee-standard/">Access control design with Docker EE Standard</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/access-control/access-control-design-ee-advanced/">Access control design with Docker EE Advanced</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/access-control/recover-a-user-password/">Recover a user password</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item5" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">User guides<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item5" aria-expanded="false">
+
+
+
+<li><a data-target="#item1" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Access UCP<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item1" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/user/access-ucp/">Web-based access</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/user/access-ucp/cli-based-access/">CLI-based access</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item2" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Deploy an application<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item2" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/user/services/deploy-a-service/">Deploy a service</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/user/services/use-domain-names-to-access-services/">Use domain names to access services</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/user/services/">Deploy an app from the UI</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/user/services/deploy-app-cli/">Deploy an app from the CLI</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/user/services/deploy-stack-to-collection/">Deploy application resources to a collection</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Secrets<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/user/secrets/">Manage secrets</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/user/secrets/grant-revoke-access/">Grant access to secrets</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/reference/api/">API reference</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/release-notes/">Release notes</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.2/guides/get-support/">Get support</a></li>
+
+
+
+<li><a data-target="#item9" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Previous versions<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item9" aria-expanded="false">
+
+
+
+<li><a data-target="#item1" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Universal Control Plane 2.1<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item1" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/">Universal Control Plane overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/architecture/">Architecture</a></li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Administration<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a data-target="#item1" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Install<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item1" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/install/system-requirements/">System requirements</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/install/plan-installation/">Plan your installation</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/install/">Install</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/install/install-offline/">Install offline</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/upgrade/">Upgrade</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/upgrade-offline/">Upgrade offline</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/install/uninstall/">Uninstall</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item2" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Configure<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item2" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/license-your-installation/">License your installation</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/scale-your-cluster/">Scale your cluster</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/set-up-high-availability/">Set up high availability</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/use-a-load-balancer/">Use a load balancer</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/add-labels-to-cluster-nodes/">Add labels to cluster nodes</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/add-sans-to-cluster/">Add SANs to cluster certificates</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/store-logs-in-an-external-system/">Store logs in an external system</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/restrict-services-to-worker-nodes/">Restrict services to worker nodes</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/use-domain-names-to-access-services/">Use domain names to access services</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/run-only-the-images-you-trust/">Run only the images you trust</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/integrate-with-dtr/">Integrate with Docker Trusted Registry</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/external-auth/">Integrate with LDAP</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/use-your-own-tls-certificates/">Use your own TLS certificates</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Manage users<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/manage-users/">Authentication and authorization</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/manage-users/create-and-manage-users/">Create and manage users</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/manage-users/create-and-manage-teams/">Create and manage teams</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/manage-users/permission-levels/">Permission levels</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/manage-users/recover-a-user-password/">Recover a user password</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item4" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Monitor and troubleshoot<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item4" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/">Monitor the cluster status</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/troubleshoot-node-messages/">Troubleshoot node messages</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/">Troubleshoot with logs</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations/">Troubleshoot configurations</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/backups-and-disaster-recovery/">Backups and disaster recovery</a></li>
+
+
+
+<li><a data-target="#item6" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">CLI reference<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item6" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/reference/cli/">docker/ucp overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/reference/cli/backup/">backup</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/reference/cli/dump-certs/">dump-certs</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/reference/cli/fingerprint/">fingerprint</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/reference/cli/id/">id</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/reference/cli/images/">images</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/reference/cli/install/">install</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/reference/cli/restart/">restart</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/reference/cli/restore/">restore</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/reference/cli/stop/">stop</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/reference/cli/support/">support</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/reference/cli/uninstall-ucp/">uninstall-ucp</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/reference/cli/upgrade/">upgrade</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item4" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">User guides<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item4" aria-expanded="false">
+
+
+
+<li><a data-target="#item1" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Access UCP<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item1" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/user/access-ucp/">Web-based access</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/user/access-ucp/cli-based-access/">CLI-based access</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item2" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Deploy an application<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item2" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/user/services/deploy-a-service/">Deploy a service</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/user/services/use-domain-names-to-access-services/">Use domain names to access services</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/user/services/">Deploy an app from the UI</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/user/services/deploy-app-cli/">Deploy an app from the CLI</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Secrets<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/user/secrets/">Manage secrets</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/user/secrets/grant-revoke-access/">Grant access to secrets</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item5" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Release notes<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item5" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/release-notes/">Release notes</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/release-notes/incompatibilities-and-breaking-changes/">Incompatibilities and breaking changes</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/get-support/">Get support</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item2" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Universal Control Plane 2.0<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item2" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/">Universal Control Plane overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/architecture/">Architecture</a></li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Installation<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/installation/system-requirements/">System requirements</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/installation/plan-production-install/">Plan a production installation</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/installation/">Install UCP for production</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/installation/install-offline/">Install offline</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/installation/license/">License UCP</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/installation/scale-your-cluster/">Scale your cluster</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/installation/upgrade/">Upgrade UCP</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/installation/uninstall/">Uninstall UCP</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item4" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Access UCP<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item4" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/access-ucp/">Web-based access</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/access-ucp/cli-based-access/">CLI-based access</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item5" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Configuration<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item5" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/configuration/">Use externally-signed certificates</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/configuration/configure-logs/">Configure UCP logging</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/configuration/integrate-with-dtr/">Integrate with Docker Trusted Registry</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/configuration/integrate-with-ldap/">Integrate with LDAP</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/configuration/route-hostnames/">Route hostnames to services</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item6" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Monitor and troubleshoot<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item6" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/monitor/">Monitor your cluster</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/monitor/troubleshoot/">Troubleshoot your cluster</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/monitor/troubleshoot-configurations/">Troubleshoot cluster configurations</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item7" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">High-availability<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item7" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/high-availability/">Set up high availability</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/high-availability/backups-and-disaster-recovery/">Backups and disaster recovery</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item8" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">User management<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item8" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/user-management/">Authentication and authorization</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/user-management/create-and-manage-users/">Create and manage users</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/user-management/create-and-manage-teams/">Create and manage teams</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/user-management/permission-levels/">Permission levels</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item9" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Applications<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item9" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/applications/">Deploy an app from the UI</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/applications/deploy-app-cli/">Deploy an app from the CLI</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item10" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Content trust<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item10" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/content-trust/">Run only images you trust</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/content-trust/manage-trusted-repositories/">Manage trusted repositories</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/content-trust/continuous-integration/">Use trusted images for continuous integration</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item11" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">CLI reference<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item11" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/reference/cli/">docker/ucp overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/reference/cli/backup/">backup</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/reference/cli/dump-certs/">dump-certs</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/reference/cli/fingerprint/">fingerprint</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/reference/cli/id/">id</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/reference/cli/images/">images</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/reference/cli/install/">install</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/reference/cli/restart/">restart</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/reference/cli/restore/">restore</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/reference/cli/stop/">stop</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/reference/cli/support/">support</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/reference/cli/uninstall-ucp/">uninstall-ucp</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/reference/cli/upgrade/">upgrade</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/support/">Get support</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/2.0/guides/release-notes/">Release notes</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Universal Control Plane 1.0<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/overview/">Universal Control Plane overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/install-sandbox/">Install DDC in a sandbox for evaluation</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/install-sandbox-2/">Evaluate DDC in a sandbox deployment</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/architecture/">Architecture</a></li>
+
+
+
+<li><a data-target="#item5" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Installation<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item5" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/installation/system-requirements/">System requirements</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/installation/plan-production-install/">Plan a production installation</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/installation/install-production/">Install UCP for production</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/installation/install-offline/">Install offline</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/installation/license/">License UCP</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/installation/upgrade/">Upgrade UCP</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/installation/uninstall/">Uninstall UCP</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item6" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Access UCP<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item6" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/access-ucp/web-based-access/">Web-based access</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/access-ucp/cli-based-access/">CLI-based access</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item7" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Configuration<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item7" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/configuration/use-externally-signed-certs/">Use externally-signed certificates</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/configuration/configure-logs/">Configure UCP logging</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/configuration/dtr-integration/">Integrate with Docker Trusted Registry</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/configuration/ldap-integration/">Integrate with LDAP</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/configuration/multi-host-networking/">Set up container networking</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item8" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Monitor and troubleshoot<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item8" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/monitor/monitor-ucp/">Monitor your cluster</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/monitor/troubleshoot-ucp/">Troubleshoot your cluster</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/monitor/troubleshoot-configurations/">Troubleshoot cluster configurations</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item9" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">High-availability<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item9" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/high-availability/set-up-high-availability/">Set up high availability</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/high-availability/replicate-cas/">Replicate CAs for high availability</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/high-availability/backups-and-disaster-recovery/">Backups and disaster recovery</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item10" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">User management<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item10" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/user-management/authentication-and-authorization/">Authentication and authorization</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/user-management/create-and-manage-users/">Create and manage users</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/user-management/create-and-manage-teams/">Create and manage teams</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/user-management/permission-levels/">Permission levels</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item11" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Applications<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item11" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/applications/deploy-app-ui/">Deploy an app from the UI</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/applications/deploy-app-cli/">Deploy an app from the CLI</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item12" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">UCP tool CLI<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item12" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/reference/">UCP tool v1.1 overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/reference/backup/">backup</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/reference/dump-certs/">dump-certs</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/reference/engine-discovery/">engine-discovery</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/reference/fingerprint/">fingerprint</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/reference/help/">help</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/reference/id/">id</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/reference/images/">images</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/reference/install/">install</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/reference/join/">join</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/reference/regen-certs/">regen-certs</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/reference/restart/">restart</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/reference/restore/">restore</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/reference/stop/">stop</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/reference/support/">support</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/reference/uninstall/">uninstall</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/reference/upgrade/">upgrade</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/support/">Get support</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/ucp/1.1/release_notes/"></a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item7" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Docker Trusted Registry<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item7" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/">Docker Trusted Registry overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/architecture/">Architecture</a></li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Administration<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a data-target="#item1" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Install<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item1" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/install/system-requirements/">System requirements</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/install/">Install</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/install/install-offline/">Install offline</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/upgrade/">Upgrade</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/install/uninstall/">Uninstall</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item2" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Configure<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item2" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/configure/license-your-installation/">License your installation</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/configure/use-your-own-tls-certificates/">Use your own TLS certificates</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/configure/enable-single-sign-on/">Enable single sign-on</a></li>
+
+
+
+<li><a data-target="#item4" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">External storage<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item4" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/configure/external-storage/">Overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/configure/external-storage/s3/">S3</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/configure/external-storage/nfs/">NFS</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/configure/set-up-high-availability/">Set up high availability</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/configure/use-a-load-balancer/">Use a load balancer</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/configure/set-up-vulnerability-scans/">Set up vulnerability scans</a></li>
+
+
+
+<li><a data-target="#item8" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Deploy caches<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item8" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/configure/deploy-caches/">Overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/configure/deploy-caches/tls/">Deploy caches with TLS</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/configure/deploy-caches/chaining/">Chain multiple caches</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/configure/garbage-collection/">Garbage collection</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/configure/use-a-web-proxy/">Use a web proxy</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Manage users<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/manage-users/">Authentication and authorization</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/manage-users/create-and-manage-users/">Create and manage users</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/manage-users/create-and-manage-teams/">Create and manage teams</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/manage-users/create-and-manage-orgs/">Create and manage organizations</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/manage-users/permission-levels/">Permission levels</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item4" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Monitor and troubleshoot<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item4" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/">Monitor the cluster status</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/">Troubleshoot with logs</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/">Troubleshoot batch jobs</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/admin/backups-and-disaster-recovery/">Backups and disaster recovery</a></li>
+
+
+
+<li><a data-target="#item6" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">CLI reference<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item6" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/reference/cli/">Overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/reference/cli/backup/">backup</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/reference/cli/destroy/">destroy</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/reference/cli/dumpcerts/">dumpcerts</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/reference/cli/images/">images</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/reference/cli/install/">install</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/reference/cli/join/">join</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/reference/cli/reconfigure/">reconfigure</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/reference/cli/remove/">remove</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/reference/cli/restore/">restore</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/reference/cli/upgrade/">upgrade</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item4" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">User guides<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item4" aria-expanded="false">
+
+
+
+<li><a data-target="#item1" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Access DTR<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item1" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/user/access-dtr/">Configure your Docker Engine</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/user/access-dtr/configure-your-notary-client/">Configure your Notary client</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/user/access-dtr/use-a-cache/">Use a cache</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item2" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Manage images<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item2" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/user/manage-images/">Create a repository</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/user/manage-images/pull-and-push-images/">Pull and push images</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/user/manage-images/delete-images/">Delete images</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/user/manage-images/scan-images-for-vulnerabilities/">Scan images for vulnerabilities</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/user/manage-images/prevent-tags-from-being-overwritten/">Prevent tags from being overwritten</a></li>
+
+
+
+<li><a data-target="#item6" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Sign images<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item6" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/user/manage-images/sign-images/">Sign an image</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/user/manage-images/sign-images/delegate-image-signing/">Delegate image signing</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/user/manage-images/sign-images/manage-trusted-repositories/">Manage trusted repositories</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/user/create-and-manage-webhooks/">Create and manage webhooks</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/user/create-promotion-policies/">Create promotion policies</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/reference/api/">API reference</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/release-notes/">Release notes</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.3/guides/support/">Get support</a></li>
+
+
+
+<li><a data-target="#item8" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Previous versions<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item8" aria-expanded="false">
+
+
+
+<li><a data-target="#item1" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Docker Trusted Registry 2.2<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item1" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/">Docker Trusted Registry overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/architecture/">Architecture</a></li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Administration<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a data-target="#item1" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Install<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item1" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/install/system-requirements/">System requirements</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/install/">Install</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/install/install-offline/">Install offline</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/upgrade/">Upgrade</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/install/uninstall/">Uninstall</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item2" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Configure<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item2" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/license-your-installation/">License your installation</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/use-your-own-tls-certificates/">Use your own TLS certificates</a></li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">External storage<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/external-storage/">Overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/external-storage/s3/">S3</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/external-storage/nfs/">NFS</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/set-up-high-availability/">Set up high availability</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/use-a-load-balancer/">Use a load balancer</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/set-up-vulnerability-scans/">Set up vulnerability scans</a></li>
+
+
+
+<li><a data-target="#item7" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Deploy caches<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item7" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/deploy-caches/">Overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/deploy-caches/tls/">Deploy caches with TLS</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/deploy-caches/chaining/">Chain multiple caches</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/configure/garbage-collection/">Garbage collection</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Manage users<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/manage-users/">Create and manage users</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-users/">Create and manage users</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-teams/">Create and manage teams</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/manage-users/permission-levels/">Permission levels</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item4" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Monitor and troubleshoot<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item4" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/">Monitor the cluster status</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/">Troubleshoot with logs</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/">Troubleshoot batch jobs</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/">Backups and disaster recovery</a></li>
+
+
+
+<li><a data-target="#item6" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">CLI reference<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item6" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/reference/cli/">Overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/reference/cli/backup/">backup</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/reference/cli/destroy/">destroy</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/reference/cli/dumpcerts/">dumpcerts</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/reference/cli/images/">images</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/reference/cli/install/">install</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/reference/cli/join/">join</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/reference/cli/reconfigure/">reconfigure</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/reference/cli/remove/">remove</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/reference/cli/restore/">restore</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/reference/cli/upgrade/">upgrade</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item4" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">User guides<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item4" aria-expanded="false">
+
+
+
+<li><a data-target="#item1" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Access DTR<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item1" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/user/access-dtr/">Configure your Docker Engine</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/user/access-dtr/configure-your-notary-client/">Configure your Notary client</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/user/access-dtr/use-a-cache/">Use a cache</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item2" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Manage images<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item2" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/user/manage-images/">Create a repository</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/user/manage-images/pull-and-push-images/">Pull and push images</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/user/manage-images/delete-images/">Delete images</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/user/manage-images/scan-images-for-vulnerabilities/">Scan images for vulnerabilities</a></li>
+
+
+
+<li><a data-target="#item5" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Sign images<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item5" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/user/manage-images/sign-images/">Sign an image</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/user/manage-images/sign-images/delegate-image-signing/">Delegate image signing</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/user/manage-images/sign-images/manage-trusted-repositories/">Manage trusted repositories</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/user/create-and-manage-webhooks/">Create and manage webhooks</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/reference/api/">API reference</a></li>
+
+
+
+<li><a data-target="#item6" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Release notes<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item6" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/release-notes/">Release notes</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/release-notes/incompatibilities-and-breaking-changes/">Incompatibilities and breaking changes</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.2/guides/support/">Get support</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item2" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Docker Trusted Registry 2.1<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item2" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/">Docker Trusted Registry overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/architecture/">Architecture</a></li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Installation<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/install/system-requirements/">System requirements</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/install/">Install Docker Trusted Registry</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/install/install-offline/">Install offline</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/install/license/">License your deployment</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/install/scale-your-deployment/">Scale your deployment</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/install/upgrade/">Upgrade</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/install/uninstall/">Uninstall</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item4" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Configuration<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item4" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/configure/">Use your own certificates</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/configure/configure-storage/">Storage configuration</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/configure/use-nfs/">Use NFS</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item5" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Monitor and troubleshoot<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item5" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/monitor-troubleshoot/">Monitor DTR</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/monitor-troubleshoot/troubleshoot/">Troubleshoot DTR</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item6" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">High-availability<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item6" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/high-availability/">Set up high availability</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/high-availability/backups-and-disaster-recovery/">Backups and disaster recovery</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item7" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">User management<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item7" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/user-management/">Authentication and authorization</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/user-management/create-and-manage-users/">Create and manage users</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/user-management/create-and-manage-orgs/">Create and manage organizations</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/user-management/create-and-manage-teams/">Create and manage teams</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/user-management/permission-levels/">Permission levels</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item8" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Repositories and images<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item8" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/repos-and-images/">Configure your Docker Engine</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/repos-and-images/pull-an-image/">Pull an image</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/repos-and-images/push-an-image/">Push an image</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/repos-and-images/delete-an-image/">Delete an image</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item9" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">API and CLI reference<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item9" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/reference/api/">API reference</a></li>
+
+
+
+<li><a data-target="#item2" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">CLI reference<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item2" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/reference/cli/">Overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/reference/cli/backup/">backup</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/reference/cli/dumpcerts/">dumpcerts</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/reference/cli/images/">images</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/reference/cli/install/">install</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/reference/cli/join/">join</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/reference/cli/reconfigure/">reconfigure</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/reference/cli/remove/">remove</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/reference/cli/restore/">restore</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/reference/cli/upgrade/">upgrade</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/release-notes/">Release notes</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/support/">Get support</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Docker Trusted Registry 2.0<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/">Docker Trusted Registry overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/architecture/">Architecture</a></li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Installation<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/install/system-requirements/">System requirements</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/install/">Install Docker Trusted Registry</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/install/install-dtr-offline/">Install offline</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/install/license/">License DTR</a></li>
+
+
+
+<li><a data-target="#item5" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Upgrade<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item5" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/install/upgrade/upgrade-major/">Upgrade from 1.4.3</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/install/upgrade/">Upgrade from 2.0.0</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/install/uninstall/">Uninstall</a></li>
+
+
+
+<li><a data-target="#item7" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">docker/dtr image reference<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item7" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/reference/">Overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/reference/backup/">backup</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/reference/dumpcerts/">dumpcerts</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/reference/images/">images</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/reference/install/">install</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/reference/join/">join</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/reference/migrate/">migrate</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/reference/reconfigure/">reconfigure</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/reference/remove/">remove</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/reference/restore/">restore</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/reference/upgrade/">upgrade</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item4" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Configuration<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item4" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/configure/configuration/">Configuration overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/configure/config-general/">Configure general settings</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/configure/config-security/">Security configuration</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/configure/config-storage/">Storage configuration</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item5" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Monitor and troubleshoot<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item5" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/monitor-troubleshoot/">Monitor DTR</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/monitor-troubleshoot/troubleshoot/">Troubleshoot DTR</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item6" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">High-availability<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item6" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/high-availability/">Set up high availability</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/high-availability/backups-and-disaster-recovery/">Backups and disaster recovery</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item7" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">User management<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item7" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/user-management/">Authentication and authorization</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/user-management/create-and-manage-users/">Create and manage users</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/user-management/create-and-manage-orgs/">Create and manage organizations</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/user-management/create-and-manage-teams/">Create and manage teams</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/user-management/permission-levels/">Permission levels</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item8" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Repositories and images<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item8" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/repos-and-images/">Configure your Docker Engine</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/repos-and-images/pull-an-image/">Pull an image</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/repos-and-images/push-an-image/">Push an image</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/repos-and-images/delete-an-image/">Delete an image</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item9" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Release notes<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item9" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/release-notes/">Trusted Registry release notes</a></li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/release-notes/prior-release-notes/">Prior Trusted Registry release notes</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item10" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Trusted Registry API<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item10" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/apidocs/v2.0.1/">API v2.0.1</a></li>
+
+
+
+<li><a href="https://docs.docker.com/apidocs/v2.0.0/">API v2.0.0</a></li>
+
+
+
+<li><a href="https://docs.docker.com/apidocs/v1.4.0/">API v1.4.0</a></li>
+
+
+
+<li><a href="https://docs.docker.com/apidocs/v1.3.3/">API v1.3.3</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/datacenter/dtr/2.0/support/">Get support</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item2" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">商业上支持的Docker Engine</font></font><span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item2" aria-expanded="false">
+
+
+
+<li><a data-target="#item1" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">1.13<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item1" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/cs-engine/1.13/">Install</a></li>
+
+
+
+<li><a href="https://docs.docker.com/cs-engine/1.13/upgrade/">Upgrade</a></li>
+
+
+
+<li><a href="https://docs.docker.com/cs-engine/1.13/release-notes/">Release notes</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item2" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">1.12<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item2" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/cs-engine/1.12/">Install</a></li>
+
+
+
+<li><a href="https://docs.docker.com/cs-engine/1.12/upgrade/">Upgrade</a></li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Release notes<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/cs-engine/1.12/release-notes/release-notes/">CS Engine release notes</a></li>
+
+
+
+<li><a href="https://docs.docker.com/cs-engine/1.12/release-notes/prior-release-notes/">Prior CS Engine release notes</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker Cloud</font></font><span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/">About Docker Cloud</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/dockerid/">Docker Cloud settings and Docker ID</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/orgs/">Organizations and teams</a></li>
+
+
+
+<li><a data-target="#item4" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Manage builds and images<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item4" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/builds/">Builds and images overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/builds/repos/">Docker Cloud repositories</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/builds/link-source/">Link to a source code repository</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/builds/push-images/">Push images to Docker Cloud</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/builds/image-scan/">Docker security scanning</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/builds/automated-build/">Automated builds</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/builds/automated-testing/">Automated repository tests</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/builds/advanced/">Advanced options for autobuild and autotest</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item5" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Manage swarms (beta swarm mode)<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item5" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/cloud-swarm/">Overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/cloud-swarm/using-swarm-mode/">Using Swarm mode</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/cloud-swarm/register-swarms/">Register existing swarms</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/cloud-swarm/create-cloud-swarm-aws/">Create a new swarm on Amazon Web Services in Docker Cloud</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/cloud-swarm/create-cloud-swarm-azure/">Create a new swarm on Microsoft Azure in Docker Cloud</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/cloud-swarm/connect-to-swarm/">Connect to a swarm through Docker Cloud</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/cloud-swarm/link-aws-swarm/">Link Amazon Web Services to Docker Cloud</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/cloud-swarm/link-azure-swarm/">Link Microsoft Azure Cloud Services to Docker Cloud</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/cloud-swarm/ssh-key-setup/">Set up SSH keys</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item6" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Manage Infrastructure (standard mode)<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item6" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/infrastructure/">Infrastructure overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/infrastructure/deployment-strategies/">Container distribution strategies</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/infrastructure/link-aws/">Link to Amazon Web Services hosts</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/infrastructure/link-do/">Link to DigitalOcean hosts</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/infrastructure/link-azure/">Link to Microsoft Azure hosts</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/infrastructure/link-packet/">Link to Packet hosts</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/infrastructure/link-softlayer/">Link to SoftLayer hosts</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/infrastructure/ssh-into-a-node/">SSH into a Docker Cloud-managed node</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/infrastructure/docker-upgrade/">Upgrade Docker Engine on a node</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/infrastructure/byoh/">Use the Docker Cloud agent</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/infrastructure/cloud-on-packet.net-faq/">Using Docker Cloud and Packet.net</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/infrastructure/cloud-on-aws-faq/">Using Docker Cloud on AWS</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item7" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Manage nodes and apps (standard mode)<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item7" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/standard/">Overview</a></li>
+
+
+
+<li><a data-target="#item2" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Getting started<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item2" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/getting-started/">Getting started with Docker Cloud</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/getting-started/intro_cloud/">Introducing Docker Cloud</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/getting-started/connect-infra/">Link to your infrastructure</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/getting-started/your_first_node/">Deploy your first node</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/getting-started/your_first_service/">Deploy your first service</a></li>
+
+
+
+<li><a data-target="#item6" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Deploy an application<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item6" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/getting-started/deploy-app/1_introduction/">Introduction to deploying an app in Docker Cloud</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/getting-started/deploy-app/2_set_up/">Set up your environment</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/getting-started/deploy-app/3_prepare_the_app/">Prepare the application</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/getting-started/deploy-app/4_push_to_cloud_registry/">Push the image to Docker Cloud's Registry</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/getting-started/deploy-app/5_deploy_the_app_as_a_service/">Deploy the app as a Docker Cloud service</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/getting-started/deploy-app/6_define_environment_variables/">Define environment variables</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/getting-started/deploy-app/7_scale_the_service/">Scale the service</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/getting-started/deploy-app/8_view_logs/">View service logs</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/getting-started/deploy-app/9_load-balance_the_service/">Load-balance the service</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/getting-started/deploy-app/10_provision_a_data_backend_for_your_service/">Provision a data backend for the service</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/getting-started/deploy-app/11_service_stacks/">Stackfiles for your service</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/getting-started/deploy-app/12_data_management_with_volumes/">Data management with volumes</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Manage applications<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/apps/">Applications in Docker Cloud</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/apps/deploy-to-cloud-btn/">Add a deploy to Docker Cloud button</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/apps/auto-destroy/">Automatic container destroy</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/apps/autorestart/">Automatic container restart</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/apps/auto-redeploy/">Automatic service redeploy</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/apps/load-balance-hello-world/">Create a proxy or load balancer</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/apps/deploy-tags/">Deployment tags</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/apps/stacks/">Manage service stacks</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/apps/ports/">Publish and expose service or container ports</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/apps/service-redeploy/">Redeploy running services</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/apps/service-scaling/">Scale your service</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/apps/api-roles/">Service API roles</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/apps/service-links/">Service discovery and links</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/apps/triggers/">Use triggers</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/apps/volumes/">Work with data volumes</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/apps/stack-yaml-reference/">Cloud stack file YAML reference</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/slack-integration/">Docker Cloud notifications in Slack</a></li>
+
+
+
+<li><a href="https://docs.docker.com/apidocs/docker-cloud/">Docker Cloud API</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/installing-cli/">The Docker Cloud CLI</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/docker-errors-faq/">Known issues in Docker Cloud</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/release-notes/">Release notes</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item4" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker撰写</font></font><span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item4" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/compose/overview/">Overview of Docker Compose</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/install/">Install Compose</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/gettingstarted/">Getting started</a></li>
+
+
+
+<li><a data-target="#item4" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Compose (docker-compose) CLI reference<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item4" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/overview/">Overview of docker-compose CLI</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/envvars/">CLI environment variables</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/completion/">Command-line completion</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/build/">build</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/bundle/">bundle</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/config/">config</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/create/">create</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/down/">down</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/events/">events</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/exec/">exec</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/help/">help</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/kill/">kill</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/logs/">logs</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/pause/">pause</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/port/">port</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/ps/">ps</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/pull/">pull</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/push/">push</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/restart/">restart</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/rm/">rm</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/run/">run</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/scale/">scale</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/start/">start</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/stop/">stop</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/top/">top</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/unpause/">unpause</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/reference/up/">up</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item5" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Compose file reference<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item5" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/compose/compose-file/">Version 3</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/compose-file/compose-file-v2/">Version 2</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/compose-file/compose-file-v1/">Version 1</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/compose-file/compose-versioning/">About versions and upgrading</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/faq/">Frequently asked questions</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/compose/bundles/">Docker stacks and distributed application bundles</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/swarm/">Using Compose with Swarm</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/env-file/">Environment file</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/environment-variables/">Environment variables in Compose</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/extends/">Extend services in Compose</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/networking/">Networking in Compose</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/production/">Using Compose in production</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/link-env-deprecated/">Link environment variables (deprecated)</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/startup-order/">Control startup order</a></li>
+
+
+
+<li><a href="https://docs.docker.com/compose/samples-for-compose/">Sample apps with Compose</a></li>
+
+
+
+<li><a href="https://docs.docker.com/release-notes/docker-compose/">Docker Compose release notes</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item5" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker for Mac</font></font><span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item5" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/docker-for-mac/">Getting started</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-mac/install/">Install Docker for Mac</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-mac/docker-toolbox/">Docker for Mac vs. Docker Toolbox</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-mac/multi-arch/">Leveraging Multi-CPU architecture support</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-mac/networking/">Networking</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-mac/osxfs/">File system sharing</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-mac/osxfs-caching/">Performance tuning for volume mounts (shared filesystems)</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-mac/troubleshoot/">Logs and troubleshooting</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-mac/faqs/">FAQs</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-mac/opensource/">Open source licensing</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-mac/release-notes/">Release notes</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item6" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker for Windows</font></font><span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item6" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/docker-for-windows/">Getting started</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-windows/install/">Install Docker for Windows</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-windows/troubleshoot/">Logs and troubleshooting</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-windows/faqs/">FAQs</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-windows/opensource/">Open source licensing</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-windows/release-notes/">Release notes</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/docker-id/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker ID帐户</font></font></a></li>
+
+
+
+<li><a data-target="#item8" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">码头机</font></font><span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item8" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/machine/overview/">Machine overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/install-machine/">Install Machine</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/get-started/">Get started with a local VM</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/get-started-cloud/">Provision hosts in the cloud</a></li>
+
+
+
+<li><a data-target="#item5" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Learn by example<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item5" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/machine/examples/ocean/">Provision Digital Ocean Droplets</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/examples/aws/">Provision AWS EC2 instances</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/machine/concepts/">Machine concepts and help</a></li>
+
+
+
+<li><a data-target="#item7" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Machine (docker-machine) CLI<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item7" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/">Machine CLI overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/completion/">Machine command-line completion</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/active/">active</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/config/">config</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/create/">create</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/env/">env</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/help/">help</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/inspect/">inspect</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/ip/">ip</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/kill/">kill</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/ls/">ls</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/provision/">provision</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/regenerate-certs/">regenerate-certs</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/restart/">restart</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/rm/">rm</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/scp/">scp</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/ssh/">ssh</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/start/">start</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/status/">status</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/stop/">stop</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/upgrade/">upgrade</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/reference/url/">url</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item8" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Machine drivers<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item8" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/machine/drivers/">Drivers overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/drivers/os-base/">Driver options and operating system defaults</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/drivers/aws/">Amazon Web Services</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/drivers/digital-ocean/">Digital Ocean</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/drivers/exoscale/">Exoscale</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/drivers/generic/">Generic</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/drivers/gce/">Google Compute Engine</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/drivers/soft-layer/">IBM Softlayer</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/drivers/azure/">Microsoft Azure</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/drivers/hyper-v/">Microsoft Hyper-V</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/drivers/openstack/">OpenStack</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/drivers/virtualbox/">Oracle VirtualBox</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/drivers/rackspace/">Rackspace</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/drivers/vm-fusion/">VMware Fusion</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/drivers/vm-cloud/">VMware vCloud Air</a></li>
+
+
+
+<li><a href="https://docs.docker.com/machine/drivers/vsphere/">VMware vSphere</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/machine/migrate-to-machine/">Migrate from Boot2Docker to Machine</a></li>
+
+
+
+<li><a href="https://docs.docker.com/release-notes/docker-machine/">Docker Machine release notes</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item9" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker公证人</font></font><span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item9" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/notary/getting_started/">Getting started with Notary</a></li>
+
+
+
+<li><a href="https://docs.docker.com/notary/advanced_usage/">Use the Notary client</a></li>
+
+
+
+<li><a href="https://docs.docker.com/notary/service_architecture/">Understand the service architecture</a></li>
+
+
+
+<li><a href="https://docs.docker.com/notary/running_a_service/">Running a Notary service</a></li>
+
+
+
+<li><a href="https://docs.docker.com/notary/changelog/">Notary changelog</a></li>
+
+
+
+<li><a data-target="#item6" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Configuration files<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item6" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/notary/reference/server-config/">Server configuration</a></li>
+
+
+
+<li><a href="https://docs.docker.com/notary/reference/signer-config/">Signer configuration</a></li>
+
+
+
+<li><a href="https://docs.docker.com/notary/reference/client-config/">Client configuration</a></li>
+
+
+
+<li><a href="https://docs.docker.com/notary/reference/common-configs/">Common Server and signer configurations</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item10" data-toggle="collapse" data-parent="#stacked-menu" aria-expanded="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker注册表</font></font><span class="caret arrow"></span></a>
+<ul class="nav collapse in" id="#item10" aria-expanded="true">
+
+
+
+<li><a href="https://docs.docker.com/registry/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注册表概述</font></font></a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/introduction/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">了解注册表</font></font></a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/deploying/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">部署注册表服务器</font></font></a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/configuration/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">配置注册表</font></font></a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/notifications/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理通知</font></font></a></li>
+
+
+
+<li><a data-target="#item6" data-toggle="collapse" data-parent="#stacked-menu" aria-expanded="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">食谱</font></font><span class="caret arrow"></span></a>
+<ul class="nav collapse in" id="#item6" aria-expanded="true">
+
+
+
+<li><a href="https://docs.docker.com/registry/recipes/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">食谱概述</font></font></a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/recipes/apache/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用apache验证代理</font></font></a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/recipes/nginx/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用nginx验证代理</font></font></a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/recipes/mirror/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">镜像Docker Hub</font></font></a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/recipes/osx-setup-guide/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在macOS上运行</font></font></a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/garbage-collection/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">垃圾收集</font></font></a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/insecure/" class="active currentPage"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">测试不安全的注册表</font></font></a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/registry/deprecated/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">已弃用的功能</font></font></a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/compatibility/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">兼容性</font></font></a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/help/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">获得帮助</font></font></a></li>
+
+
+
+<li><a data-target="#item10" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注册表参考</font></font><span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item10" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/registry/spec/api/">Registry HTTP API v2</a></li>
+
+
+
+<li><a data-target="#item2" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Registry image manifests<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item2" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/registry/spec/manifest-v2-1/">Image manifest v 2, schema 1</a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/spec/manifest-v2-2/">Image manifest v 2, schema 2</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item3" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Registry storage drivers<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item3" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/registry/storage-drivers/">Storage driver overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/storage-drivers/oss/">Aliyun OSS storage driver</a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/storage-drivers/filesystem/">Filesystem storage driver</a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/storage-drivers/gcs/">GCS storage driver</a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/storage-drivers/inmemory/">In-memory storage driver</a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/storage-drivers/azure/">Microsoft Azure storage driver</a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/storage-drivers/s3/">S3 storage driver</a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/storage-drivers/swift/">Swift storage driver</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item4" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Registry specifications<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item4" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/registry/spec/auth/">Docker Registry token authentication</a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/spec/auth/jwt/">Token authentication implementation</a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/spec/auth/oauth/">Oauth2 token authentication</a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/spec/auth/scope/">Token scope documentation</a></li>
+
+
+
+<li><a href="https://docs.docker.com/registry/spec/auth/token/">Token authentication specification</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item11" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">码头店</font></font><span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item11" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/docker-store/">Docker Store overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-store/publish/">Submit a product to Docker Store</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-store/trustchain/">Docker Store Trust Chain</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-store/faq/">Docker Store FAQs</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item12" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发行说明</font></font><span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item12" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/release-notes/">Overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/enterprise/17.06/">Docker EE</a></li>
+
+
+
+<li><a href="https://docs.docker.com/release-notes/docker-ce/">Docker CE</a></li>
+
+
+
+<li><a href="https://docs.docker.com/cs-engine/1.13/release-notes/">CS Docker Engine</a></li>
+
+
+
+<li><a href="https://docs.docker.com/release-notes/docker-engine/">Docker Engine</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-mac/release-notes/">Docker for Mac</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-windows/release-notes/">Docker for Windows</a></li>
+
+
+
+<li><a href="https://docs.docker.com/release-notes/docker-compose/">Docker Compose</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-cloud/release-notes/">Docker Cloud</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-aws/release-notes/">Docker for AWS</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-for-azure/release-notes/">Docker for Azure</a></li>
+
+
+
+<li><a href="https://docs.docker.com/release-notes/docker-machine/">Docker Machine release notes</a></li>
+
+
+
+<li><a href="https://docs.docker.com/release-notes/docker-swarm/">Docker Swarm release notes</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item13" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">取代产品和工具</font></font><span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item13" aria-expanded="false">
+
+
+
+<li><a data-target="#item1" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Docker Hub<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item1" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/docker-hub/">Overview of Docker Hub</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-hub/accounts/">Use Docker Hub with Docker ID</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-hub/orgs/">Teams &amp; organizations</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-hub/repos/">Repositories on Docker Hub</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-hub/builds/">Automated builds</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-hub/webhooks/">Webhooks for automated builds</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-hub/bitbucket/">Automated builds with Bitbucket</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-hub/github/">Automated builds from GitHub</a></li>
+
+
+
+<li><a href="https://docs.docker.com/docker-hub/official_repos/">Official repositories on Docker Hub</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a data-target="#item2" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Docker Swarm (standalone)<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item2" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/swarm/overview/">Swarm overview</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/get-swarm/">How to get Swarm</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/install-w-machine/">Evaluate Swarm in a sandbox</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/plan-for-production/">Plan for Swarm in production</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/install-manual/">Build a Swarm cluster for production</a></li>
+
+
+
+<li><a data-target="#item6" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Try Swarm at scale<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item6" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/swarm/swarm_at_scale/about/">Learn the application architecture</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/swarm_at_scale/deploy-infra/">Deploy application infrastructure</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/swarm_at_scale/deploy-app/">Deploy the application</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/swarm_at_scale/troubleshoot/">Troubleshoot the application</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/multi-manager-setup/">High availability in Swarm</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/networking/">Swarm and container networks</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/discovery/">Discovery</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/provision-with-machine/">Provision with Machine</a></li>
+
+
+
+<li><a data-target="#item11" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Scheduling<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item11" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/swarm/scheduler/filter/">Filters</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/scheduler/rescheduling/">Rescheduling</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/scheduler/strategy/">Strategies</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/secure-swarm-tls/">Overview Docker Swarm with TLS</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/configure-tls/">Configure Docker Swarm for TLS</a></li>
+
+
+
+<li><a data-target="#item14" data-toggle="collapse" data-parent="#stacked-menu" class="collapsed" aria-expanded="false">Command line reference<span class="caret arrow"></span></a>
+<ul class="nav collapse" id="#item14" aria-expanded="false">
+
+
+
+<li><a href="https://docs.docker.com/swarm/reference/create/">create</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/reference/help/">help</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/reference/join/">join</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/reference/list/">list</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/reference/manage/">manage</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/reference/swarm/">swarm</a></li>
+
+</ul>
+</li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/status-code-comparison-to-docker/">API response codes</a></li>
+
+
+
+<li><a href="https://docs.docker.com/swarm/swarm-api/">Docker Swarm API</a></li>
+
+
+
+<li><a href="https://docs.docker.com/release-notes/docker-swarm/">Docker Swarm release notes</a></li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+
+    </ul>
+</div>
+
+						</div>
+					</nav>
+					<div class="col-toc">
+							<div class="sidebar hidden-xs hidden-sm">
+							<div class="toc-nav">
+								<div class="feedback-links">
+									<ul>
+										
+										<li><a href="https://github.com/docker/docker.github.io/edit/master/registry/insecure.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 编辑这个页面</font></font></a></li>
+										<li><a href="https://github.com/docker/docker.github.io/issues/new?assignee=joaofnfernandes&amp;body=File:%20[registry/insecure.md](https://docs.docker.com/registry/insecure/),%20CC%20@joaofnfernandes" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 请求文档更改</font></font></a></li>
+										<li><a href="https://www.docker.com/docker-support-services"><i class="fa fa-question" aria-hidden="true"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 得到支持</font></font></a></li>
+										<!-- toggle mode -->
+<!-- 										<li>
+											<div class="toggle-mode">
+												<div class="icon">
+													<i class="fa fa-sun-o" aria-hidden="true"></i>
+												</div>
+												<div class="toggle-switch">
+													<label class="switch">
+														<input type="checkbox" id="switch-style">
+														<div class="slider round"></div>
+												</label>
+												</div>
+												<div class="icon">
+													<i class="fa fa-moon-o" aria-hidden="true"></i>
+												</div>
+											</div>
+										</li> -->
+									</ul>
+								</div>
+								   
+									<div id="side-toc-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在此页面上：</font></font></div>
+									
+<ul id="my_toc" class="inline_toc">
+  <li><a href="https://docs.docker.com/registry/insecure/#deploy-a-plain-http-registry" class="nomunge"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">部署纯HTTP注册表</font></font></a></li>
+  <li><a href="https://docs.docker.com/registry/insecure/#use-self-signed-certificates" class="nomunge active"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用自签名证书</font></font></a></li>
+  <li><a href="https://docs.docker.com/registry/insecure/#troubleshoot-insecure-registry" class="nomunge"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">排除不安全的注册表</font></font></a>
+    <ul>
+      <li><a href="https://docs.docker.com/registry/insecure/#failing" class="nomunge"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">失败…</font></font></a></li>
+      <li><a href="https://docs.docker.com/registry/insecure/#docker-still-complains-about-the-certificate-when-using-authentication" class="nomunge"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker在使用身份验证时仍然抱怨该证书？</font></font></a></li>
+      <li><a href="https://docs.docker.com/registry/insecure/#windows" class="nomunge"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">视窗</font></font></a></li>
+    </ul>
+  </li>
+</ul>
+
+
+								</div>
+								
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	<footer class="footer">
+		  
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-2">
+                    <ul class="footer_links">
+                        <li><a href="https://www.docker.com/what-docker"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">什么是Docker</font></font></a></li>
+                        <li><a href="https://www.docker.com/what-container"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">什么是集装箱</font></font></a></li>
+                        <li><a href="https://www.docker.com/use-cases"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用例</font></font></a></li>
+                        <li><a href="https://www.docker.com/customers"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">顾客</font></font></a></li>
+                        <li><a href="https://www.docker.com/partners/partner-program"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">伙伴</font></font></a></li>
+                        <li class="break"><a href="https://www.docker.com/industry-government"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">对于政府</font></font></a></li>
+                        <li><a href="https://www.docker.com/company"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">关于Docker</font></font></a></li>
+                        <li><a href="https://www.docker.com/company/management"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">管理</font></font></a></li>
+                        <li><a href="https://www.docker.com/company/news-and-press"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">新闻新闻</font></font></a></li>
+                        <li><a href="https://www.docker.com/careers"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">招聘</font></font></a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-2">
+                    <ul class="footer_links">
+                        <li><a href="https://www.docker.com/products/overview"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">产品</font></font></a></li>
+                        <li><a href="https://www.docker.com/pricing"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">价钱</font></font></a></li>
+                        <li><a href="https://www.docker.com/docker-community"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">社区版</font></font></a></li>
+                        <li class="break"><a href="https://www.docker.com/enterprise"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">企业版 </font></font></a></li>
+                        <li><a href="https://www.docker.com/products/docker-datacenter"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker数据中心</font></font></a></li>
+                        <li><a href="https://cloud.docker.com/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker Cloud</font></font></a></li>
+                        <li><a href="https://store.docker.com/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">码头店</font></font></a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><a href="https://www.docker.com/docker-mac"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker for Mac</font></font></a></li>
+                        <li class="break"><a href="https://www.docker.com/docker-windows"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker for Windows（PC）</font></font></a></li>
+                        <li><a href="https://www.docker.com/docker-aws" class="web30"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">AWS的Docker</font></font></a></li>
+                        <li class="break"><a href="https://www.docker.com/docker-microsoft-azure"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker的Azure</font></font></a></li>
+                        <li><a href="https://www.docker.com/docker-windows-server"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker for Windows Server</font></font></a></li>
+                        <li><a href="https://www.docker.com/docker-centos"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker为CentOS发行</font></font></a></li>
+                        <li><a href="https://www.docker.com/docker-debian"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker for Debian</font></font></a></li>
+                        <li><a href="https://www.docker.com/docker-fedora"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker forFedora®</font></font></a></li>
+                        <li><a href="https://www.docker.com/docker-oracle-linux"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker for Oracle Enterprise Linux</font></font></a></li>
+                        <li><a href="https://www.docker.com/docker-rhel"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">RHEL的Docker</font></font></a></li>
+                        <li><a href="https://www.docker.com/docker-sles"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SLES的Docker</font></font></a></li>
+                        <li><a href="https://www.docker.com//docker-ubuntu"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker的Ubuntu</font></font></a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-2">
+                    <ul class="footer_links">
+                        <li><a href="https://docs.docker.com/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文档</font></font></a></li>
+                        <li><a href="https://www.docker.com/docker"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">学习</font></font></a></li>
+                        <li><a href="https://blog.docker.com/" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">博客</font></font></a></li>
+                        <li><a href="https://training.docker.com/" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">训练</font></font></a></li>
+                        <li><a href="https://www.docker.com/docker-support-services"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">支持</font></font></a></li>
+                        <li><a href="https://success.docker.com/kbase"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">知识库</font></font></a></li>
+                        <li><a href="https://www.docker.com/products/resources"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">资源</font></font></a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-2">
+                    <ul class="footer_links">
+                        <li><a href="https://www.docker.com/docker-community"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">社区</font></font></a></li>
+                        <li><a href="https://www.docker.com/technologies/overview"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">开源</font></font></a></li>
+                        <li><a href="https://www.docker.com/community/events"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">活动</font></font></a></li>
+                        <li><a href="https://forums.docker.com/" target="_blank"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">论坛</font></font></a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">码头船长</font></font></a></li>
+                        <li><a href="https://www.docker.com/docker-community/scholarships"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">奖学金</font></font></a></li>
+                        <li><a href="https://blog.docker.com/curated/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">社区新闻</font></font></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">状态</font></font></a></li>
+                        <li><a href="https://www.docker.com/docker-security"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安全</font></font></a></li>
+                        <li><a href="https://www.docker.com/legal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">法律</font></font></a></li>
+                        <li><a href="https://www.docker.com/company/contact"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">联系</font></font></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                    版权所有©2017 Docker Inc.保留所有权利。 </font></font></p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">推特</font></font></a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的Youtube</font></font></a></li>
+                    <li class="fa fa-google-plus"><a href="https://plus.google.com/u/0/communities/108146856671494713993"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">谷歌</font></font></a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker/docker"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Github上</font></font></a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">LinkedIn</font></font></a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Facebook的</font></font></a></li>
+                    <li class="fa fa-reddit"><a href="http://www.reddit.com/r/docker"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">书签交易</font></font></a></li>
+                    <li class="fa fa-slideshare"><a href="http://www.slideshare.net/docker"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Slideshare的</font></font></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+	</footer>
+	<link rel="stylesheet" href="./测试不安全的注册表_ Docker文档_files/github.css">
+	
+	<!-- <script src="/js/anchorlinks.js"></script> -->
+	<script defer="" src="./测试不安全的注册表_ Docker文档_files/menu.js.下载"></script>
+	<script src="./测试不安全的注册表_ Docker文档_files/jquery.js.下载"></script>
+	<script src="./测试不安全的注册表_ Docker文档_files/bootstrap.min.js.下载"></script>
+	<script src="./测试不安全的注册表_ Docker文档_files/stickyfill.min.js.下载"></script>
+	<script defer="" src="./测试不安全的注册表_ Docker文档_files/docs.js.下载"></script>
+	<script language="javascript">
+	jQuery(document).ready(function(){
+			$.getJSON( "/metadata.txt", function( data ) {
+				metadata = data;
+				hookupTOCEvents();
+				$.getJSON( "/glossary.txt", function( data ) {
+					glossary = data;
+					renderTagsPage();
+				});
+			});
+	});
+	</script><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./测试不安全的注册表_ Docker文档_files/translate_24dp.png" width="20" height="20" alt="Google 翻译"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray" id="title">原文</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">提供更好的翻译建议</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div></body></html>

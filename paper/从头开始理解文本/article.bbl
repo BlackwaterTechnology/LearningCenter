@@ -1,0 +1,296 @@
+\begin{thebibliography}{44}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Boureau et~al.(2010{\natexlab{a}})Boureau, Bach, LeCun, and
+  Ponce]{BBLP10}
+Boureau, Y-L, Bach, Francis, LeCun, Yann, and Ponce, Jean.
+\newblock Learning mid-level features for recognition.
+\newblock In \emph{Computer Vision and Pattern Recognition (CVPR), 2010 IEEE
+  Conference on}, pp.\  2559--2566. IEEE, 2010{\natexlab{a}}.
+
+\bibitem[Boureau et~al.(2010{\natexlab{b}})Boureau, Ponce, and LeCun]{BPL10}
+Boureau, Y-Lan, Ponce, Jean, and LeCun, Yann.
+\newblock A theoretical analysis of feature pooling in visual recognition.
+\newblock In \emph{Proceedings of the 27th International Conference on Machine
+  Learning (ICML-10)}, pp.\  111--118, 2010{\natexlab{b}}.
+
+\bibitem[Braille(1829)]{B1829}
+Braille, Louis.
+\newblock \emph{Method of Writing Words, Music, and Plain Songs by Means of
+  Dots, for Use by the Blind and Arranged for Them}.
+\newblock 1829.
+
+\bibitem[Collobert et~al.(2011{\natexlab{a}})Collobert, Kavukcuoglu, and
+  Farabet]{CKF11}
+Collobert, Ronan, Kavukcuoglu, Koray, and Farabet, Cl{\'e}ment.
+\newblock Torch7: A matlab-like environment for machine learning.
+\newblock In \emph{BigLearn, NIPS Workshop}, number EPFL-CONF-192376,
+  2011{\natexlab{a}}.
+
+\bibitem[Collobert et~al.(2011{\natexlab{b}})Collobert, Weston, Bottou, Karlen,
+  Kavukcuoglu, and Kuksa]{CWB11}
+Collobert, Ronan, Weston, Jason, Bottou, L{\'e}on, Karlen, Michael,
+  Kavukcuoglu, Koray, and Kuksa, Pavel.
+\newblock Natural language processing (almost) from scratch.
+\newblock \emph{J. Mach. Learn. Res.}, 12:\penalty0 2493--2537, November
+  2011{\natexlab{b}}.
+\newblock ISSN 1532-4435.
+
+\bibitem[Deng et~al.(2009)Deng, Dong, Socher, Li, Li, and Fei-Fei]{DDSLLF09}
+Deng, J., Dong, W., Socher, R., Li, L.-J., Li, K., and Fei-Fei, L.
+\newblock {ImageNet: A Large-Scale Hierarchical Image Database}.
+\newblock In \emph{CVPR09}, 2009.
+
+\bibitem[dos Santos \& Gatti(2014)dos Santos and Gatti]{SG14}
+dos Santos, Cicero and Gatti, Maira.
+\newblock Deep convolutional neural networks for sentiment analysis of short
+  texts.
+\newblock In \emph{Proceedings of COLING 2014, the 25th International
+  Conference on Computational Linguistics: Technical Papers}, pp.\  69--78,
+  Dublin, Ireland, August 2014. Dublin City University and Association for
+  Computational Linguistics.
+
+\bibitem[Fellbaum(2005)]{F05}
+Fellbaum, Christiane.
+\newblock Wordnet and wordnets.
+\newblock In Brown, Keith (ed.), \emph{Encyclopedia of Language and
+  Linguistics}, pp.\  665--670, Oxford, 2005. Elsevier.
+
+\bibitem[Frome et~al.(2013)Frome, Corrado, Shlens, Bengio, Dean, Mikolov,
+  et~al.]{FCGSBDM13}
+Frome, Andrea, Corrado, Greg~S, Shlens, Jon, Bengio, Samy, Dean, Jeff, Mikolov,
+  Tomas, et~al.
+\newblock Devise: A deep visual-semantic embedding model.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pp.\
+  2121--2129, 2013.
+
+\bibitem[Gamon \& Aue(2005)Gamon and Aue]{GA05}
+Gamon, Michael and Aue, Anthony.
+\newblock Automatic identification of sentiment vocabulary: exploiting low
+  association with known sentiment terms.
+\newblock In \emph{In: Proceedings of the ACL 2005 Workshop on Feature
+  Engineering for Machine Learning in NLP, ACL}, pp.\  57--64, 2005.
+
+\bibitem[Gao et~al.(2013)Gao, He, Yih, and Deng]{GHYD13}
+Gao, Jianfeng, He, Xiaodong, Yih, Wen-tau, and Deng, Li.
+\newblock Learning semantic representations for the phrase translation model.
+\newblock \emph{arXiv preprint arXiv:1312.0482}, 2013.
+
+\bibitem[Girshick et~al.(2013)Girshick, Donahue, Darrell, and Malik]{GDDM13}
+Girshick, Ross~B., Donahue, Jeff, Darrell, Trevor, and Malik, Jitendra.
+\newblock Rich feature hierarchies for accurate object detection and semantic
+  segmentation.
+\newblock \emph{CoRR}, abs/1311.2524, 2013.
+
+\bibitem[{Hannun} et~al.(2014){Hannun}, {Case}, {Casper}, {Catanzaro},
+  {Diamos}, {Elsen}, {Prenger}, {Satheesh}, {Sengupta}, {Coates}, and
+  {Ng}]{HCCCDEPSSCN14}
+{Hannun}, A., {Case}, C., {Casper}, J., {Catanzaro}, B., {Diamos}, G., {Elsen},
+  E., {Prenger}, R., {Satheesh}, S., {Sengupta}, S., {Coates}, A., and {Ng},
+  A.~Y.
+\newblock {DeepSpeech: Scaling up end-to-end speech recognition}.
+\newblock \emph{ArXiv e-prints}, December 2014.
+
+\bibitem[Hinton et~al.(2012)Hinton, Srivastava, Krizhevsky, Sutskever, and
+  Salakhutdinov]{HSKSS12}
+Hinton, Geoffrey~E, Srivastava, Nitish, Krizhevsky, Alex, Sutskever, Ilya, and
+  Salakhutdinov, Ruslan~R.
+\newblock Improving neural networks by preventing co-adaptation of feature
+  detectors.
+\newblock \emph{arXiv preprint arXiv:1207.0580}, 2012.
+
+\bibitem[Hochreiter \& Schmidhuber(1997)Hochreiter and Schmidhuber]{HS97}
+Hochreiter, Sepp and Schmidhuber, J\"{u}rgen.
+\newblock Long short-term memory.
+\newblock \emph{Neural Comput.}, 9\penalty0 (8):\penalty0 1735--1780, November
+  1997.
+\newblock ISSN 0899-7667.
+
+\bibitem[Johnson \& Zhang(2014)Johnson and Zhang]{JZ14}
+Johnson, Rie and Zhang, Tong.
+\newblock Effective use of word order for text categorization with
+  convolutional neural networks.
+\newblock \emph{CoRR}, abs/1412.1058, 2014.
+
+\bibitem[Karpathy et~al.(2014)Karpathy, Joulin, and Fei{-}Fei]{KJF14}
+Karpathy, Andrej, Joulin, Armand, and Fei{-}Fei, Li.
+\newblock Deep fragment embeddings for bidirectional image sentence mapping.
+\newblock \emph{CoRR}, abs/1406.5679, 2014.
+
+\bibitem[Kim \& Hovy(2004)Kim and Hovy]{KH04}
+Kim, Soo-Min and Hovy, Eduard.
+\newblock Determining the sentiment of opinions.
+\newblock In \emph{Proceedings of the 20th International Conference on
+  Computational Linguistics}, COLING '04, Stroudsburg, PA, USA, 2004.
+  Association for Computational Linguistics.
+
+\bibitem[Kim(2014)]{K14}
+Kim, Yoon.
+\newblock Convolutional neural networks for sentence classification.
+\newblock In \emph{Proceedings of the 2014 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}, pp.\  1746--1751, Doha, Qatar, October
+  2014. Association for Computational Linguistics.
+
+\bibitem[Krizhevsky et~al.(2012)Krizhevsky, Sutskever, and Hinton]{KSH12}
+Krizhevsky, Alex, Sutskever, Ilya, and Hinton, Geoffrey~E.
+\newblock Imagenet classification with deep convolutional neural networks.
+\newblock In \emph{NIPS}, pp.\  1106--1114, 2012.
+
+\bibitem[Le \& Mikolov(2014)Le and Mikolov]{LM14}
+Le, Quoc~V and Mikolov, Tomas.
+\newblock Distributed representations of sentences and documents.
+\newblock \emph{arXiv preprint arXiv:1405.4053}, 2014.
+
+\bibitem[LeCun et~al.(1998)LeCun, Bottou, Bengio, and Haffner]{LBBH98}
+LeCun, Y., Bottou, L., Bengio, Y., and Haffner, P.
+\newblock Gradient-based learning applied to document recognition.
+\newblock \emph{Proceedings of the IEEE}, 86\penalty0 (11):\penalty0
+  2278--2324, November 1998.
+
+\bibitem[Lehmann et~al.(2014)Lehmann, Isele, Jakob, Jentzsch, Kontokostas,
+  Mendes, Hellmann, Morsey, van Kleef, Auer, and Bizer]{LIJJKMHMKAB114}
+Lehmann, Jens, Isele, Robert, Jakob, Max, Jentzsch, Anja, Kontokostas,
+  Dimitris, Mendes, Pablo~N., Hellmann, Sebastian, Morsey, Mohamed, van Kleef,
+  Patrick, Auer, S{\"o}ren, and Bizer, Christian.
+\newblock {DBpedia} - a large-scale, multilingual knowledge base extracted from
+  wikipedia.
+\newblock \emph{Semantic Web Journal}, 2014.
+
+\bibitem[Linell(1982)]{L82}
+Linell, P.
+\newblock {The Written Language Bias in Linguistics}.
+\newblock 1982.
+
+\bibitem[McAuley \& Leskovec(2013)McAuley and Leskovec]{ML13}
+McAuley, Julian and Leskovec, Jure.
+\newblock Hidden factors and hidden topics: Understanding rating dimensions
+  with review text.
+\newblock In \emph{Proceedings of the 7th ACM Conference on Recommender
+  Systems}, RecSys '13, pp.\  165--172, New York, NY, USA, 2013. ACM.
+\newblock ISBN 978-1-4503-2409-0.
+
+\bibitem[Mikolov et~al.(2013{\natexlab{a}})Mikolov, Le, and Sutskever]{MLS13}
+Mikolov, Tomas, Le, Quoc~V, and Sutskever, Ilya.
+\newblock Exploiting similarities among languages for machine translation.
+\newblock \emph{arXiv preprint arXiv:1309.4168}, 2013{\natexlab{a}}.
+
+\bibitem[Mikolov et~al.(2013{\natexlab{b}})Mikolov, Sutskever, Chen, Corrado,
+  and Dean]{MSCCD13}
+Mikolov, Tomas, Sutskever, Ilya, Chen, Kai, Corrado, Greg~S., and Dean, Jeff.
+\newblock Distributed representations of words and phrases and their
+  compositionality.
+\newblock In Burges, C.j.c., Bottou, L., Welling, M., Ghahramani, Z., and
+  Weinberger, K.q. (eds.), \emph{Advances in Neural Information Processing
+  Systems 26}, pp.\  3111--3119. 2013{\natexlab{b}}.
+
+\bibitem[Nair \& Hinton(2010)Nair and Hinton]{NH10}
+Nair, Vinod and Hinton, Geoffrey~E.
+\newblock Rectified linear units improve restricted boltzmann machines.
+\newblock In \emph{Proceedings of the 27th International Conference on Machine
+  Learning (ICML-10)}, pp.\  807--814, 2010.
+
+\bibitem[Norvig(1987)]{N87}
+Norvig, Peter.
+\newblock Inference in text understanding.
+\newblock In \emph{AAAI}, pp.\  561--565, 1987.
+
+\bibitem[Pennington et~al.(2014)Pennington, Socher, and Manning]{PSM14}
+Pennington, Jeffrey, Socher, Richard, and Manning, Christopher~D.
+\newblock Glove: Global vectors for word representation.
+\newblock \emph{Proceedings of the Empiricial Methods in Natural Language
+  Processing (EMNLP 2014)}, 12, 2014.
+
+\bibitem[Polyak(1964)]{P64}
+Polyak, B.T.
+\newblock Some methods of speeding up the convergence of iteration methods.
+\newblock \emph{\{USSR\} Computational Mathematics and Mathematical Physics},
+  4\penalty0 (5):\penalty0 1 -- 17, 1964.
+\newblock ISSN 0041-5553.
+
+\bibitem[Razavian et~al.(2014)Razavian, Azizpour, Sullivan, and
+  Carlsson]{RASC14}
+Razavian, Ali~Sharif, Azizpour, Hossein, Sullivan, Josephine, and Carlsson,
+  Stefan.
+\newblock {CNN} features off-the-shelf: an astounding baseline for recognition.
+\newblock \emph{CoRR}, abs/1403.6382, 2014.
+
+\bibitem[Rumelhart et~al.(1986)Rumelhart, Hintont, and Williams]{RHW86}
+Rumelhart, D.E., Hintont, G.E., and Williams, R.J.
+\newblock {Learning representations by back-propagating errors}.
+\newblock \emph{Nature}, 323\penalty0 (6088):\penalty0 533--536, 1986.
+
+\bibitem[Sermanet et~al.(2013)Sermanet, Eigen, Zhang, Mathieu, Fergus, and
+  LeCun]{SEZMFL13}
+Sermanet, Pierre, Eigen, David, Zhang, Xiang, Mathieu, Micha{\"e}l, Fergus,
+  Rob, and LeCun, Yann.
+\newblock Overfeat: Integrated recognition, localization and detection using
+  convolutional networks.
+\newblock \emph{CoRR}, abs/1312.6229, 2013.
+
+\bibitem[Soderland(2001)]{S01}
+Soderland, Stephen.
+\newblock Building a machine learning based text understanding system.
+\newblock In \emph{In Proc. IJCAI-2001 Workshop on Adaptive Text Extraction and
+  Mining}, pp.\  64--70, 2001.
+
+\bibitem[Strapparava \& Mihalcea(2008)Strapparava and Mihalcea]{SM08}
+Strapparava, Carlo and Mihalcea, Rada.
+\newblock Learning to identify emotions in text.
+\newblock In \emph{Proceedings of the 2008 ACM Symposium on Applied Computing},
+  SAC '08, pp.\  1556--1560, New York, NY, USA, 2008. ACM.
+\newblock ISBN 978-1-59593-753-7.
+
+\bibitem[Sutskever et~al.(2013)Sutskever, Martens, Dahl, and Hinton]{SMDH13}
+Sutskever, Ilya, Martens, James, Dahl, George~E., and Hinton, Geoffrey~E.
+\newblock On the importance of initialization and momentum in deep learning.
+\newblock In Dasgupta, Sanjoy and Mcallester, David (eds.), \emph{Proceedings
+  of the 30th International Conference on Machine Learning (ICML-13)},
+  volume~28, pp.\  1139--1147. JMLR Workshop and Conference Proceedings, May
+  2013.
+
+\bibitem[Viera et~al.(2005)Viera, Garrett, et~al.]{VG60}
+Viera, Anthony~J, Garrett, Joanne~M, et~al.
+\newblock Understanding interobserver agreement: the kappa statistic.
+\newblock \emph{Fam Med}, 37\penalty0 (5):\penalty0 360--363, 2005.
+
+\bibitem[Vinyals et~al.(2014)Vinyals, Toshev, Bengio, and Erhan]{VTBE14}
+Vinyals, Oriol, Toshev, Alexander, Bengio, Samy, and Erhan, Dumitru.
+\newblock Show and tell: {A} neural image caption generator.
+\newblock \emph{CoRR}, abs/1411.4555, 2014.
+
+\bibitem[Wang et~al.(2008)Wang, Zhang, Ma, and Ru]{WZMR08}
+Wang, Canhui, Zhang, Min, Ma, Shaoping, and Ru, Liyun.
+\newblock Automatic online news issue construction in web environment.
+\newblock In \emph{Proceedings of the 17th International Conference on World
+  Wide Web}, WWW '08, pp.\  457--466, New York, NY, USA, 2008. ACM.
+\newblock ISBN 978-1-60558-085-2.
+
+\bibitem[Wiebe et~al.(2001)Wiebe, Wilson, and Bell]{WWB01}
+Wiebe, Janyce~M., Wilson, Theresa, and Bell, Matthew.
+\newblock {Identifying Collocations for Recognizing Opinions}.
+\newblock In \emph{Proceedings of the ACL/EACL Workshop on Collocation},
+  Toulouse, FR, 2001.
+
+\bibitem[Wilson et~al.(2005)Wilson, Wiebe, and Hoffmann]{WWH05}
+Wilson, Theresa, Wiebe, Janyce, and Hoffmann, Paul.
+\newblock Recognizing contextual polarity in phrase-level sentiment analysis.
+\newblock In \emph{Proceedings of the Conference on Human Language Technology
+  and Empirical Methods in Natural Language Processing}, HLT '05, pp.\
+  347--354, Stroudsburg, PA, USA, 2005. Association for Computational
+  Linguistics.
+
+\bibitem[Zaremba \& Sutskever(2014)Zaremba and Sutskever]{ZS14}
+Zaremba, Wojciech and Sutskever, Ilya.
+\newblock Learning to execute.
+\newblock \emph{CoRR}, abs/1410.4615, 2014.
+
+\bibitem[Zeiler \& Fergus(2014)Zeiler and Fergus]{ZF14}
+Zeiler, Matthew~D and Fergus, Rob.
+\newblock Visualizing and understanding convolutional networks.
+\newblock In \emph{Computer Vision--ECCV 2014}, pp.\  818--833. Springer, 2014.
+
+\end{thebibliography}
