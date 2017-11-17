@@ -1,0 +1,171 @@
+                                  
+    nat {                               
+        source {                        
+            rule-set SNAT {             
+                from zone trust;        
+                to zone untrust;        
+                rule SNAT_1 {           
+                    match {             
+                        source-address 0.0.0.0/0;
+                        destination-address 0.0.0.0/0;
+                    }                   
+                    then {              
+                        source-nat {    
+                            interface;  
+                        }               
+                    }                   
+                }                       
+            }                           
+        }                               
+        destination {                   
+            pool 183to102_port_80 {     
+                address 183.2.236.183/32 port 80;
+            }                           
+            pool 182to102_port_88 {     
+                address 183.2.236.182/32 port 88;
+            }                           
+            rule-set nat_183_to_102_80 {
+                from zone untrust;      
+                rule rule_80_to_102 {   
+                    description 10.10.100.102/32;
+                    match {             
+                        source-address 0.0.0.0/0;
+                        destination-address 10.10.100.102/32;
+                        destination-port 80;
+                        protocol tcp;   
+                    }                   
+                    then {              
+                        destination-nat {
+                            pool {      
+                                183to102_port_80;
+                            }           
+                        }               
+                    }                   
+                }                       
+                rule 182_88_to_102 {    
+                    description 10.10.100.102/32;
+                    match {             
+                        source-address 0.0.0.0/0;
+                        destination-address 10.10.100.102/32;
+                        destination-port 88;
+                        protocol tcp;   
+                    }                   
+                    then {              
+                        destination-nat {
+                            pool {      
+                                182to102_port_88;
+                            }           
+                        }               
+                    }                   
+                }                       
+            }                           
+        }                               
+        proxy-arp {                     
+            interface ge-0/0/7.0 {      
+                address {               
+                    183.2.236.182/32;   
+                    10.10.100.102/32;   
+                    183.2.236.183/32;   
+                }                       
+            }                           
+            interface vlan.100 {        
+                address {               
+                    183.2.236.183/32;   
+                }                       
+            }                           
+        }                               
+    }                                   
+    policies {                          
+        from-zone trust to-zone untrust {
+            policy trust_to_untrust {   
+                match {                 
+                    source-address any; 
+                    destination-address any;
+                    application any;    
+                }                       
+                then {                  
+                    permit;             
+                }                       
+            }                           
+        }                               
+        from-zone untrust to-zone trust {
+            policy policy_in_wizard_dyn_vpn {
+                match {                 
+                    source-address any; 
+                    destination-address any;
+                    application any;    
+                }                       
+                then {                  
+                    permit {            
+                        tunnel {        
+                            ipsec-vpn wizard_dyn_vpn;
+                        }               
+                    }                   
+                }                       
+            }                           
+            policy allow_web_80_to_102 {
+                match {                 
+                    source-address any; 
+                    destination-address server_102;
+                    application [ port_88 port_80 ];
+                }                       
+                then {                  
+                    permit;             
+                }                       
+            }                           
+            policy allow_all {          
+                match {                 
+                    source-address any; 
+                    destination-address any;
+                    application any;    
+                }                       
+                then {                  
+                    permit;             
+                }                       
+            }                           
+        }                               
+    }                                   
+    zones {                             
+        security-zone trust {           
+            address-book {              
+                address server_102 10.10.100.102/32;
+            }                           
+            host-inbound-traffic {      
+                system-services {       
+                    all;                
+                }                       
+            }                           
+            interfaces {                
+                vlan.100;               
+            }                           
+        }                               
+        security-zone untrust {         
+            host-inbound-traffic {      
+                system-services {       
+                    ping;               
+                    ssh;                
+                    https;              
+                    ike;                
+                }                       
+            }                           
+            interfaces {                
+                ge-0/0/6.0;             
+            }                           
+        }                               
+    }                                   
+}                                       
+      
+applications {                          
+    application port_88 {               
+        protocol tcp;                   
+        source-port 1-65535;            
+        destination-port 88-88;         
+        inactivity-timeout never;       
+    }                                   
+    application port_80 {               
+        protocol tcp;                   
+        source-port 1-65535;            
+        destination-port 80-80;         
+        inactivity-timeout never;       
+    }                                   
+}                                       

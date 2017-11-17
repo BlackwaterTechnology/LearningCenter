@@ -1,0 +1,69 @@
+version: "3.3"
+services:
+  mariadb1:
+    image: mariadb
+    environment: 
+     - MYSQL_ROOT_PASSWORD=suneee 
+    command: mysqld --wsrep-new-cluster
+    ports:
+     - "3336:3306"
+    volumes: 
+     - maria-data1:/var/lib/mysql
+    configs:
+     - source: db_config
+       target: /etc/mysql/
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == weiningweb]
+
+  mariadb2:
+    image: mariadb
+    links:
+     - "mariadb1"
+    depends_on:
+     - "mariadb1"
+    environment: 
+     - MYSQL_ROOT_PASSWORD=suneee 
+    command: mysqld --wsrep_cluster_address = gcomm://mariadb1
+    ports:
+     - "3346:3306"
+    volumes:
+     - maria-data2:/var/lib/mysql
+    configs:
+     - source: db_config
+       target: /etc/mysql/
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == weiningweb]
+
+  mariadb3:
+    image: mariadb
+    links:
+     - "mariadb1"
+    depends_on:
+     - "mariadb1"
+    environment: 
+     - MYSQL_ROOT_PASSWORD=suneee 
+    command: mysqld --wsrep_cluster_address = gcomm://mariadb1
+    ports:
+     - "3356:3306"
+    volumes:
+     - maria-data3:/var/lib/mysql
+    configs:
+     - source: db_config
+       target: /etc/mysql/
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.hostname == weiningweb]
+
+volumes: 
+  maria-data1:
+  maria-data2:
+  maria-data3:
+
+configs:
+  db_config:
+    file: ./my.cnf

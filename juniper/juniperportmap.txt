@@ -1,0 +1,26 @@
+1、设置应用
+set applications application port_80 protocol tcp
+set applications application port_80 destination-port 80
+
+2、添加地址簿
+set security zones security-zone trust address-book address server_102 10.10.100.102/32
+
+3、定义地址池
+set security nat destination pool nat_pool_102 address 10.10.100.102/32
+
+4、设置arp代理
+set security nat proxy-arp interface ge-0/0/7.0 address 10.10.100.102/32
+
+5、设置nat策略
+set security nat destination rule-set nat_web from zone untrust
+
+set security nat destination rule-set nat_web rule rule_80_to_102 match source-address 0.0.0.0/0
+set security nat destination rule-set nat_web rule rule_80_to_102 match destination-address 183.2.236.183/32
+set security nat destination rule-set nat_web rule rule_80_to_102 match destination-port 80
+set security nat destination rule-set nat_web rule rule_80_to_102 then destination-nat pool nat_pool_102
+
+6、设置安全策略
+set security policies from-zone untrust to-zone trust policy allow_web_80_to_102 match source-address any
+set security policies from-zone untrust to-zone trust policy allow_web_80_to_102 match destination-address server_102
+set security policies from-zone untrust to-zone trust policy allow_web_80_to_102 match application port_80
+set security policies from-zone untrust to-zone trust policy allow_web_80_to_102 then permit

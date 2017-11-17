@@ -1,0 +1,117 @@
+root> show configuration | display set 
+set version 12.1X46-D35.1
+set system root-authentication encrypted-password "$1$sWdjQNFL$Srt6FPC7E3ndCWdXC/fB51"
+set system login user admin uid 2000
+set system login user admin class super-user
+set system login user admin authentication encrypted-password "$1$XByPebgR$WO/jwZB5C2Ck0ndqPuT19."
+set system services ssh root-login allow
+set system services web-management management-url admin
+set system services web-management https system-generated-certificate
+set system services web-management https interface vlan.100
+set system services web-management https interface ge-0/0/6.0
+set system max-configurations-on-flash 49
+set system max-configuration-rollbacks 49
+set chassis aggregated-devices ethernet device-count 5
+set interfaces ge-0/0/0 unit 0 family ethernet-switching port-mode access
+set interfaces ge-0/0/0 unit 0 family ethernet-switching vlan members 100
+set interfaces ge-0/0/1 unit 0 family ethernet-switching port-mode access
+set interfaces ge-0/0/1 unit 0 family ethernet-switching vlan members 100
+set interfaces ge-0/0/6 unit 0 family inet address 183.2.236.182/24
+set interfaces ge-0/0/7 unit 0 family ethernet-switching port-mode access
+set interfaces ge-0/0/7 unit 0 family ethernet-switching vlan members 100
+set interfaces vlan unit 100 family inet address 10.10.100.254/24
+set routing-options static route 0.0.0.0/0 next-hop 183.2.236.1
+set security ike policy ike_pol_wizard_dyn_vpn mode aggressive
+set security ike policy ike_pol_wizard_dyn_vpn proposal-set compatible
+set security ike policy ike_pol_wizard_dyn_vpn pre-shared-key ascii-text "$9$QeKqF369AuOBRgo9pB1rlJGDHP5"
+set security ike gateway gw_wizard_dyn_vpn ike-policy ike_pol_wizard_dyn_vpn
+set security ike gateway gw_wizard_dyn_vpn dynamic hostname bepsun
+set security ike gateway gw_wizard_dyn_vpn dynamic connections-limit 100
+set security ike gateway gw_wizard_dyn_vpn dynamic ike-user-type group-ike-id
+set security ike gateway gw_wizard_dyn_vpn external-interface ge-0/0/6.0
+set security ike gateway gw_wizard_dyn_vpn xauth access-profile remote_access_profile
+set security ipsec policy ipsec_pol_wizard_dyn_vpn perfect-forward-secrecy keys group1
+set security ipsec policy ipsec_pol_wizard_dyn_vpn proposal-set compatible
+set security ipsec vpn wizard_dyn_vpn ike gateway gw_wizard_dyn_vpn
+set security ipsec vpn wizard_dyn_vpn ike ipsec-policy ipsec_pol_wizard_dyn_vpn
+set security dynamic-vpn access-profile remote_access_profile
+set security dynamic-vpn clients wizard-dyn-group remote-protected-resources 192.168.100.0/24
+set security dynamic-vpn clients wizard-dyn-group remote-protected-resources 10.10.100.0/24
+set security dynamic-vpn clients wizard-dyn-group remote-exceptions 0.0.0.0/0
+set security dynamic-vpn clients wizard-dyn-group ipsec-vpn wizard_dyn_vpn
+set security dynamic-vpn clients wizard-dyn-group user test
+set security dynamic-vpn clients wizard-dyn-group user userx
+set security dynamic-vpn clients wizard-dyn-group user wangyijie
+set security nat source rule-set SNAT from zone trust
+set security nat source rule-set SNAT to zone untrust
+set security nat source rule-set SNAT rule SNAT_1 match source-address 0.0.0.0/0
+set security nat source rule-set SNAT rule SNAT_1 match destination-address 0.0.0.0/0
+set security nat source rule-set SNAT rule SNAT_1 then source-nat interface
+set security nat destination pool 183to102_port_80 address 183.2.236.183/32
+set security nat destination pool 183to102_port_80 address port 80
+set security nat destination pool 182to102_port_88 address 183.2.236.182/32
+set security nat destination pool 182to102_port_88 address port 88
+set security nat destination rule-set nat_183_to_102_80 from zone untrust
+set security nat destination rule-set nat_183_to_102_80 rule rule_80_to_102 description 10.10.100.102/32
+set security nat destination rule-set nat_183_to_102_80 rule rule_80_to_102 match source-address 0.0.0.0/0
+set security nat destination rule-set nat_183_to_102_80 rule rule_80_to_102 match destination-address 10.10.100.102/32
+set security nat destination rule-set nat_183_to_102_80 rule rule_80_to_102 match destination-port 80
+set security nat destination rule-set nat_183_to_102_80 rule rule_80_to_102 match protocol tcp
+set security nat destination rule-set nat_183_to_102_80 rule rule_80_to_102 then destination-nat pool 183to102_port_80
+set security nat destination rule-set nat_183_to_102_80 rule 182_88_to_102 description 10.10.100.102/32
+set security nat destination rule-set nat_183_to_102_80 rule 182_88_to_102 match source-address 0.0.0.0/0
+set security nat destination rule-set nat_183_to_102_80 rule 182_88_to_102 match destination-address 10.10.100.102/32
+set security nat destination rule-set nat_183_to_102_80 rule 182_88_to_102 match destination-port 88
+set security nat destination rule-set nat_183_to_102_80 rule 182_88_to_102 match protocol tcp
+set security nat destination rule-set nat_183_to_102_80 rule 182_88_to_102 then destination-nat pool 182to102_port_88
+set security nat proxy-arp interface ge-0/0/7.0 address 183.2.236.182/32
+set security nat proxy-arp interface ge-0/0/7.0 address 10.10.100.102/32
+set security nat proxy-arp interface ge-0/0/7.0 address 183.2.236.183/32
+set security nat proxy-arp interface vlan.100 address 183.2.236.183/32
+set security policies from-zone trust to-zone untrust policy trust_to_untrust match source-address any
+set security policies from-zone trust to-zone untrust policy trust_to_untrust match destination-address any
+set security policies from-zone trust to-zone untrust policy trust_to_untrust match application any
+set security policies from-zone trust to-zone untrust policy trust_to_untrust then permit
+set security policies from-zone untrust to-zone trust policy policy_in_wizard_dyn_vpn match source-address any
+set security policies from-zone untrust to-zone trust policy policy_in_wizard_dyn_vpn match destination-address any
+set security policies from-zone untrust to-zone trust policy policy_in_wizard_dyn_vpn match application any
+set security policies from-zone untrust to-zone trust policy policy_in_wizard_dyn_vpn then permit tunnel ipsec-vpn wizard_dyn_vpn
+set security policies from-zone untrust to-zone trust policy allow_web_80_to_102 match source-address any
+set security policies from-zone untrust to-zone trust policy allow_web_80_to_102 match destination-address server_102
+set security policies from-zone untrust to-zone trust policy allow_web_80_to_102 match application port_88
+set security policies from-zone untrust to-zone trust policy allow_web_80_to_102 match application port_80
+set security policies from-zone untrust to-zone trust policy allow_web_80_to_102 then permit
+set security policies from-zone untrust to-zone trust policy allow_all match source-address any
+set security policies from-zone untrust to-zone trust policy allow_all match destination-address any
+set security policies from-zone untrust to-zone trust policy allow_all match application any
+set security policies from-zone untrust to-zone trust policy allow_all then permit
+set security zones security-zone trust address-book address server_102 10.10.100.102/32
+set security zones security-zone trust host-inbound-traffic system-services all
+set security zones security-zone trust interfaces vlan.100
+set security zones security-zone untrust host-inbound-traffic system-services ping
+set security zones security-zone untrust host-inbound-traffic system-services ssh
+set security zones security-zone untrust host-inbound-traffic system-services https
+set security zones security-zone untrust host-inbound-traffic system-services ike
+set security zones security-zone untrust interfaces ge-0/0/6.0
+set access profile remote_access_profile authentication-order password
+set access profile remote_access_profile client test firewall-user password "$9$blsoJUjHm5QoaUHmT/9cyl"
+set access profile remote_access_profile client userx firewall-user password "$9$G1Dqm5QF/Apq.5F/tIRLxN"
+set access profile remote_access_profile client wangyijie firewall-user password "$9$UJjik.PTzF6Lx.5F3puNdbYaZ"
+set access profile remote_access_profile address-assignment pool dyn-vpn-address-pool
+set access address-assignment pool dynamicVPN family inet network 192.168.1.0/24
+set access address-assignment pool dynamicVPN family inet range 192168 low 192.168.1.2
+set access address-assignment pool dynamicVPN family inet range 192168 high 192.168.1.10
+set access address-assignment pool dynamicVPN family inet xauth-attributes primary-dns 223.5.5.5/32
+set access address-assignment pool dyn-vpn-address-pool family inet network 192.168.100.0/24
+set access address-assignment pool dyn-vpn-address-pool family inet xauth-attributes primary-dns 223.5.5.5/32
+set access firewall-authentication web-authentication default-profile remote_access_profile
+set applications application port_88 protocol tcp
+set applications application port_88 source-port 1-65535
+set applications application port_88 destination-port 88-88
+set applications application port_88 inactivity-timeout never
+set applications application port_80 protocol tcp
+set applications application port_80 source-port 1-65535
+set applications application port_80 destination-port 80-80
+set applications application port_80 inactivity-timeout never
+set vlans vlan100 vlan-id 100           
+set vlans vlan100 l3-interface vlan.100

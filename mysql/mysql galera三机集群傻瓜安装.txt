@@ -1,0 +1,278 @@
+一:(从第一到第九步三台机步骤一样，只注意IP)
+1、关闭防火墙
+chkconfig iptables off
+service iptables stop
+管理节点服务器防火墙必须开启1186,3306端口。 
+2、关闭selinux
+vi /etc/sysconfig/selinux
+设置 SELINUX=disabled
+临时关闭：
+setenforce 0 ----设置SELinux 成为permissive模式
+getenforce --检查状态
+#REHAT7关闭防火墙 禁止开机启动  
+3.systemctl stop firewalld.service  
+4.systemctl disable firewalld.service  
+如果开防火墙必须开启1186,3306端口。
+
+--------------------
+
+
+二:
+1:清理环境：
+1.1#rpm -qa |grep -i mysql*  查找到的MYSQL开头的组件，使用rpm方式删除
+1.2#rpm -qa |grep mariadb-server  --这个数据库要删除
+# rpm -e --nodeps mysql-libs-5.1.71-1.el6.x86_64
+rpm -e akonadi-mysql-1.9.2-4.el7.x86_64 --不删除这个软件包好像有影响
+2.whereis mysql
+最好实用find命令查看MySQL数据库相关的文件，方便后面彻底删除MySQL。
+3.# find / -name mysql
+-------------------------------
+配置文件一般有/etc/my.cnf 或/etc/init.d/mysql.server 或者rm -rf /etc/init.d/mysql ,rm -rf /var/lib/mysql，# rm -rf /usr/lib64/mysql # rm -rf /usr/share/mysql然后重新初始化要清掉，视具体安装配置情况而定。
+---------------
+
+4.安装可能用到的依赖包
+yum  install –y perl perl-devel  
+yum   install –y   socat 
+yum  install –y gcc gcc-c++
+yum  install –y boost-devel scons check-devel openssl-devel  libaio numactl perl-Time-HiRes 
+
+
+三：
+1.userdel mysql                   # 删除用户
+# groupdel mysql   
+2. /usr/sbin/groupadd mysql
+/usr/sbin/useradd -g mysql  mysql
+passwd mysql
+
+四:从官网下载安装包http://galeracluster.com/ ;centos7的 ，主要有以下几个RPM包，一起安装就行。依赖关系依次为common→libs→client→server
+现已经下载在台湾环境05机上，传过去就行#scp -r /root/centos7 root@192.168.0.11:/root/
+#ssh root@192.168.0.11
+#cd /root/centos7
+#yum install  mysql-wsrep-common-5.7-5.7.18-25.12.el7.x86_64.rpm  mysql-wsrep-libs-5.7-5.7.18-25.12.el7.x86_64.rpm  mysql-wsrep-libs-compat-5.7-5.7.18-25.12.el7.x86_64.rpm  mysql-wsrep-server-5.7-5.7.18-25.12.el7.x86_64.rpm mysql-wsrep-devel-5.7-5.7.18-25.12.el7.x86_64.rpm mysql-wsrep-client-5.7-5.7.18-25.12.el7.x86_64.rpm mysql-wsrep-5.7-5.7.18-25.12.el7.x86_64.rpm galera-3-25.3.21-2.el7.x86_64.rpm
+
+#mkdir -p /var/lib/mysql/data
+echo 5444 >/var/lib/mysql/mysqld.pid
+mkdir /var/lib/mysql/logs/
+ mkdir /var/lib/mysql/galera/
+chown -R mysql:mysql /var/lib/mysql/
+chmod 777 /usr/share/mysql/english/errmsg.sys
+mkdir -p /opt/mysqlcluster/
+mv  /var/lib/mysql /opt/mysqlcluster/
+
+五:
+vi /etc/my.cnf  注意: server_id = 11   ##每台机不一样
+------------
+[client]
+socket=/opt/mysqlcluster/mysql/mysql.sock
+default-character-set=utf8
+
+
+[mysqld_safe]
+log-error=/var/log/mysql.log
+
+[mysqld]
+basedir=/opt/mysqlcluster/mysql
+datadir=/opt/mysqlcluster/mysql/data 
+pid-file=/opt/mysqlcluster/mysql/mysqld.pid 
+max_connections=600
+language=/usr/share/mysql/english 
+transaction_isolation=READ-COMMITTED
+innodb_print_all_deadlocks=1
+
+innodb_lock_wait_timeout=500
+character-set-server=utf8
+socket=/opt/mysqlcluster/mysql/mysql.sock
+port=3306
+user=mysql
+log_bin_trust_function_creators=1
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES 
+skip-name-resolve
+group_concat_max_len=200000
+event_scheduler=ON
+
+default_storage_engine=innodb
+bind-address=0.0.0.0 
+innodb_autoinc_lock_mode=2
+innodb_flush_log_at_trx_commit=2
+binlog_format=ROW
+
+
+server_id = 21  
+log_bin = /opt/mysqlcluster/mysql/logs/mysql-bin  
+log_slave_updates=1
+expire_logs_days=7
+max_binlog_size=256M
+
+innodb_buffer_pool_size=18000M   ##配比物理内存的一半大点点就行
+innodb_log_buffer_size=16M
+innodb_log_file_size=128M
+innodb_log_files_in_group=3
+join_buffer_size=8M
+sort_buffer_size=8m
+read_buffer_size=4M
+
+
+
+-----------
+六:初始化
+
+#/usr/sbin/mysqld --no-defaults --initialize --user=mysql --basedir=/opt/mysqlcluster/mysql --datadir=/opt/mysqlcluster/mysql/data
+
+---------请记住数据库生成的初次登陆密码root@localhost:后面的--------
+ A temporary password is generated for root@localhost: P3<hmdIg*b/V
+ -l9S3doQwO/;          ##06机的 mysql -uroot -p'P3<hmdIg*b/V'
+ 
+ ---------------------------------
+七:启动数据库，并改ROOT密码
+#service mysqld start 或systemctl start mysqld.service 
+#mysql -uroot -p'P3<hmdIg*b/V'
+mysql> alter user 'root'@'localhost' identified by 'root'; 
+mysql>FLUSH PRIVILEGES;
+mysql>exit;
+
+
+八:关闭数据库#service mysqld stop 或 /usr/bin/mysqladmin -u root -proot shutdown或  systemctl stop mysqld 
+------------------------------
+
+九:  vi  /etc/my.cnf 加入以下内容    注意wsrep_node_name="node1" 每台机不一样,IP每台机不一样
+-----------------------------------------------
+wsrep_provider=/usr/lib64/galera-3/libgalera_smm.so
+wsrep_provider_options="gcache.dir=/opt/mysqlcluster/mysql/galera/;gcache.name=galera.cache;gcache.size=800M;gcache.page_size=800M"  
+wsrep_cluster_name="mysql_cluster"
+wsrep_cluster_address="gcomm://192.168.0.12:4567,192.168.0.13:4567,192.168.0.11:4567"   ##这里配了其它两台机的IP
+wsrep_sst_method=rsync
+wsrep_node_name="node11"
+wsrep_node_address="192.168.0.11"   
+##wsrep_node_incoming_address='192.168.0.11:4567'   
+wsrep_slave_threads=32
+wsrep_log_conflicts=ON
+---------------------------------------
+
+十:三台机都操作完以上步骤后
+
+关闭后再启动集群，第一次启动第一台机时
+
+#/usr/sbin/mysqld --user=mysql --basedir=/opt/mysqlcluster/mysql --datadir=/opt/mysqlcluster/mysql/data --wsrep-new-cluster &
+等启动完再启动第二台机,
+#service mysqld start 或#systemctl start mysqld  或	systemctl start mysqld.service 
+再等第二台机启动完再启动第三台机
+#service mysqld start 或#systemctl start mysqld  或	systemctl start mysqld.service 
+
+#mysql -uroot -proot   ##可以创建database与用户了
+mysql>CREATE DATABASE player_test DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE DATABASE player0 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE player1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE player2 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE player3 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE player4 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+GRANT ALL PRIVILEGES ON player_test.* TO 'player_test'@'%' IDENTIFIED BY 'player_test' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON player0.* TO 'player0'@'%' IDENTIFIED BY 'player0#z2w0' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON player1.* TO 'player1'@'%' IDENTIFIED BY 'player1#zre1' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON player2.* TO 'player2'@'%' IDENTIFIED BY 'player2#ed$2' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON player3.* TO 'player3'@'%' IDENTIFIED BY 'player3#dwf3' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON player4.* TO 'player4'@'%' IDENTIFIED BY 'player4#dwf4' WITH GRANT OPTION;
+mysql>FLUSH   PRIVILEGES;
+
+十一: =====查看状态============正确的状态====
+ mysql> SHOW STATUS LIKE 'wsrep_%';
++------------------------------+-------------------------------------------------+
+| Variable_name                | Value                                           |
++------------------------------+-------------------------------------------------+
+| wsrep_local_state_uuid       | 551796f0-9940-11e7-86a3-0337ec1913c9            |
+| wsrep_protocol_version       | 7                                               |
+| wsrep_last_committed         | 8                                               |
+| wsrep_replicated             | 3                                               |
+| wsrep_replicated_bytes       | 755                                             |
+| wsrep_repl_keys              | 6                                               |
+| wsrep_repl_keys_bytes        | 117                                             |
+| wsrep_repl_data_bytes        | 446                                             |
+| wsrep_repl_other_bytes       | 0                                               |
+| wsrep_received               | 15                                              |
+| wsrep_received_bytes         | 2134                                            |
+| wsrep_local_commits          | 1                                               |
+| wsrep_local_cert_failures    | 0                                               |
+| wsrep_local_replays          | 0                                               |
+| wsrep_local_send_queue       | 0                                               |
+| wsrep_local_send_queue_max   | 1                                               |
+| wsrep_local_send_queue_min   | 0                                               |
+| wsrep_local_send_queue_avg   | 0.000000                                        |
+| wsrep_local_recv_queue       | 0                                               |
+| wsrep_local_recv_queue_max   | 2                                               |
+| wsrep_local_recv_queue_min   | 0                                               |
+| wsrep_local_recv_queue_avg   | 0.066667                                        |
+| wsrep_local_cached_downto    | 1                                               |
+| wsrep_flow_control_paused_ns | 0                                               |
+| wsrep_flow_control_paused    | 0.000000                                        |
+| wsrep_flow_control_sent      | 0                                               |
+| wsrep_flow_control_recv      | 0                                               |
+| wsrep_cert_deps_distance     | 1.500000                                        |
+| wsrep_apply_oooe             | 0.000000                                        |
+| wsrep_apply_oool             | 0.000000                                        |
+| wsrep_apply_window           | 1.000000                                        |
+| wsrep_commit_oooe            | 0.000000                                        |
+| wsrep_commit_oool            | 0.000000                                        |
+| wsrep_commit_window          | 1.000000                                        |
+| wsrep_local_state            | 4                                               |
+| wsrep_local_state_comment    | Synced                                          |
+| wsrep_cert_index_size        | 6                                               |
+| wsrep_causal_reads           | 0                                               |
+| wsrep_cert_interval          | 0.000000                                        |
+| wsrep_incoming_addresses     | 10.0.1.177:3306,10.0.1.171:3306,10.0.1.175:3306 |
+| wsrep_desync_count           | 0                                               |
+| wsrep_evs_delayed            |                                                 |
+| wsrep_evs_evict_list         |                                                 |
+| wsrep_evs_repl_latency       | 0/0/0/0/0                                       |
+| wsrep_evs_state              | OPERATIONAL                                     |
+| wsrep_gcomm_uuid             | 5516b399-9940-11e7-a994-7b4888e31792            |
+| wsrep_cluster_conf_id        | 3                                               |
+| wsrep_cluster_size           | 3                                               |
+| wsrep_cluster_state_uuid     | 551796f0-9940-11e7-86a3-0337ec1913c9            |
+| wsrep_cluster_status         | Primary                                         |
+| wsrep_connected              | ON                                              |
+| wsrep_local_bf_aborts        | 0                                               |
+| wsrep_local_index            | 1                                               |
+| wsrep_provider_name          | Galera                                          |
+| wsrep_provider_vendor        | Codership Oy <info@codership.com>               |
+| wsrep_provider_version       | 3.21(r8678538)                                  |
+| wsrep_ready                  | ON                                              |
++------------------------------+-------------------------------------------------+
+
+参数说明：
+1)集群完整性检查
+wsrep_cluster_state_uuid
+在集群所有节点的值应该是相同的，有不同值的节点，说明其没有连接入集群。
+wsrep_cluster_conf_id
+正常情况下所有节点上该值是一样的，如果值不同，说明该节点被临时"分区"了。当节点之间网络连接恢复的时候应该会恢复一样的值。
+wsrep_cluster_size
+当前集群的节点个数，如果这个值跟预期的节点数一致，则所有的集群节点已经连接。
+wsrep_cluster_status
+集群组成的状态如果不为"Primary"，说明出现"分区"或是"split-brain"状况。
+2)节点状态检查
+wsrep_ready
+该值为ON,则说明可以接受SQL负载，如果为Off，则需要检查wsrep_connected。
+wsrep_connected
+如果该值为Off，且wsrep_ready值也为Off，说明该节点没有连接到集群，可能是wsrep_cluster_address或wsrep_cluster_name等配置错造成的，具体错误需要查看日志。
+wsrep_local_state_comment
+如果wsrep_connected为On，但wsrep_ready为OFF，则可以从该项查看原因。
+3)复制健康检查
+wsrep_flow_control_paused
+表示复制停止了多长时间，集群因为Slave延迟而慢多少。该值为0~1之间，越靠近0越好，值为1表示复制完全停止。可优化wsrep_slave_threads来改善。
+wsrep_cert_deps_distance
+有多少事务可以并行处理，wsrep_slave_threads设置的值不应该高出该这个太多。
+wsrep_flow_control_sent
+表示该节点已经停止复制了多少次。
+wsrep_local_recv_queue_avg
+表示slave事务队列的平均长度，slave有没有瓶颈，可以从这里看。最慢节点的wsrep_flow_control_sent和wsrep_local_recv_queue_avg值都是最高的，这两个值越低越好。
+4)检测慢网络问题
+wsrep_local_send_queue_avg
+网络瓶颈的预兆，如果这个值比较高的话，可能存在网络瓶颈。
+5)冲突或死锁的数目
+wsrep_last_committed
+最后提交的事务数目。
+
+最后：这种集群与单机版维护基本一致。
+
+
+
+

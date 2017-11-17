@@ -1,0 +1,111 @@
+# MaxScale documentation on GitHub:
+# https://github.com/mariadb-corporation/MaxScale/blob/2.1/Documentation/Documentation-Contents.md
+
+# Global parameters
+#
+# Complete list of configuration options:
+# https://github.com/mariadb-corporation/MaxScale/blob/2.1/Documentation/Getting-Started/Configuration-Guide.md
+
+[maxscale]
+threads=3
+
+# Server definitions
+#
+# Set the address of the server to the network
+# address of a MySQL server.
+#
+
+[db_mysql1]
+type=server
+address=db_mysql1
+port=3306
+protocol=MySQLBackend
+#priority=1
+
+[db_mysql2]
+type=server
+address=db_mysql2
+port=3306
+protocol=MySQLBackend
+#priority=2
+
+[db_mysql3]
+type=server
+address=db_mysql3
+port=3306
+protocol=MySQLBackend
+#priority=3
+# Monitor for the servers
+#
+# This will keep MaxScale aware of the state of the servers.
+# MySQL Monitor documentation:
+# https://github.com/mariadb-corporation/MaxScale/blob/2.1/Documentation/Monitors/MySQL-Monitor.md
+
+#[#MySQL Monitor]
+#type=monitor
+#module=mysqlmon
+#servers=server1
+#user=myuser
+#passwd=mypwd
+#monitor_interval=10000
+
+[Galera Monitor]
+type=monitor
+module=galeramon
+servers=db_mysql1,db_mysql2,db_mysql3
+user=root
+passwd=suneee
+#use_priority=true
+# Service definitions
+#
+# Service Definition for a read-only service and
+# a read/write splitting service.
+#
+
+# ReadConnRoute documentation:
+# https://github.com/mariadb-corporation/MaxScale/blob/2.1/Documentation/Routers/ReadConnRoute.md
+
+#[Read-Only Service]
+#type=service
+#router=readconnroute
+#servers=server1
+#user=myuser
+#passwd=mypwd
+#router_options=slave
+
+# ReadWriteSplit documentation:
+# https://github.com/mariadb-corporation/MaxScale/blob/2.1/Documentation/Routers/ReadWriteSplit.md
+
+[Galera Service]
+type=service
+router=readwritesplit
+servers=db_mysql1,db_mysql2,db_mysql3
+user=root
+passwd=suneee
+enable_root_user=1
+
+# This service enables the use of the MaxAdmin interface
+# MaxScale administration guide:
+# https://github.com/mariadb-corporation/MaxScale/blob/2.1/Documentation/Reference/MaxAdmin.md
+
+# services will listen on.
+#
+
+[Galera Listener]
+type=listener
+service=Galera Service
+protocol=MySQLClient
+port=3306
+socket=/tmp/galera.sock
+
+
+[MaxAdmin Service]
+type=service
+router=cli
+
+
+[MaxAdmin Listener]
+type=listener
+service=MaxAdmin Service
+protocol=maxscaled
+socket=default
