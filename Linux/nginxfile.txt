@@ -131,6 +131,42 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
         && apk add --no-cache --virtual .nginx-rundeps $runDeps \
         && apk del .build-deps \
         && apk del .gettext \
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+apt-get install -y     apt-utils     apache2     ca-certificates     curl     git     libapache2-mod-php     netcat     php     php-bcmath     php-cli     php-curl     php-bz2     php-dom     php-gd     php-imagick     php-intl     php-json     php-ldap     php-mbstring     php-mcrypt     php-mysql     php-mysqlnd     php-sqlite3     php-zip     php-gettext     wget     unzip     vim     pwgen     openssh-client     openssh-server     mysql-server     && phpenmod mcrypt     && apt-get autoclean     && apt-get autoremove     && apt-get clean
+
+/bin/sh -c apt-get update && apt-get install -y  apt-utils
+
+/var/www/html
+
+/etc/apache2/sites-available/schli
+
+sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php/7.0/apache2/php.ini
+sed -i "s/error_reporting = .*$/error_reporting = E_ERROR | E_WARNING | E_PARSE/" /etc/php/7.0/apache2/php.ini
+sed -i "s/max_execution_time = 30/max_execution_time = 180/" /etc/php/7.0/apache2/php.ini
+sed -i "s/;opcache.enable=0/opcache.enable=1/" /etc/php/7.0/apache2/php.ini
+sed -i "s/error_reporting = .*$/error_reporting = E_ERROR | E_WARNING | E_PARSE/" /etc/php/7.0/apache2/php.ini 
+sed -i "s/post_max_size = .*$/post_max_size = 128M/" /etc/php/7.0/apache2/php.ini
+sed -i "s/upload_max_filesize = .*$/upload_max_filesize = 16M/" /etc/php/7.0/apache2/php.ini
+sed -i "s/display_errors = .*$/display_errors = On/" /etc/php/7.0/apache2/php.ini 
+sed -i "s/max_input_time = .*$/max_input_time = 120/" /etc/php/7.0/apache2/php.ini
+sed -i "s/expose_php = .*$/expose_php = Off/" /etc/php/7.0/apache2/php.ini
+
         && mv /tmp/envsubst /usr/local/bin/ \
         \
         # forward request and error logs to docker log collector
@@ -145,3 +181,102 @@ EXPOSE 80
 STOPSIGNAL SIGTERM
 
 CMD ["nginx", "-g", "daemon off;"]
+
+it建设计划
+职能划分：
+1.部署支撑：职责范围：基础环境搭建，一线交付 版本更新发布  
+            能力要求：具备扎实的系统和网络知识，熟悉协同场的软件技术，项目环境
+2.运维开发：职责范围：借助简单，快速的软件系统加快IT自动化建设，用架构和编程优化运维工作，为一线交付工作提供技术支持
+            能力要求：熟悉前沿的软件技术，富有探索和创新精神
+3.监控运营：职责范围：保障即时监控和响应，业务软件和系统的数据收集、处理、存储、分析及可视化，为系统优化，业务分析，决策提供数据支撑
+            能力要求：熟悉业务系统监控，数据分析处理
+4.备份容灾：职责范围：业务系统备份，容灾系统建设优化
+            能力要求：熟悉网络存储系统，容灾系统架构
+5. CMDB(配置管理) CI/CD 数据分析 业务监控 辅助运营  作业平台 管控平台 监控中心
+
+实现自动化，更加协作，让 IT 更加智能，响应能力更强。
+
+通过平台统一管理所有运维对象，对想项目组和运维部门所有操作都程序固化，实现所有项目的持续集成，自动化部署，自助操作，
+
+标准化，流程规范化，CMDB
+
+通过平台统一管理所有运维对象，对项目组、对运维部门的所有操作都程序固化；
+实现所有项目的持续集成、自动化部署、项目组自助操作以提升发布效率和降低故障率；
+有一个完善的配置中心为所有运维自动化的底层数据和配置基础，驱动所有运维脚本、工具、组件正常运行
+
+
+明确了目标之后，你会发现这三个目标正好对应三个运维术语：标准化、流程规范化和 CMDB。
+标准化：从主机名、IP、操作系统、文件目录、脚本等一系列运维对象都制定标准规范，业务部门和运维部门都遵守同一套标准，基于这套标准去建设统一的平台。
+流程规范化：主要是涉及 程序文件打包、开发测试线上环境管理、发布流程 等多部门协作的规范，必须落实到程序固化或者文档固化，打造 Dev 和 Ops 之间的标准交付环境。
+CMDB：这是一切运维自动化体系建设的基石，其它如配置管理、作业执行、资产管理等需要基于 CMDB 才能形成体系，构建完善的运维对象生命周期和操作闭环。
+
+AB_7fKj2)N45c5)xd%	ssh 10.0.0.54:13222
+watch ntpq -p
+
+
+
+
+
+
+
+
+1	超级管理员	admin	admin	AjWDWmgdS60lfSAcH+DWad/j6a/6JIdmA+83mbCaQ90=	0	0		1											0	0				0			
+10000001740726	曹建峰	曹建峰	cjf	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:15	1	13367716299@qq.com	1.3367716299E10		1			正式员工	0	2017-11-21 11:30:15		0	0		4.0					0
+10000001740730	戴晓红	戴晓红	dxh	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:15	1	13207719771@qq.com	1.3207719771E10		0			正式员工	0	2017-11-21 11:30:15		0	0		5.0					0
+10000001740735	祝雄林	祝雄林	zxl	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:15	1	15207718016@qq.com	1.5207718016E10		1			正式员工	0	2017-11-21 11:30:15		0	0		6.0					0
+10000001740740	罗燕萍	罗燕萍	lyp	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:15	1	18275755955@qq.com	1.8275755955E10		0			正式员工	0	2017-11-21 11:30:15		0	0		7.0					0
+10000001740745	李爱国	李爱国	lag	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:15	1	15807717588@qq.com	1.5807717588E10		1			正式员工	0	2017-11-21 11:30:15		0	0		8.0					0
+10000001740750	潘龙孙	潘龙孙	pls	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:15	1	13367711023@qq.com	1.3367711023E10		1			正式员工	0	2017-11-21 11:30:15		0	0		9.0					0
+10000001740755	周月文	周月文	zyw	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:15	1	13367713380@qq.com	1.336771338E10		1			正式员工	0	2017-11-21 11:30:15		0	0		10.0					0
+10000001740760	卢春梅	卢春梅	lcm	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:15	1	18977989251@qq.com	1.8977989251E10		0			正式员工	0	2017-11-21 11:30:15		0	0		11.0					0
+10000001740765	何滔	何滔	ht	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:15	1	13307711518@qq.com	1.3307711518E10		1			正式员工	0	2017-11-21 11:30:15		0	0		12.0					0
+10000001740769	张志宏	张志宏	zzh	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:15	1	13907713110@qq.com	1.390771311E10		1			正式员工	0	2017-11-21 11:30:15		0	0		13.0					0
+10000001740773	吴婉娴	吴婉娴	wwx	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:15	1	13978893327@qq.com	1.3978893327E10		0			正式员工	0	2017-11-21 11:30:15		0	0		14.0					0
+10000001740777	胡国兴	胡国兴	hgx	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:15	1	18077163188@qq.com	1.8077163188E10		1			正式员工	0	2017-11-21 11:30:15		0	0		15.0					0
+10000001740780	郑国庆	郑国庆	zgq	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:15	1	18977111968@qq.com	1.8977111968E10		1			正式员工	0	2017-11-21 11:30:15		0	0		16.0					0
+10000001740783	黄庆全	黄庆全	hqq	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:15	1	13367711028@qq.com	1.3367711028E10		1			正式员工	0	2017-11-21 11:30:15		0	0		17.0					0
+10000001740786	田立丰	田立丰	tlf	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:15	1	13117611071@qq.com	1.3117611071E10		1			正式员工	0	2017-11-21 11:30:15		0	0		18.0					0
+10000001740791	方莫彦	方莫彦	fmy	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:15	1	18977113328@qq.com	1.8977113328E10		1			正式员工	0	2017-11-21 11:30:15		0	0		19.0					0
+10000001740799	周萍	周萍	zp	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:16	1	13367711306@qq.com	1.3367711306E10		0			正式员工	0	2017-11-21 11:30:16		0	0		21.0					0
+10000001740869	王瑜	王瑜	wy	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:17	1	15678866221@qq.com	1.5678866221E10		0			正式员工	0	2017-11-21 11:30:17		0	0		38.0					0
+10000001740997	杨扬	杨扬	yy	vLFfghR5tNV3K9DKhmwArV+SbjWAcgZZzIDTnJ0JgCo=	0	0	2017-11-21 11:30:19	1	18677193650@qq.com	1.867719365E10		1			正式员工	0	2017-11-21 11:30:19		0	0		72.0					0
+
+docker run -P -p 8000:8000 -t -i --name ralph --mac-address=02:42:ac:11:ff:ff --volumes-from mysql_data allegrogroup/ralph:latest
+
+
+
+
+/usr/bin/docker run -d --restart=always -e LANG=en_US.UTF-8 -e RAILS_ENV=production -e UNICORN_WORKERS=8 -e UNICORN_SIDEKIQS=1 -e RUBY_GLOBAL_METHOD_CACHE_SIZE=131072 -e RUBY_GC_HEAP_GROWTH_MAX_SLOTS=40000 -e RUBY_GC_HEAP_INIT_SLOTS=400000 -e RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR=1.5 -e DISCOURSE_DB_SOCKET=/var/run/postgresql -e DISCOURSE_DB_HOST= -e DISCOURSE_DB_PORT= -e DISCOURSE_HOSTNAME=discourse.example.com -e DISCOURSE_DEVELOPER_EMAILS=me@example.com,you@example.com -e DISCOURSE_SMTP_ADDRESS=smtp.example.com -h xiangpu-docker- -e DOCKER_HOST_IP=172.17.0.1 --name -t -p 80:80 -p 443:443 -v /var/discourse/shared/standalone:/shared -v /var/discourse/shared/standalone/log/var-log:/var/log --mac-address 02:18:a3:7b:23:ac local_discourse/ /sbin/boot
+            "Env": [
+                "LANG=en_US.UTF-8",
+                "RAILS_ENV=production",
+                "UNICORN_WORKERS=8",
+                "UNICORN_SIDEKIQS=1",
+                "RUBY_GLOBAL_METHOD_CACHE_SIZE=131072",
+                "RUBY_GC_HEAP_GROWTH_MAX_SLOTS=40000",
+                "RUBY_GC_HEAP_INIT_SLOTS=400000",
+                "RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR=1.5",
+                "DISCOURSE_DB_SOCKET=/var/run/postgresql",
+                "DISCOURSE_DB_HOST=",
+                "DISCOURSE_DB_PORT=",
+                "DISCOURSE_HOSTNAME=xiangpu-docker.novalocal",
+                "DISCOURSE_DEVELOPER_EMAILS=785471184@qq.com",
+                "DISCOURSE_SMTP_ADDRESS=smtp.wo.cn",
+                "DISCOURSE_SMTP_PORT=25",
+                "DISCOURSE_SMTP_USER_NAME=15626256146@wo.cn",
+                "DISCOURSE_SMTP_PASSWORD=xiluo1990",
+                "DOCKER_HOST_IP=172.17.0.1",
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "PG_MAJOR=9.5",
+                "RUBY_ALLOCATOR=/usr/lib/libjemalloc.so.1",
+                "COMPRESS_BROTLI=1"
+
+
+root	2TP-SvN#.201^
+  vi /etc/security/limits.conf
+
+0894.ef4f.b889
+personalSessionId.js
+
+绵薄之力
+此致敬礼
